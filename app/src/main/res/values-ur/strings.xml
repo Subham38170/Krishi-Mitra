@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">کِرشی متر</string>
+    <string name="mobile_no">موبائل نمبر</string>
+    <string name="language">اردو</string>
+    <string name="name">نام</string>
+    <string name="state">ریاست</string>
+    <string name="district">ضلع</string>
+    <string name="pin_no">پن نمبر</string>
+    <string name="village">گاؤں</string>
+    <string name="login">لاگ ان</string>
+    <string name="signup">سائن اپ</string>
+    <string name="already_have_account">کیا آپ کا پہلے سے اکاؤنٹ ہے؟</string>
+    <string name="dont_have_account">کیا آپ کا اکاؤنٹ نہیں ہے؟</string>
+    <string name="welcome">خوش آمدید</string>
+    <string name="enter_mobile">موبائل نمبر درج کریں</string>
+    <string name="enter_name">نام درج کریں</string>
+    <string name="otp_sent">او ٹی پی بھیج دیا گیا ہے</string>
+    <string name="verify_otp">او ٹی پی کی تصدیق کریں</string>
+    <string name="resend_otp">او ٹی پی دوبارہ بھیجیں</string>
+    <string name="logout">لاگ آؤٹ</string>
+
+    <string name="error_invalid_mobile">غلط موبائل نمبر</string>
+    <string name="error_invalid_otp">غلط او ٹی پی</string>
+    <string name="error_required">یہ خانہ لازمی ہے</string>
+    <string name="no_internet">انٹرنیٹ کنکشن نہیں ہے</string>
+    <string name="try_again">براہ کرم دوبارہ کوشش کریں</string>
+    <string name="welcome_user">خوش آمدید، %1$s!</string>
+</resources>

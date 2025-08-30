@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">કૃષિ મિત્ર</string>
+    <string name="mobile_no">મોબાઈલ નંબર</string>
+    <string name="language">ગુજરાતી</string>
+    <string name="name">નામ</string>
+    <string name="state">રાજ્ય</string>
+    <string name="district">જિલ્લો</string>
+    <string name="pin_no">પીન નંબર</string>
+    <string name="village">ગામ</string>
+    <string name="login">લૉગિન</string>
+    <string name="signup">સાઇન અપ</string>
+    <string name="already_have_account">પહેલેથી જ એકાઉન્ટ છે?</string>
+    <string name="dont_have_account">એકાઉન્ટ નથી?</string>
+    <string name="welcome">સ્વાગત છે</string>
+    <string name="enter_mobile">મોબાઈલ નંબર દાખલ કરો</string>
+    <string name="enter_name">નામ દાખલ કરો</string>
+    <string name="otp_sent">OTP મોકલાયો છે</string>
+    <string name="verify_otp">OTP ચકાસો</string>
+    <string name="resend_otp">OTP ફરી મોકલો</string>
+    <string name="logout">લૉગઆઉટ</string>
+
+    <string name="error_invalid_mobile">અમાન્ય મોબાઈલ નંબર</string>
+    <string name="error_invalid_otp">અમાન્ય OTP</string>
+    <string name="error_required">આ ફીલ્ડ જરૂરી છે</string>
+    <string name="no_internet">ઇન્ટરનેટ કનેક્શન નથી</string>
+    <string name="try_again">ફરી પ્રયત્ન કરો</string>
+    <string name="welcome_user">સ્વાગત છે, %1$s!</string>
+</resources>

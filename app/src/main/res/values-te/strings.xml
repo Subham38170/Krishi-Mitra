@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">క్రిషి మిత్ర</string>
+    <string name="mobile_no">మొబైల్ నంబర్</string>
+    <string name="language">తెలుగు</string>
+    <string name="name">పేరు</string>
+    <string name="state">రాష్ట్రం</string>
+    <string name="district">జిల్లా</string>
+    <string name="pin_no">పిన్ నంబర్</string>
+    <string name="village">గ్రామం</string>
+    <string name="login">లాగిన్</string>
+    <string name="signup">సైన్ అప్</string>
+    <string name="already_have_account">ఇప్పటికే ఖాతా ఉందా?</string>
+    <string name="dont_have_account">ఖాతా లేదు?</string>
+    <string name="welcome">స్వాగతం</string>
+    <string name="enter_mobile">మొబైల్ నంబర్ ఇవ్వండి</string>
+    <string name="enter_name">పేరు ఇవ్వండి</string>
+    <string name="otp_sent">OTP పంపబడింది</string>
+    <string name="verify_otp">OTP ధృవీకరించండి</string>
+    <string name="resend_otp">OTP మళ్లీ పంపండి</string>
+    <string name="logout">లాగ్ అవుట్</string>
+
+    <string name="error_invalid_mobile">చెల్లని మొబైల్ నంబర్</string>
+    <string name="error_invalid_otp">చెల్లని OTP</string>
+    <string name="error_required">ఈ ఫీల్డ్ అవసరం</string>
+    <string name="no_internet">ఇంటర్నెట్ కనెక్షన్ లేదు</string>
+    <string name="try_again">దయచేసి మళ్లీ ప్రయత్నించండి</string>
+    <string name="welcome_user">స్వాగతం, %1$s!</string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">କୃଷି ମିତ୍ର</string>
+    <string name="mobile_no">ମୋବାଇଲ୍ ନମ୍ବର</string>
+    <string name="language">ଓଡିଆ</string>
+    <string name="name">ନାମ</string>
+    <string name="state">ରାଜ୍ୟ</string>
+    <string name="district">ଜିଲ୍ଲା</string>
+    <string name="pin_no">ପିନ୍ ନମ୍ବର</string>
+    <string name="village">ଗାଁ</string>
+    <string name="login">ଲଗିନ୍</string>
+    <string name="signup">ସାଇନ୍ ଅପ୍</string>
+    <string name="already_have_account">ପୂର୍ବରୁ ଖାତା ଅଛି କି ?</string>
+    <string name="dont_have_account">ଖାତା ନାହିଁ କି ?</string>
+    <string name="welcome">ସ୍ୱାଗତ</string>
+    <string name="enter_mobile">ମୋବାଇଲ୍ ନମ୍ବର ଲେଖନ୍ତୁ</string>
+    <string name="enter_name">ନାମ ଲେଖନ୍ତୁ</string>
+    <string name="otp_sent">OTP ପଠାଯାଇଛି</string>
+    <string name="verify_otp">OTP ସତ୍ୟାୟନ</string>
+    <string name="resend_otp">OTP ପୁଣିଥରେ ପଠାନ୍ତୁ</string>
+    <string name="logout">ଲଗ୍ ଆଉଟ୍</string>
+
+    <string name="error_invalid_mobile">ଅବୈଧ ମୋବାଇଲ୍ ନମ୍ବର</string>
+    <string name="error_invalid_otp">ଅବୈଧ OTP</string>
+    <string name="error_required">ଏହି ସ୍ଥାନଟି ଆବଶ୍ୟକ</string>
+    <string name="no_internet">ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ</string>
+    <string name="try_again">ଦୟାକରି ପୁଣିଥରେ ଚେଷ୍ଟା କରନ୍ତୁ</string>
+    <string name="welcome_user">ସ୍ୱାଗତ, %1$s!</string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">കൃഷി മിത്ര</string>
+    <string name="mobile_no">മൊബൈൽ നമ്പർ</string>
+    <string name="language">മലയാളം</string>
+    <string name="name">പേര്</string>
+    <string name="state">സംസ്ഥാനം</string>
+    <string name="district">ജില്ല</string>
+    <string name="pin_no">പിൻ നമ്പർ</string>
+    <string name="village">ഗ്രാമം</string>
+    <string name="login">ലോഗിൻ</string>
+    <string name="signup">സൈൻ അപ്</string>
+    <string name="already_have_account">ഇതിനകം അക്കൗണ്ട് ഉണ്ടോ?</string>
+    <string name="dont_have_account">അക്കൗണ്ട് ഇല്ലേ?</string>
+    <string name="welcome">സ്വാഗതം</string>
+    <string name="enter_mobile">മൊബൈൽ നമ്പർ നൽകുക</string>
+    <string name="enter_name">പേര് നൽകുക</string>
+    <string name="otp_sent">OTP അയച്ചിരിക്കുന്നു</string>
+    <string name="verify_otp">OTP പരിശോധിക്കുക</string>
+    <string name="resend_otp">OTP വീണ്ടും അയക്കുക</string>
+    <string name="logout">ലോഗ് ഔട്ട്</string>
+
+    <string name="error_invalid_mobile">തെറ്റായ മൊബൈൽ നമ്പർ</string>
+    <string name="error_invalid_otp">തെറ്റായ OTP</string>
+    <string name="error_required">ഈ ഫീൽഡ് ആവശ്യമാണ്</string>
+    <string name="no_internet">ഇന്റർനെറ്റ് കണക്ഷൻ ഇല്ല</string>
+    <string name="try_again">ദയവായി വീണ്ടും ശ്രമിക്കുക</string>
+    <string name="welcome_user">സ്വാഗതം, %1$s!</string>
+</resources>

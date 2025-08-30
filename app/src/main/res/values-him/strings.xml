@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">कृषि मित्र</string>
+    <string name="mobile_no">मोबाइल नम्बर</string>
+    <string name="language">नेपाली</string>
+    <string name="name">नाम</string>
+    <string name="state">राज्य</string>
+    <string name="district">जिल्ला</string>
+    <string name="pin_no">पिन नम्बर</string>
+    <string name="village">गाउँ</string>
+    <string name="login">लगइन</string>
+    <string name="signup">साइन अप</string>
+    <string name="already_have_account">पहिले नै खाता छ ?</string>
+    <string name="dont_have_account">खाता छैन ?</string>
+    <string name="welcome">स्वागत छ</string>
+    <string name="enter_mobile">मोबाइल नम्बर हाल्नुहोस्</string>
+    <string name="enter_name">नाम हाल्नुहोस्</string>
+    <string name="otp_sent">OTP पठाइयो</string>
+    <string name="verify_otp">OTP प्रमाणित गर्नुहोस्</string>
+    <string name="resend_otp">OTP पुन: पठाउनुहोस्</string>
+    <string name="logout">लगआउट</string>
+
+    <string name="error_invalid_mobile">अवैध मोबाइल नम्बर</string>
+    <string name="error_invalid_otp">अवैध OTP</string>
+    <string name="error_required">यो फिल्ड आवश्यक छ</string>
+    <string name="no_internet">इन्टरनेट छैन</string>
+    <string name="try_again">कृपया फेरि प्रयास गर्नुहोस्</string>
+    <string name="welcome_user">स्वागत छ, %1$s!</string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">কৃষি মিত্র</string>
+    <string name="mobile_no">মোবাইল নম্বর</string>
+    <string name="language">ꯃꯅꯤꯄꯨꯔꯤ</string>
+    <string name="name">ꯃꯁꯤꯡ</string>
+    <string name="state">ꯂꯩꯇꯩ</string>
+    <string name="district">ꯗꯤꯁ꯭ꯇ꯭ꯔꯤꯛ</string>
+    <string name="pin_no">ꯄꯤꯟ নম্বর</string>
+    <string name="village">ꯃꯤꯡꯗꯨꯡ</string>
+    <string name="login">ꯂꯣꯒꯤꯟ</string>
+    <string name="signup">ꯁꯥꯏꯟ ꯑꯨꯞ</string>
+    <string name="already_have_account">ꯑꯃꯠꯇꯝ ꯑꯃ ꯑꯦꯀꯣꯟꯠ ꯑꯃꯠꯇꯝ ?</string>
+    <string name="dont_have_account">ꯑꯃꯠꯇꯝ ꯑꯦꯀꯣꯟꯠ ꯑꯃꯠꯇꯝ ?</string>
+    <string name="welcome">ꯋꯦꯂꯃ</string>
+    <string name="enter_mobile">মোবাইল নম্বর ꯍꯦꯟꯇꯔ ꯇꯧꯕꯥ</string>
+    <string name="enter_name">ꯃꯁꯤꯡ ꯍꯦꯟꯇꯔ ꯇꯧꯕꯥ</string>
+    <string name="otp_sent">OTP ꯁꯦꯟꯠ ꯇꯧꯔꯤ</string>
+    <string name="verify_otp">OTP ꯚꯦꯔꯤꯐꯤ ꯇꯧꯕꯥ</string>
+    <string name="resend_otp">OTP ꯑꯣꯡꯗꯨ ꯁꯦꯟꯠ ꯇꯧꯕꯥ</string>
+    <string name="logout">ꯂꯣꯒꯤꯟ ꯑꯣꯡꯗꯨ</string>
+
+    <string name="error_invalid_mobile">মোবাইল নম্বর ꯑꯦꯏꯁꯤ ꯄꯤꯟ ꯇꯧꯕꯥ</string>
+    <string name="error_invalid_otp">OTP ꯑꯦꯏꯁꯤ ꯄꯤꯟ ꯇꯧꯕꯥ</string>
+    <string name="error_required">ꯑꯃ ꯄꯨꯡꯗꯨ ꯑꯦꯏꯁꯤ ꯇꯧꯕꯥ</string>
+    <string name="no_internet">ইন্টারনেট ꯑꯦꯏꯁꯤ ꯇꯧꯕꯥ</string>
+    <string name="try_again">ꯑꯣꯡꯗꯨ ꯇꯨꯡꯗꯣꯛꯄ ꯇꯧꯕꯥ</string>
+    <string name="welcome_user">ꯋꯦꯂꯃ, %1$s!</string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">কৃষি মিত্র</string>
+    <string name="mobile_no">মোবাইল নম্বর</string>
+    <string name="language">বাংলা</string>
+    <string name="name">নাম</string>
+    <string name="state">রাজ্য</string>
+    <string name="district">জেলা</string>
+    <string name="pin_no">পিন নম্বর</string>
+    <string name="village">গ্রাম</string>
+    <string name="login">লগইন</string>
+    <string name="signup">সাইন আপ</string>
+    <string name="already_have_account">আগেই একটি অ্যাকাউন্ট আছে?</string>
+    <string name="dont_have_account">অ্যাকাউন্ট নেই?</string>
+    <string name="welcome">স্বাগতম</string>
+    <string name="enter_mobile">মোবাইল নম্বর লিখুন</string>
+    <string name="enter_name">নাম লিখুন</string>
+    <string name="otp_sent">ওটিপি পাঠানো হয়েছে</string>
+    <string name="verify_otp">ওটিপি যাচাই করুন</string>
+    <string name="resend_otp">ওটিপি পুনরায় পাঠান</string>
+    <string name="logout">লগ আউট</string>
+
+    <string name="error_invalid_mobile">অবৈধ মোবাইল নম্বর</string>
+    <string name="error_invalid_otp">অবৈধ ওটিপি</string>
+    <string name="error_required">এই ক্ষেত্রটি আবশ্যক</string>
+    <string name="no_internet">ইন্টারনেট সংযোগ নেই</string>
+    <string name="try_again">অনুগ্রহ করে আবার চেষ্টা করুন</string>
+    <string name="welcome_user">স্বাগতম, %1$s!</string>
+</resources>

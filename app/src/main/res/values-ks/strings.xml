@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">کرِشی مترہ</string>
+    <string name="mobile_no">موبائل نمبر</string>
+    <string name="language">اَنگریزی</string>
+    <string name="name">ناو</string>
+    <string name="state">ریاست</string>
+    <string name="district">ضِلع</string>
+    <string name="pin_no">پِن نمبر</string>
+    <string name="village">گام</string>
+    <string name="login">لاگ اِن</string>
+    <string name="signup">سائن اَپ</string>
+    <string name="already_have_account">کیا تہند اَکاؤنٹ چھ موجود؟</string>
+    <string name="dont_have_account">کیا تہند اَکاؤنٹ نئ چھ؟</string>
+    <string name="welcome">خوش آمدید</string>
+    <string name="enter_mobile">موبائل نمبر دٲخل کرِو</string>
+    <string name="enter_name">ناو دٲخل کرِو</string>
+    <string name="otp_sent">او ٹی پی موکلِت گئ چھ</string>
+    <string name="verify_otp">او ٹی پی تصدیق کرِو</string>
+    <string name="resend_otp">او ٹی پی دوبارہ موکلِو</string>
+    <string name="logout">لاگ آؤٹ</string>
+
+    <string name="error_invalid_mobile">غلط موبائل نمبر</string>
+    <string name="error_invalid_otp">غلط او ٹی پی</string>
+    <string name="error_required">یہ میدان لازمی چھ</string>
+    <string name="no_internet">انٹرنیٹ کنکشن نئ چھ</string>
+    <string name="try_again">مہربانی کرِت دوبارہ کوشش کرِو</string>
+    <string name="welcome_user">خوش آمدید، %1$s!</string>
+</resources>

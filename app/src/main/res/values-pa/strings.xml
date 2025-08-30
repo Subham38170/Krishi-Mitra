@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ਕ੍ਰਿਸ਼ੀ ਮਿੱਤਰ</string>
+    <string name="mobile_no">ਮੋਬਾਈਲ ਨੰਬਰ</string>
+    <string name="language">ਪੰਜਾਬੀ</string>
+    <string name="name">ਨਾਮ</string>
+    <string name="state">ਰਾਜ</string>
+    <string name="district">ਜ਼ਿਲ੍ਹਾ</string>
+    <string name="pin_no">ਪਿੰਨ ਕੋਡ</string>
+    <string name="village">ਪਿੰਡ</string>
+    <string name="login">ਲੌਗਿਨ</string>
+    <string name="signup">ਸਾਈਨ ਅਪ</string>
+    <string name="already_have_account">ਕੀ ਪਹਿਲਾਂ ਹੀ ਖਾਤਾ ਹੈ?</string>
+    <string name="dont_have_account">ਖਾਤਾ ਨਹੀਂ ਹੈ?</string>
+    <string name="welcome">ਸਵਾਗਤ ਹੈ</string>
+    <string name="enter_mobile">ਮੋਬਾਈਲ ਨੰਬਰ ਦਰਜ ਕਰੋ</string>
+    <string name="enter_name">ਨਾਮ ਦਰਜ ਕਰੋ</string>
+    <string name="otp_sent">ਓਟੀਪੀ ਭੇਜ ਦਿੱਤੀ ਗਈ ਹੈ</string>
+    <string name="verify_otp">ਓਟੀਪੀ ਚੈੱਕ ਕਰੋ</string>
+    <string name="resend_otp">ਓਟੀਪੀ ਮੁੜ ਭੇਜੋ</string>
+    <string name="logout">ਲੌਗ ਆਊਟ</string>
+
+    <string name="error_invalid_mobile">ਗਲਤ ਮੋਬਾਈਲ ਨੰਬਰ</string>
+    <string name="error_invalid_otp">ਗਲਤ ਓਟੀਪੀ</string>
+    <string name="error_required">ਇਹ ਫੀਲਡ ਜਰੂਰੀ ਹੈ</string>
+    <string name="no_internet">ਇੰਟਰਨੈੱਟ ਕੁਨੈਕਸ਼ਨ ਨਹੀਂ</string>
+    <string name="try_again">ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
+    <string name="welcome_user">ਸਵਾਗਤ ਹੈ, %1$s!</string>
+</resources>

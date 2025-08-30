@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">கிரிஷி மித்ரா</string>
+    <string name="mobile_no">மொபைல் எண்</string>
+    <string name="language">தமிழ்</string>
+    <string name="name">பெயர்</string>
+    <string name="state">மாநிலம்</string>
+    <string name="district">மாவட்டம்</string>
+    <string name="pin_no">பின் குறியீடு</string>
+    <string name="village">பிராந்தியம்</string>
+    <string name="login">உள்நுழைய</string>
+    <string name="signup">சைன் அப்</string>
+    <string name="already_have_account">ஏற்கனவே கணக்கு உள்ளதா?</string>
+    <string name="dont_have_account">கணக்கு இல்லை?</string>
+    <string name="welcome">வரவேற்கிறோம்</string>
+    <string name="enter_mobile">மொபைல் எண் உள்ளிடவும்</string>
+    <string name="enter_name">பெயர் உள்ளிடவும்</string>
+    <string name="otp_sent">OTP அனுப்பப்பட்டது</string>
+    <string name="verify_otp">OTP உறுதி செய்யவும்</string>
+    <string name="resend_otp">OTP மீண்டும் அனுப்பவும்</string>
+    <string name="logout">வெளியேறு</string>
+
+    <string name="error_invalid_mobile">தவறான மொபைல் எண்</string>
+    <string name="error_invalid_otp">தவறான OTP</string>
+    <string name="error_required">இந்த புலம் அவசியம்</string>
+    <string name="no_internet">இணைய இணைப்பு இல்லை</string>
+    <string name="try_again">தயவு செய்து மீண்டும் முயற்சிக்கவும்</string>
+    <string name="welcome_user">வரவேற்கிறோம், %1$s!</string>
+</resources>

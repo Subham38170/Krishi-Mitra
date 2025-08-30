@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ಕೃಷಿ ಮಿತ್ರ</string>
+    <string name="mobile_no">ಮೊಬೈಲ್ ಸಂಖ್ಯೆ</string>
+    <string name="language">ಇಂಗ್ಲೀಷ್</string>
+    <string name="name">ಹೆಸರು</string>
+    <string name="state">ರಾಜ್ಯ</string>
+    <string name="district">ಜಿಲ್ಲೆ</string>
+    <string name="pin_no">ಪಿನ್ ಸಂಖ್ಯೆ</string>
+    <string name="village">ಗ್ರಾಮ</string>
+    <string name="login">ಲಾಗಿನ್</string>
+    <string name="signup">ನೋಂದಣಿ</string>
+    <string name="already_have_account">ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೆ?</string>
+    <string name="dont_have_account">ಖಾತೆ ಇಲ್ಲವೆ?</string>
+    <string name="welcome">ಸ್ವಾಗತ</string>
+    <string name="enter_mobile">ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="enter_name">ಹೆಸರನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="otp_sent">OTP ಕಳುಹಿಸಲಾಗಿದೆ</string>
+    <string name="verify_otp">OTP ಪರಿಶೀಲಿಸಿ</string>
+    <string name="resend_otp">OTP ಮರುಕಳುಹಿಸಿ</string>
+    <string name="logout">ಲಾಗ್ ಔಟ್</string>
+
+    <string name="error_invalid_mobile">ಅಮಾನ್ಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ</string>
+    <string name="error_invalid_otp">ಅಮಾನ್ಯ OTP</string>
+    <string name="error_required">ಈ ಕ್ಷೇತ್ರ ಅಗತ್ಯವಿದೆ</string>
+    <string name="no_internet">ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ</string>
+    <string name="try_again">ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="welcome_user">ಸ್ವಾಗತ, %1$s!</string>
+</resources>

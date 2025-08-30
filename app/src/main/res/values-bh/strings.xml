@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">कृषि मीत</string>
+    <string name="mobile_no">मोबाइल नंबर</string>
+    <string name="language">भाषा</string>
+    <string name="name">नाव</string>
+    <string name="state">राज्य</string>
+    <string name="district">जिला</string>
+    <string name="pin_no">पिन नंबर</string>
+    <string name="village">गाँव</string>
+    <string name="login">लॉगिन</string>
+    <string name="signup">साइन अप</string>
+    <string name="already_have_account">पहिले से खाता बा?</string>
+    <string name="dont_have_account">खाता नइखे?</string>
+    <string name="welcome">स्वागत बा</string>
+    <string name="enter_mobile">मोबाइल नंबर डालऽ</string>
+    <string name="enter_name">नाव डालऽ</string>
+    <string name="otp_sent">OTP भेजल गइल बा</string>
+    <string name="verify_otp">OTP चेक करीं</string>
+    <string name="resend_otp">OTP फेर से भेजीं</string>
+    <string name="logout">लॉग आउट</string>
+
+    <string name="error_invalid_mobile">गलत मोबाइल नंबर</string>
+    <string name="error_invalid_otp">गलत OTP</string>
+    <string name="error_required">ई खेत जरूरी बा</string>
+    <string name="no_internet">इंटरनेट कनेक्शन नइखे</string>
+    <string name="try_again">फेर से कोशिश करीं</string>
+    <string name="welcome_user">स्वागत बा, %1$s!</string>
+</resources>

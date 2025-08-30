@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ڪِرشي مِترا</string>
+    <string name="mobile_no">موبائل نمبر</string>
+    <string name="language">سنڌي</string>
+    <string name="name">نالو</string>
+    <string name="state">صوبو</string>
+    <string name="district">ضلعي</string>
+    <string name="pin_no">پن نمبر</string>
+    <string name="village">ڳوٺ</string>
+    <string name="login">لاگ ان</string>
+    <string name="signup">سائن اپ</string>
+    <string name="already_have_account">ڇا اڳ ۾ ئي اڪائونٽ آهي؟</string>
+    <string name="dont_have_account">اڪائونٽ ناهي؟</string>
+    <string name="welcome">ڀليڪار</string>
+    <string name="enter_mobile">موبائل نمبر داخل ڪريو</string>
+    <string name="enter_name">نالو داخل ڪريو</string>
+    <string name="otp_sent">او ٽي پي موڪلي وئي آهي</string>
+    <string name="verify_otp">او ٽي پي جي تصديق ڪريو</string>
+    <string name="resend_otp">او ٽي پي ٻيهر موڪليو</string>
+    <string name="logout">لاگ آئوٽ</string>
+
+    <string name="error_invalid_mobile">غلط موبائل نمبر</string>
+    <string name="error_invalid_otp">غلط او ٽي پي</string>
+    <string name="error_required">هي فيلڊ ضروري آهي</string>
+    <string name="no_internet">انٽرنيٽ ڪنيڪشن ناهي</string>
+    <string name="try_again">مهرباني ڪري ٻيهر ڪوشش ڪريو</string>
+    <string name="welcome_user">ڀليڪار، %1$s!</string>
+</resources>
