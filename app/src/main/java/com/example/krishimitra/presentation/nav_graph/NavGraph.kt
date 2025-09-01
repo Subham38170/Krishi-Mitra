@@ -6,8 +6,11 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
@@ -29,13 +32,12 @@ fun NavGraph(
     navController: NavHostController = rememberNavController()
 ) {
 
-    val firebaseAuth = FirebaseAuth.getInstance().uid
+    val firebaseAuth = FirebaseAuth.getInstance()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
-    val viewModel = hiltViewModel<AuthViewModel>()
     Scaffold(
         bottomBar = {
-            if (firebaseAuth != null) {
+            if (firebaseAuth.uid != null) {
 
                 NavigationBar(
                     containerColor = Color.White
@@ -65,17 +67,38 @@ fun NavGraph(
         }) { innerpadding ->
         NavHost(
             navController = navController,
-            startDestination = if(firebaseAuth==null) Routes.AuthScreen else Routes.HomeScreen
+            startDestination = if (firebaseAuth.uid == null) Routes.AuthScreen else Routes.HomeScreen
         ) {
             composable<Routes.AuthScreen> {
-                AuthScreen()
+                val authViewModel = hiltViewModel<AuthViewModel>()
+                AuthScreen(
+                    state = authViewModel.state.collectAsStateWithLifecycle().value,
+                    changeLanguage = authViewModel::changeLanguage,
+                    signIn = authViewModel::signIn,
+                    signUp = authViewModel::signUp,
+                    moveToHomeScreen = {
+                        navController.navigate(Routes.HomeScreen) {
+                            popUpTo(0)
+                            launchSingleTop = true
+                        }
+                    },
+                    getLocation = authViewModel::getLocation
+                )
             }
             composable<Routes.HomeScreen> {
                 HomeScreen()
 
             }
             composable<Routes.ProfileScreen> {
-                ProfileScreen()
+                ProfileScreen(
+                    logOut = {
+                        firebaseAuth.signOut()
+                        navController.navigate(Routes.AuthScreen) {
+                            popUpTo(0)
+                            launchSingleTop = true
+                        }
+                    }
+                )
             }
             composable<Routes.BuySellScreen> {
                 BuySellScreen()

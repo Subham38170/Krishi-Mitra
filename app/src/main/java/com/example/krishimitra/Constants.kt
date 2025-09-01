@@ -1,12 +1,7 @@
 package com.example.krishimitra
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
-import com.google.mlkit.common.model.RemoteModelManager
-import com.google.mlkit.nl.translate.TranslateRemoteModel
+import android.content.Context
+import androidx.datastore.preferences.preferencesDataStore
 
 
 data class Language(
@@ -72,6 +67,7 @@ object Constants {
     )
 
 
+    val Context.dataStore by preferencesDataStore(name = "settings")
 
 
 }

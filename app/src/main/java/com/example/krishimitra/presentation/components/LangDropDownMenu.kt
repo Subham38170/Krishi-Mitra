@@ -13,7 +13,7 @@ fun LangDropDownMenu(
     expanded: Boolean,
     onDismiss: () -> Unit,
     langList: List<Language>,
-    onClick: (Language) -> Unit,
+    onClick: (String) -> Unit,
     modifier: Modifier
 ) {
     DropdownMenu(
@@ -29,7 +29,7 @@ fun LangDropDownMenu(
                     )
                 },
                 onClick = {
-                    onClick(it)
+                    onClick(it.code)
                 }
             )
         }

@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -76,8 +77,6 @@ dependencies {
     //Permissions for jetpack compose
     implementation(libs.accompanist.permissions)
 
-    //Google ML kit for translation
-    implementation(libs.translate)
 
 
     //Room database
@@ -85,4 +84,14 @@ dependencies {
     ksp(libs.androidx.room.compiler)  // For annotation processing
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
+
+    //Datastore
+    implementation(libs.androidx.datastore.preferences) // <-- Add this line
+
+    //Location services
+    implementation(libs.play.services.location)
+
+    //Retrofir
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }

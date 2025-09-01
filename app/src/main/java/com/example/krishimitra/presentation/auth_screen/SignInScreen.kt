@@ -1,20 +1,22 @@
 package com.example.krishimitra.presentation.auth_screen
 
+
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FilledIconButton
-import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -23,23 +25,35 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.krishimitra.R
-
+import com.example.krishimitra.domain.farmer_data.UserDataModel
 
 @Composable
 fun SignInScreen(
     modifier: Modifier = Modifier,
-    moveToSignUpScreen: () -> Unit
+    moveToSignUpScreen: () -> Unit,
+    signIn: (UserDataModel) -> Unit,
+    authState: AuthState,
+    context: Context
 ) {
-    var mobileNo by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var showPassword by remember { mutableStateOf(false) }
+    var email by rememberSaveable { mutableStateOf("") }
+    val gmailRegex = Regex("^[a-zA-Z0-9._%+-]+@gmail\\.com$")
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -50,20 +64,19 @@ fun SignInScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Sign In",
+            text = stringResource(R.string.login),
             style = MaterialTheme.typography.titleLarge,
         )
-        Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
-            value = mobileNo,
-            onValueChange = { mobileNo = it },
+            value = email,
+            onValueChange = { email = it },
             singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier
                 .fillMaxWidth(),
             label = {
                 Text(
-                    text = "Mobile No."
+                    text = "Email"
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
@@ -73,49 +86,99 @@ fun SignInScreen(
                 unfocusedTextColor = colorResource(id = R.color.grass_green),
                 cursorColor = colorResource(id = R.color.grass_green),
             ),
-            leadingIcon = {
-                Text(
-                    text = "+91"
-                )
-
-            },
-            trailingIcon = {
-                if (mobileNo.length == 10) {
-                    FilledIconButton(
-                        onClick = {
-
-                        },
-                        modifier = Modifier
-                            .width(60.dp)
-                            .padding(end = 8.dp),
-
-                        shape = RoundedCornerShape(2.dp),
-                        colors = IconButtonDefaults.iconButtonColors(
-                            containerColor = colorResource(id = R.color.grass_green),
-                            contentColor = Color.White
-                        )
-                    ) {
-                        Text(
-                            text = "OTP"
-                        )
-                    }
+            supportingText = {
+                if (email.isNotEmpty() && !email.matches(gmailRegex)) {
+                    Text(
+                        text = "Enter a valid Gmail address",
+                        color = Color.Red
+                    )
                 }
             }
         )
 
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(
+                mask = '*'
+            ),
+            modifier = Modifier
+                .fillMaxWidth(),
+            label = {
+                Text(
+                    text = "Password"
+                )
+            },
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedBorderColor = colorResource(id = R.color.grass_green),
+                focusedBorderColor = colorResource(id = R.color.grass_green),
+                focusedLabelColor = colorResource(R.color.grass_green),
+                unfocusedTextColor = colorResource(id = R.color.grass_green),
+                cursorColor = colorResource(id = R.color.grass_green),
+            ),
+            trailingIcon = {
+                IconButton(
+                    onClick = { showPassword = !showPassword }
+                ) {
+                    Icon(
+                        painter = if (showPassword) painterResource(id = R.drawable.outline_visibility_off_24) else painterResource(
+                            id = R.drawable.outline_visibility_24
+                        ),
+                        contentDescription = if (showPassword) "Hide password" else "Show password"
+                    )
+
+                }
+            },
+            supportingText = {
+                if (password.length > 0 && password.length < 8) {
+                    Text(
+                        text = "Password must be 8 characters long",
+                        color = Color.Red
+
+                    )
+                }
+            }
+
+        )
+
+
+
         Button(
             modifier = Modifier
                 .fillMaxWidth(),
-            onClick = {},
+            onClick = {
+                if (password.length < 8 || !email.matches(gmailRegex)
+                ) {
+                    Toast.makeText(context, "Enter valid details", Toast.LENGTH_SHORT).show()
+                } else if (authState.isSignLoading) {
+                    Toast.makeText(context, "Wait...", Toast.LENGTH_SHORT).show()
+                } else {
+                    signIn(
+                        UserDataModel(
+                            email = email,
+                            password = password
+                        )
+                    )
+
+                }
+            },
             shape = RoundedCornerShape(4.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(id = R.color.grass_green)
             )
         ) {
-            Text(
-                text = "Sign In",
-                style = MaterialTheme.typography.bodyLarge
-            )
+            if (authState.isSignLoading) {
+                CircularProgressIndicator(
+                    color = Color.White
+                )
+            } else {
+                Text(
+                    text = stringResource(id = R.string.login),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -123,7 +186,7 @@ fun SignInScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Don't have account?",
+                text = stringResource(id = R.string.dont_have_account),
 
                 )
             TextButton(
@@ -136,4 +199,5 @@ fun SignInScreen(
         }
 
     }
+
 }

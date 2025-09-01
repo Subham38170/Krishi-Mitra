@@ -1,4 +1,4 @@
-package com.example.krishimitra.ui.theme
+package com.example.krishimitra.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
