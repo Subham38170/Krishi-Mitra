@@ -26,4 +26,26 @@
     <string name="no_internet">इंटरनेट कनेक्शन नाही</string>
     <string name="try_again">कृपया पुन्हा प्रयत्न करा</string>
     <string name="welcome_user">स्वागत आहे, %1$s!</string>
+
+    <string name="password">पासवर्ड</string>
+    <string name="email">ईमेल</string>
+    <string name="create">तयार करा</string>
+
+    <string name="enter_a_valid_gmail_address">वैध Gmail पत्ता प्रविष्ट करा</string>
+    <string name="password_must_be_8_characters_long">पासवर्ड ८ अक्षरी असावा</string>
+
+    <string name="crops">पिके</string>
+    <string name="vegetables">भाजीपाला</string>
+    <string name="fruits">फळे</string>
+    <string name="grains">धान्ये</string>
+    <string name="pulses">डाळी</string>
+    <string name="oilseeds">तेलझड बियाणे</string>
+    <string name="spices">मसाले</string>
+    <string name="cash_crops">नकद पिके</string>
+    <string name="plantation_crops">प्लांटेशन पिके</string>
+    <string name="fodder_crops">चारा पिके</string>
+
+    <string name="krishi_bazar">कृषी बाजार</string>
+    <string name="search_for_crops">पिक शोधा</string>
+
 </resources>

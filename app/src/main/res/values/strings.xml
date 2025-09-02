@@ -10,7 +10,7 @@
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
     <string name="already_have_account">Already have an account ?</string>
-    <string name="dont_have_account">Dont have acccount ?</string>
+    <string name="dont_have_account">Dont have account ?</string>
     <string name="welcome">Welcome</string>
     <string name="enter_mobile">Enter Mobile Number</string>
     <string name="enter_name">Enter Name</string>
@@ -27,6 +27,26 @@
     <string name="try_again">Please try again</string>
     <string name="welcome_user">Welcome, %1$s!</string>
 
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="create">Create</string>
 
+
+    <string name="enter_a_valid_gmail_address">Enter a valid Gmail address</string>
+    <string name="password_must_be_8_characters_long">Password must be 8 characters long</string>
+
+    <string name="crops">Crops</string>
+    <string name="vegetables">Vegetables</string>
+    <string name="fruits">Fruits</string>
+    <string name="grains">Grains</string>
+    <string name="pulses">Pulses</string>
+    <string name="oilseeds">Oilseeds</string>
+    <string name="spices">Spices</string>
+    <string name="cash_crops">Cash Crops</string>
+    <string name="plantation_crops">Plantation Crops</string>
+    <string name="fodder_crops">Fodder Crops</string>
+
+    <string name="krishi_bazar">Krishi Bazar</string>
+    <string name="search_for_crops">Search for crops</string>
 
 </resources>

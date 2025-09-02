@@ -26,4 +26,27 @@
     <string name="no_internet">इंटरनेट कनेक्शन नइखे</string>
     <string name="try_again">फेर से कोशिश करीं</string>
     <string name="welcome_user">स्वागत बा, %1$s!</string>
+
+    <string name="password">पासवर्ड</string>
+    <string name="email">ईमेल</string>
+    <string name="create">बनाइं</string>
+
+    <string name="enter_a_valid_gmail_address">सही Gmail पता दर्ज करें</string>
+    <string name="password_must_be_8_characters_long">पासवर्ड 8 अक्षरों का होना चाहिए</string>
+
+    <string name="crops">फसलें</string>
+    <string name="vegetables">सब्जियाँ</string>
+    <string name="fruits">फल</string>
+    <string name="grains">अनाज</string>
+    <string name="pulses">दालें</string>
+    <string name="oilseeds">तिलहन</string>
+    <string name="spices">मसाले</string>
+    <string name="cash_crops">नकदी फसलें</string>
+    <string name="plantation_crops">बागवानी फसलें</string>
+    <string name="fodder_crops">चारा फसलें</string>
+
+    <string name="krishi_bazar">कृषि बाजार</string>
+    <string name="search_for_crops">फसल खोजें</string>
+
+
 </resources>

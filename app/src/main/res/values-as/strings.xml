@@ -1,30 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">কৃষি মিত্ৰ</string>
-    <string name="mobile_no">মবাইল নম্বৰ</string>
-    <string name="language">ভাষা</string>
+    <string name="mobile_no">ম\'বাইল নং</string>
+    <string name="language">অসমীয়া</string>
     <string name="name">নাম</string>
     <string name="state">ৰাজ্য</string>
     <string name="district">জিলা</string>
-    <string name="pin_no">পিন নম্বৰ</string>
+    <string name="pin_no">পিন নং</string>
     <string name="village">গাঁও</string>
     <string name="login">লগইন</string>
-    <string name="signup">ছাইন আপ</string>
-    <string name="already_have_account">আগৰতে একাউণ্ট আছে নেকি ?</string>
-    <string name="dont_have_account">একাউণ্ট নাই নেকি ?</string>
+    <string name="signup">চাইন আপ</string>
+    <string name="already_have_account">পূৰ্বে একাউণ্ট আছে ?</string>
+    <string name="dont_have_account">একাউণ্ট নাই ?</string>
     <string name="welcome">স্বাগতম</string>
-    <string name="enter_mobile">মবাইল নম্বৰ দিয়ক</string>
-    <string name="enter_name">নাম দিয়ক</string>
-    <string name="otp_sent">OTP পঠোৱা হৈছে</string>
-    <string name="verify_otp">OTP যাচাই কৰক</string>
-    <string name="resend_otp">OTP পুনৰ পঠাওক</string>
-    <string name="logout">লগ আউট</string>
+    <string name="enter_mobile">ম\'বাইল নম্বৰ দিয়ক</string>
+    <string name="enter_name">নাম দিয়ক</string>
+    <string name="otp_sent">OTP পঠিওৱা হৈছে</string>
+    <string name="verify_otp">OTP নিৰীক্ষা কৰক</string>
+    <string name="resend_otp">OTP পুনৰ পঠিওৱা</string>
+    <string name="logout">লগআউট</string>
 
-    <string name="error_invalid_mobile">অবৈধ মবাইল নম্বৰ</string>
+    <string name="error_invalid_mobile">অবৈধ ম\'বাইল নম্বৰ</string>
     <string name="error_invalid_otp">অবৈধ OTP</string>
-    <string name="error_required">এই ক্ষেত্ৰটো প্ৰয়োজনীয়</string>
+    <string name="error_required">এই ক্ষেত্ৰটো আৱশ্যক</string>
     <string name="no_internet">ইণ্টাৰনেট সংযোগ নাই</string>
-    <string name="try_again">পুনৰ চেষ্টা কৰক</string>
+    <string name="try_again">অনুগ্ৰহ কৰি পুনৰ চেষ্টা কৰক</string>
     <string name="welcome_user">স্বাগতম, %1$s!</string>
 
+    <string name="password">পাছৱৰ্ড</string>
+    <string name="email">ই-মেইল</string>
+    <string name="create">সৃষ্টি কৰক</string>
+
+    <string name="enter_a_valid_gmail_address">এক বৈধ Gmail ঠিকনা দিয়ক</string>
+    <string name="password_must_be_8_characters_long">পাছৱৰ্ড ৮ আখৰৰ হ\'ব লাগিব</string>
+
+    <string name="crops">ফচল</string>
+    <string name="vegetables">শাকসবজি</string>
+    <string name="fruits">ফল</string>
+    <string name="grains">ধান্য</string>
+    <string name="pulses">ডাল</string>
+    <string name="oilseeds">তেলবীজ</string>
+    <string name="spices">মচলা</string>
+    <string name="cash_crops">নগদ ফচল</string>
+    <string name="plantation_crops">প্লাণ্টেচন ফচল</string>
+    <string name="fodder_crops">চাৰা ফচল</string>
+
+    <string name="krishi_bazar">কৃষি বজাৰ</string>
+    <string name="search_for_crops">ফচল বিচাৰক</string>
 </resources>

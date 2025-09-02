@@ -30,7 +30,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             KrishiMitraTheme {
                 val navController = rememberNavController()
-                NavGraph(navController = navController)
+                NavGraph(
+                    navController = navController,
+                    activity = this
+                )
             }
         }
     }

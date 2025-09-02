@@ -26,4 +26,26 @@
     <string name="no_internet">انٹرنیٹ کنکشن نئ چھ</string>
     <string name="try_again">مہربانی کرِت دوبارہ کوشش کرِو</string>
     <string name="welcome_user">خوش آمدید، %1$s!</string>
+
+    <string name="password">پاسورڈ</string>
+    <string name="email">ای میل</string>
+    <string name="create">بناؤ</string>
+
+    <string name="enter_a_valid_gmail_address">ایک درست Gmail پتہ درج کریں</string>
+    <string name="password_must_be_8_characters_long">پاسورڈ 8 حروف کا ہونا چاہیے</string>
+
+    <string name="crops">فصلیں</string>
+    <string name="vegetables">سبزیاں</string>
+    <string name="fruits">پھل</string>
+    <string name="grains">اناج</string>
+    <string name="pulses">دالیں</string>
+    <string name="oilseeds">تیل والے بیج</string>
+    <string name="spices">مصالحے</string>
+    <string name="cash_crops">نقد فصلیں</string>
+    <string name="plantation_crops">پلانٹیشن فصلیں</string>
+    <string name="fodder_crops">چارہ فصلیں</string>
+
+    <string name="krishi_bazar">زرعی بازار</string>
+    <string name="search_for_crops">فصل تلاش کریں</string>
+
 </resources>

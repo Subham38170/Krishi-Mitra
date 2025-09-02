@@ -31,7 +31,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -76,7 +75,7 @@ fun SignInScreen(
                 .fillMaxWidth(),
             label = {
                 Text(
-                    text = "Email"
+                    text = stringResource(id = R.string.email)
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
@@ -89,7 +88,7 @@ fun SignInScreen(
             supportingText = {
                 if (email.isNotEmpty() && !email.matches(gmailRegex)) {
                     Text(
-                        text = "Enter a valid Gmail address",
+                        text = stringResource(id = R.string.enter_a_valid_gmail_address),
                         color = Color.Red
                     )
                 }
@@ -108,7 +107,7 @@ fun SignInScreen(
                 .fillMaxWidth(),
             label = {
                 Text(
-                    text = "Password"
+                    text = stringResource(id = R.string.password)
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
@@ -132,9 +131,9 @@ fun SignInScreen(
                 }
             },
             supportingText = {
-                if (password.length > 0 && password.length < 8) {
+                if (password.isNotEmpty() && password.length < 8) {
                     Text(
-                        text = "Password must be 8 characters long",
+                        text = stringResource(R.string.password_must_be_8_characters_long),
                         color = Color.Red
 
                     )
@@ -201,3 +200,4 @@ fun SignInScreen(
     }
 
 }
+

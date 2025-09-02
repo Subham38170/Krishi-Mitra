@@ -2,6 +2,7 @@ package com.example.krishimitra
 
 import android.content.Context
 import com.example.krishimitra.data.lang_manager.LanguageManager
+import com.example.krishimitra.data.location_manager.LocationManager
 import com.example.krishimitra.data.repo.RepoImpl
 import com.example.krishimitra.domain.repo.Repo
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -53,11 +54,21 @@ object DIModule {
     @Singleton
     fun provideRepo(
         languageManager: LanguageManager,
-        @ApplicationContext context: Context,
-        fusedLocationClient: FusedLocationProviderClient
+        locationManager: LocationManager
     ): Repo{
         return RepoImpl(
             languageManager = languageManager,
+            locationManager = locationManager
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocationManager(
+        @ApplicationContext context: Context,
+        fusedLocationClient: FusedLocationProviderClient
+    ): LocationManager{
+        return LocationManager(
             context = context,
             fusedLocationClient = fusedLocationClient
         )

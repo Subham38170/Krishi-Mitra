@@ -1,6 +1,7 @@
 package com.example.krishimitra
 
 import android.content.Context
+import androidx.compose.ui.res.stringResource
 import androidx.datastore.preferences.preferencesDataStore
 
 
@@ -68,6 +69,7 @@ object Constants {
 
 
     val Context.dataStore by preferencesDataStore(name = "settings")
+
 
 
 }

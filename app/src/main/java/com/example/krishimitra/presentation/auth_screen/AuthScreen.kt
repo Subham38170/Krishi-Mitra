@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -36,7 +35,8 @@ import com.example.krishimitra.Constants
 import com.example.krishimitra.R
 import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.presentation.components.LangDropDownMenu
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,10 +45,13 @@ fun AuthScreen(
     changeLanguage: (String) -> Unit,
     signIn: (UserDataModel) -> Unit,
     signUp: (UserDataModel) -> Unit,
-    moveToHomeScreen: ()-> Unit,
-    getLocation: ()-> Unit
+    moveToHomeScreen: () -> Unit,
+    getLocation: () -> Unit,
+    onEnableLocationPermission: ()-> Unit,
+    errorFlow: SharedFlow<String>
 ) {
 
+    var pagerScreen by remember { mutableStateOf(0) }
     val pagerState = rememberPagerState(
         initialPage = 0,
         pageCount = { 2 }
@@ -58,11 +61,11 @@ fun AuthScreen(
     var expandDropDownMenu by remember { mutableStateOf(false) }
 
     LaunchedEffect(state.isSuccess) {
-        if(state.isSuccess) moveToHomeScreen()
+        if (state.isSuccess) moveToHomeScreen()
     }
-    LaunchedEffect(state.isError) {
-        if (state.isError != null) {
-            Toast.makeText(context, state.isError, Toast.LENGTH_LONG).show()
+    LaunchedEffect(Unit) {
+        errorFlow.collect { msg ->
+            Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -72,10 +75,10 @@ fun AuthScreen(
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.background_image),
+            painter = painterResource(id = R.drawable.back_image),
             contentDescription = "Back ground Image",
             modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillHeight
+            contentScale = ContentScale.FillBounds
         )
         Column(
             modifier = Modifier
@@ -86,40 +89,34 @@ fun AuthScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            HorizontalPager(
-                state = pagerState
-            ) {
-                when (pagerState.currentPage) {
-                    0 -> {
-                        SignInScreen(
-                            moveToSignUpScreen = {
-                                scope.launch {
-                                    pagerState.animateScrollToPage(1)
-                                }
 
-                            },
-                            signIn = signIn,
-                            authState = state,
-                            context = context
-                        )
-                    }
+            when (pagerScreen) {
+                0 -> {
+                    SignInScreen(
+                        moveToSignUpScreen = {
+                            pagerScreen = 1
 
-                    1 -> {
-                        SignUpScreen(
-                            moveToSignInScreen = {
-                                scope.launch {
-                                    pagerState.animateScrollToPage(0)
-                                }
-                            },
-                            signUp = signUp,
-                            authState = state,
-                            context = context,
-                            getLocation = getLocation
-
-                        )
-
-                    }
+                        },
+                        signIn = signIn,
+                        authState = state,
+                        context = context
+                    )
                 }
+
+                1 -> {
+                    SignUpScreen(
+                        moveToSignInScreen = {
+                            pagerScreen = 0
+                        },
+                        signUp = signUp,
+                        authState = state,
+                        context = context,
+                        getLocation = getLocation,
+                        enableLocationPermission = onEnableLocationPermission
+                    )
+
+                }
+
             }
 
         }

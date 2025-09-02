@@ -26,4 +26,26 @@
     <string name="no_internet">ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ</string>
     <string name="try_again">ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
     <string name="welcome_user">ಸ್ವಾಗತ, %1$s!</string>
+
+    <string name="password">ಪಾಸ್ವರ್ಡ್</string>
+    <string name="email">ಇಮೇಲ್</string>
+    <string name="create">ರಚಿಸಿ</string>
+
+    <string name="enter_a_valid_gmail_address">ಮಾನ್ಯ Gmail ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="password_must_be_8_characters_long">ಪಾಸ್ವರ್ಡ್ 8 ಅಕ್ಷರಗಳಷ್ಟು ಇರಬೇಕು</string>
+
+    <string name="crops">ಪಣ್ಣು</string>
+    <string name="vegetables">ತರಕಾರಿಗಳು</string>
+    <string name="fruits">ಹಣ್ಣುಗಳು</string>
+    <string name="grains">ಧಾನ್ಯಗಳು</string>
+    <string name="pulses">ಕಾಳುಗಳು</string>
+    <string name="oilseeds">ಎಣ್ಣೆ ಬೀಜಗಳು</string>
+    <string name="spices">ಮಸಾಲೆ</string>
+    <string name="cash_crops">ಹಣದ ಬೆಳೆಗಳು</string>
+    <string name="plantation_crops">ಚಿಕಿತ್ಸಾ ಬೆಳೆಗಳು</string>
+    <string name="fodder_crops">ಮನೆಮಾಡುವ ಬೆಳೆಗಳು</string>
+
+    <string name="krishi_bazar">ಕೃಷಿ ಮಾರುಕಟ್ಟೆ</string>
+    <string name="search_for_crops">ಬೆಳೆ ಹುಡುಕಿ</string>
+
 </resources>

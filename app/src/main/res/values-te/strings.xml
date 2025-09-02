@@ -26,4 +26,26 @@
     <string name="no_internet">ఇంటర్నెట్ కనెక్షన్ లేదు</string>
     <string name="try_again">దయచేసి మళ్లీ ప్రయత్నించండి</string>
     <string name="welcome_user">స్వాగతం, %1$s!</string>
+
+    <string name="password">పాస్‌వర్డ్</string>
+    <string name="email">ఇమెయిల్</string>
+    <string name="create">సృష్టించు</string>
+
+    <string name="enter_a_valid_gmail_address">చెల్లుబాటు అయ్యే Gmail చిరునామా ఇవ్వండి</string>
+    <string name="password_must_be_8_characters_long">పాస్‌వర్డ్ 8 అక్షరాల పొడవు ఉండాలి</string>
+
+    <string name="crops">పంటలు</string>
+    <string name="vegetables">కూరగాయలు</string>
+    <string name="fruits">పండ్లు</string>
+    <string name="grains">ధాన్యాలు</string>
+    <string name="pulses">పప్పులు</string>
+    <string name="oilseeds">నూనె గింజలు</string>
+    <string name="spices">మసాలా</string>
+    <string name="cash_crops">నగదు పంటలు</string>
+    <string name="plantation_crops">విత్తన పంటలు</string>
+    <string name="fodder_crops">మా పంటలు</string>
+
+    <string name="krishi_bazar">వ్యవసాయ మార్కెట్</string>
+    <string name="search_for_crops">పంటలు వెతకండి</string>
+
 </resources>

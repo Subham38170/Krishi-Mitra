@@ -26,4 +26,26 @@
     <string name="no_internet">नेट कनेक्शन नै</string>
     <string name="try_again">फेर सै कोशिश करो</string>
     <string name="welcome_user">राम राम सा, %1$s!</string>
+
+    <string name="password">गुप्तशब्दः</string>
+    <string name="email">ईमेल</string>
+    <string name="create">निर्मातुम्</string>
+
+    <string name="enter_a_valid_gmail_address">यथार्थं Gmail पत्रिका प्रविष्टयतु</string>
+    <string name="password_must_be_8_characters_long">गुप्तशब्दः ८ अक्षरः दीर्घः स्यात्</string>
+
+    <string name="crops">कृषि</string>
+    <string name="vegetables">शाकानि</string>
+    <string name="fruits">फलानि</string>
+    <string name="grains">धान्यानि</string>
+    <string name="pulses">दालानि</string>
+    <string name="oilseeds">तैलबीजानि</string>
+    <string name="spices">मसालानि</string>
+    <string name="cash_crops">नकद् कृषयः</string>
+    <string name="plantation_crops">प्लान्टेशन कृषयः</string>
+    <string name="fodder_crops">चराकृषयः</string>
+
+    <string name="krishi_bazar">कृषि बाज़ारः</string>
+    <string name="search_for_crops">कृषि अन्वेषणं कुर्वन्तु</string>
+
 </resources>

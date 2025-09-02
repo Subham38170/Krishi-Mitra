@@ -26,4 +26,26 @@
     <string name="no_internet">ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ</string>
     <string name="try_again">ଦୟାକରି ପୁଣିଥରେ ଚେଷ୍ଟା କରନ୍ତୁ</string>
     <string name="welcome_user">ସ୍ୱାଗତ, %1$s!</string>
+
+    <string name="password">ପାସୱାର୍ଡ</string>
+    <string name="email">ଇମେଲ୍</string>
+    <string name="create">ସୃଷ୍ଟି କରନ୍ତୁ</string>
+
+    <string name="enter_a_valid_gmail_address">ଏକ ବୈଧ Gmail ଠିକଣା ପ୍ରବେଶ କରନ୍ତୁ</string>
+    <string name="password_must_be_8_characters_long">ପାସୱାର୍ଡ 8 ଅକ୍ଷର ଲମ୍ବା ହେବା ଆବଶ୍ୟକ</string>
+
+    <string name="crops">ଚାଷ</string>
+    <string name="vegetables">ସବୁଜ ସବୁଜୀ</string>
+    <string name="fruits">ଫଳ</string>
+    <string name="grains">ଧାନ୍ୟ</string>
+    <string name="pulses">ଡାଲି</string>
+    <string name="oilseeds">ତେଲ ବୀଜ</string>
+    <string name="spices">ମସଲା</string>
+    <string name="cash_crops">ନକଦ ଚାଷ</string>
+    <string name="plantation_crops">ପ୍ଲାଣ୍ଟେସନ୍ ଚାଷ</string>
+    <string name="fodder_crops">ଚାରା ଚାଷ</string>
+
+    <string name="krishi_bazar">କୃଷି ବଜାର</string>
+    <string name="search_for_crops">ଚାଷ ଖୋଜନ୍ତୁ</string>
+
 </resources>

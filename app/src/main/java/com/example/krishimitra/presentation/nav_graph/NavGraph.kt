@@ -1,5 +1,6 @@
 package com.example.krishimitra.presentation.nav_graph
 
+import android.app.Activity
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -21,15 +22,18 @@ import androidx.navigation.compose.rememberNavController
 import com.example.krishimitra.presentation.auth_screen.AuthScreen
 import com.example.krishimitra.presentation.auth_screen.AuthViewModel
 import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreen
+import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreenViewModel
 import com.example.krishimitra.presentation.home_screen.BottomBarInfo
 import com.example.krishimitra.presentation.home_screen.HomeScreen
+import com.example.krishimitra.presentation.home_screen.HomeScreenViewModel
 import com.example.krishimitra.presentation.profile_screen.ProfileScreen
 import com.google.firebase.auth.FirebaseAuth
 
 
 @Composable
 fun NavGraph(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    activity: Activity
 ) {
 
     val firebaseAuth = FirebaseAuth.getInstance()
@@ -82,11 +86,19 @@ fun NavGraph(
                             launchSingleTop = true
                         }
                     },
-                    getLocation = authViewModel::getLocation
+                    getLocation = authViewModel::getLocation,
+                    onEnableLocationPermission = {
+                        authViewModel.onEnableLocationPermission(activity)
+                    },
+                    errorFlow = authViewModel.error
                 )
             }
             composable<Routes.HomeScreen> {
-                HomeScreen()
+                val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
+                HomeScreen(
+                    state = homeScreenViewModel.state.collectAsStateWithLifecycle().value,
+                    onEvent = homeScreenViewModel::onEvent
+                )
 
             }
             composable<Routes.ProfileScreen> {
@@ -101,7 +113,11 @@ fun NavGraph(
                 )
             }
             composable<Routes.BuySellScreen> {
-                BuySellScreen()
+                val buySellViewModel = hiltViewModel<BuySellScreenViewModel>()
+                BuySellScreen(
+                    state = buySellViewModel.state.collectAsStateWithLifecycle().value,
+                    onEvent = buySellViewModel::onEvent
+                )
             }
 
         }

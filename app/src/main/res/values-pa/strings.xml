@@ -26,4 +26,27 @@
     <string name="no_internet">ਇੰਟਰਨੈੱਟ ਕੁਨੈਕਸ਼ਨ ਨਹੀਂ</string>
     <string name="try_again">ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
     <string name="welcome_user">ਸਵਾਗਤ ਹੈ, %1$s!</string>
+
+    <string name="password">ਪਾਸਵਰਡ</string>
+    <string name="email">ਈਮੇਲ</string>
+    <string name="create">ਬਣਾਓ</string>
+
+    <string name="enter_a_valid_gmail_address">ਇੱਕ ਵੈਧ Gmail ਪਤਾ ਦਰਜ ਕਰੋ</string>
+    <string name="password_must_be_8_characters_long">ਪਾਸਵਰਡ 8 ਅੱਖਰ ਲੰਬਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ</string>
+
+    <string name="crops">ਫਸਲਾਂ</string>
+    <string name="vegetables">ਸਬਜ਼ੀਆਂ</string>
+    <string name="fruits">ਫਲ</string>
+    <string name="grains">ਅਨਾਜ</string>
+    <string name="pulses">ਦਾਲਾਂ</string>
+    <string name="oilseeds">ਤੇਲਬੀਜ</string>
+    <string name="spices">ਮਸਾਲੇ</string>
+    <string name="cash_crops">ਨਕਦ ਫਸਲਾਂ</string>
+    <string name="plantation_crops">ਪਲਾਂਟੇਸ਼ਨ ਫਸਲਾਂ</string>
+    <string name="fodder_crops">ਚਾਰਾ ਫਸਲਾਂ</string>
+
+    <string name="krishi_bazar">ਕ੍ਰਿਸ਼ੀ ਬਜ਼ਾਰ</string>
+    <string name="search_for_crops">ਫਸਲ ਖੋਜੋ</string>
+
+
 </resources>

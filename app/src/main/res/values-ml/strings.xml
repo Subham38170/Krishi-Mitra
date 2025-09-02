@@ -26,4 +26,27 @@
     <string name="no_internet">ഇന്റർനെറ്റ് കണക്ഷൻ ഇല്ല</string>
     <string name="try_again">ദയവായി വീണ്ടും ശ്രമിക്കുക</string>
     <string name="welcome_user">സ്വാഗതം, %1$s!</string>
+
+    <string name="password">പാസ്‌വേഡ്</string>
+    <string name="email">ഇമെയിൽ</string>
+    <string name="create">സൃഷ്ടിക്കുക</string>
+
+    <string name="enter_a_valid_gmail_address">സാധുവായ Gmail വിലാസം നൽകുക</string>
+    <string name="password_must_be_8_characters_long">പാസ്‌വേഡ് 8 അക്കരക്ഷരങ്ങളുടെ ആയിരിക്കണം</string>
+
+    <string name="crops">പടവുകൾ</string>
+    <string name="vegetables">പച്ചക്കറികൾ</string>
+    <string name="fruits">പഴങ്ങൾ</string>
+    <string name="grains">धान്യങ്ങൾ</string>
+    <string name="pulses">പയർ</string>
+    <string name="oilseeds">എണ്ണതിരവുകൾ</string>
+    <string name="spices">മസാലകൾ</string>
+    <string name="cash_crops">നقد പടവുകൾ</string>
+    <string name="plantation_crops">പ്ലാന്റേഷൻ പടവുകൾ</string>
+    <string name="fodder_crops">ചാരം പടവുകൾ</string>
+
+    <string name="krishi_bazar">കൃഷി മാർക്കറ്റ്</string>
+    <string name="search_for_crops">പടവുകൾ തിരയുക</string>
+
 </resources>
+

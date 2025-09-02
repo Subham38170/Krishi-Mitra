@@ -43,6 +43,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.krishimitra.R
+import com.example.krishimitra.data.location_manager.LocationManager
 import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.presentation.components.CustomOutlinedTextField
 import com.example.krishimitra.utils.AskLocationPermission
@@ -56,7 +57,8 @@ fun SignUpScreen(
     signUp: (UserDataModel) -> Unit,
     authState: AuthState,
     context: Context,
-    getLocation: () -> Unit
+    getLocation: () -> Unit,
+    enableLocationPermission: ()-> Unit
 ) {
 
     var mobileNo by rememberSaveable { mutableStateOf("") }
@@ -84,7 +86,9 @@ fun SignUpScreen(
     if (requestPermission) {
         AskLocationPermission {
             if (it) getLocation()
-            else requestPermission=false
+            else {
+                requestPermission=false
+            }
         }
     }
 
@@ -129,9 +133,13 @@ fun SignUpScreen(
 
                 onClick = {
                     if (!authState.isLocationLoading) {
-                        if (isLocationPermissionGranted(context)) {
+                        if (isLocationPermissionGranted(context) && LocationManager.isLocationEnabled(context)) {
                             getLocation()
-                        } else {
+                        } else if(!LocationManager.isLocationEnabled(context)){
+                            enableLocationPermission()
+                        }
+                            else{
+
                             requestPermission = true
                         }
                     }
