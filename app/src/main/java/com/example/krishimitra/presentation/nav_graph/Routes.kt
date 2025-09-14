@@ -19,4 +19,7 @@ sealed class Routes {
     @Serializable
     data object MandiScreen: Routes()
 
+
+    @Serializable
+    data object DiseasePredictionScreen: Routes()
 }

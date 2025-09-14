@@ -7,7 +7,9 @@ import com.example.krishimitra.Constants
 import com.example.krishimitra.domain.repo.Repo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
@@ -25,6 +27,9 @@ class HomeScreenViewModel @Inject constructor(
 
 
 
+    private val _eventFlow = MutableSharedFlow<HomeScreenEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
+
     init {
         getLanguage()
     }
@@ -34,6 +39,7 @@ class HomeScreenViewModel @Inject constructor(
             is HomeScreenEvent.ChangeLanguage -> {
                 changeLanguage(event.lang)
             }
+
         }
     }
 

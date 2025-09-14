@@ -7,8 +7,6 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -24,7 +22,7 @@ import com.example.krishimitra.presentation.auth_screen.AuthScreen
 import com.example.krishimitra.presentation.auth_screen.AuthViewModel
 import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreen
 import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreenViewModel
-import com.example.krishimitra.presentation.nav_graph.BottomBarInfo
+import com.example.krishimitra.presentation.disease_prediction_screen.DiseasePredictionScreen
 import com.example.krishimitra.presentation.home_screen.HomeScreen
 import com.example.krishimitra.presentation.home_screen.HomeScreenViewModel
 import com.example.krishimitra.presentation.mandi_screen.MandiScreen
@@ -100,7 +98,15 @@ fun NavGraph(
                 val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
                 HomeScreen(
                     state = homeScreenViewModel.state.collectAsStateWithLifecycle().value,
-                    onEvent = homeScreenViewModel::onEvent
+                    onEvent = homeScreenViewModel::onEvent,
+                    moveToMandiScreen = {
+                        navController.navigate(Routes.MandiScreen) { launchSingleTop = true }
+                    },
+                    moveToDiseasePredictionScreen = {
+                        navController.navigate(Routes.DiseasePredictionScreen) {
+                            launchSingleTop = true
+                        }
+                    }
                 )
 
             }
@@ -123,12 +129,16 @@ fun NavGraph(
                 )
             }
 
-            composable<Routes.MandiScreen>{
+            composable<Routes.MandiScreen> {
                 val mandiViewModel = hiltViewModel<MandiScreenViewModel>()
                 MandiScreen(
-                   state = mandiViewModel.state.collectAsStateWithLifecycle().value,
-                    mandiPrice= mandiViewModel.pagingData.collectAsLazyPagingItems()
+                    state = mandiViewModel.state.collectAsStateWithLifecycle().value,
+                    mandiPrice = mandiViewModel.pagingData.collectAsLazyPagingItems(),
+                    onEvent = mandiViewModel::onEvent
                 )
+            }
+            composable<Routes.DiseasePredictionScreen> {
+                DiseasePredictionScreen()
             }
 
         }
