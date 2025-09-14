@@ -19,13 +19,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.krishimitra.presentation.auth_screen.AuthScreen
 import com.example.krishimitra.presentation.auth_screen.AuthViewModel
 import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreen
 import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreenViewModel
-import com.example.krishimitra.presentation.home_screen.BottomBarInfo
+import com.example.krishimitra.presentation.nav_graph.BottomBarInfo
 import com.example.krishimitra.presentation.home_screen.HomeScreen
 import com.example.krishimitra.presentation.home_screen.HomeScreenViewModel
+import com.example.krishimitra.presentation.mandi_screen.MandiScreen
+import com.example.krishimitra.presentation.mandi_screen.MandiScreenViewModel
 import com.example.krishimitra.presentation.profile_screen.ProfileScreen
 import com.google.firebase.auth.FirebaseAuth
 
@@ -117,6 +120,14 @@ fun NavGraph(
                 BuySellScreen(
                     state = buySellViewModel.state.collectAsStateWithLifecycle().value,
                     onEvent = buySellViewModel::onEvent
+                )
+            }
+
+            composable<Routes.MandiScreen>{
+                val mandiViewModel = hiltViewModel<MandiScreenViewModel>()
+                MandiScreen(
+                   state = mandiViewModel.state.collectAsStateWithLifecycle().value,
+                    mandiPrice= mandiViewModel.pagingData.collectAsLazyPagingItems()
                 )
             }
 

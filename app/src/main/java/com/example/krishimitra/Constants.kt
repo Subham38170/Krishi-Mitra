@@ -71,6 +71,7 @@ object Constants {
     val Context.dataStore by preferencesDataStore(name = "settings")
 
 
+    const val MANDI_API_KEY = BuildConfig.MANDI_API_KEY
 
 }
 

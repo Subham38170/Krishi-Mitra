@@ -1,40 +1,48 @@
-package com.example.krishimitra.presentation.home_screen
+package com.example.krishimitra.presentation.nav_graph
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.example.krishimitra.presentation.nav_graph.Routes
 
 sealed class BottomBarInfo(
     val name: String,
     val icon: ImageVector,
     val route: Routes
 ) {
-    object HomeScreenIcon : BottomBarInfo(
+    object HomeScreenInfo : BottomBarInfo(
         name = "Home",
         icon = Icons.Default.Home,
         route = Routes.HomeScreen
     )
 
-    object ProfileScreenIcon : BottomBarInfo(
+    object ProfileScreenInfo : BottomBarInfo(
         name = "Profile",
         icon = Icons.Default.Person,
         route = Routes.ProfileScreen
     )
 
-    object BuySellScreenIcon : BottomBarInfo(
+    object BuySellScreenInfo : BottomBarInfo(
         name = "BuySell",
         icon = Icons.Default.ShoppingCart,
         route = Routes.BuySellScreen
     )
 
+    object MandiPriceScreenInfo : BottomBarInfo(
+        name = "MandiPrice",
+        icon = Icons.Default.MailOutline,
+        route = Routes.MandiScreen
+    )
+
     companion object {
         val bottomBarList = listOf<BottomBarInfo>(
-            HomeScreenIcon,
-            BuySellScreenIcon,
-            ProfileScreenIcon
+            HomeScreenInfo,
+            BuySellScreenInfo,
+            MandiPriceScreenInfo,
+
+            ProfileScreenInfo
         )
     }
 }

@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
-import com.example.krishimitra.data.lang_manager.LanguageManager
+import com.example.krishimitra.data.repo.lang_manager.LanguageManager
 import com.example.krishimitra.presentation.nav_graph.NavGraph
 import com.example.krishimitra.presentation.ui.theme.KrishiMitraTheme
 import dagger.hilt.android.AndroidEntryPoint

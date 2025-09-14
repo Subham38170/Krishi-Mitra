@@ -1,10 +1,11 @@
-package com.example.krishimitra.data.location_manager
+package com.example.krishimitra.data.repo.location_manager
 
 import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.IntentSender
 import android.location.Geocoder
+import android.location.LocationManager
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresPermission
@@ -95,9 +96,9 @@ constructor(
     companion object {
         fun isLocationEnabled(context: Context): Boolean {
             val locationserviceManager =
-                context.getSystemService(Context.LOCATION_SERVICE) as android.location.LocationManager
-            return locationserviceManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER) ||
-                    locationserviceManager.isProviderEnabled(android.location.LocationManager.NETWORK_PROVIDER)
+                context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            return locationserviceManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                    locationserviceManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
         }
     }
 

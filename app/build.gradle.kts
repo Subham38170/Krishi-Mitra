@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -22,6 +24,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        buildConfigField("String","MANDI_API_KEY",properties.getProperty("MANDI_API_KEY"))
     }
 
     buildTypes {
@@ -41,6 +48,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        buildConfig =true
         compose = true
     }
 }
@@ -58,6 +66,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.paging.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -91,7 +100,7 @@ dependencies {
     //Location services
     implementation(libs.play.services.location)
 
-    //Retrofir
+    //Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 }

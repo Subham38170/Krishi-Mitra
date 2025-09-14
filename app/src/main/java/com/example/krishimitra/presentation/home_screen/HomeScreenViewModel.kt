@@ -1,5 +1,6 @@
 package com.example.krishimitra.presentation.home_screen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.krishimitra.Constants
@@ -56,4 +57,6 @@ class HomeScreenViewModel @Inject constructor(
             getLanguage()
         }
     }
+
+
 }
