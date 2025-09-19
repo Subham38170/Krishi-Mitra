@@ -58,7 +58,7 @@ fun SignUpScreen(
     authState: AuthState,
     context: Context,
     getLocation: () -> Unit,
-    enableLocationPermission: ()-> Unit
+    enableLocationPermission: () -> Unit
 ) {
 
     var mobileNo by rememberSaveable { mutableStateOf("") }
@@ -72,6 +72,9 @@ fun SignUpScreen(
     var email by rememberSaveable { mutableStateOf("") }
     val gmailRegex = Regex("^[a-zA-Z0-9._%+-]+@gmail\\.com$")
 
+    var latitude by rememberSaveable { mutableStateOf(28.6139) }
+    var longitude by rememberSaveable { mutableStateOf(77.2090) }
+
     var requestPermission by remember { mutableStateOf(false) }
 
     LaunchedEffect(authState.location) {
@@ -80,14 +83,17 @@ fun SignUpScreen(
             village = it.village
             pinCode = it.pinCode
             district = it.district
+            latitude = it.latitude
+            longitude = it.longitude
+
         }
-        Log.d("Location",authState.location.toString())
+        Log.d("Location", authState.location.toString())
     }
     if (requestPermission) {
         AskLocationPermission {
             if (it) getLocation()
             else {
-                requestPermission=false
+                requestPermission = false
             }
         }
     }
@@ -112,7 +118,9 @@ fun SignUpScreen(
             value = name,
             onValueChange = { name = it },
             label = stringResource(id = R.string.name),
-            supportingText = ""
+            supportingText = "",
+            readOnly = false
+
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -124,21 +132,27 @@ fun SignUpScreen(
                 onValueChange = { village = it },
                 label = stringResource(id = R.string.village),
                 supportingText = "",
-                modifier = Modifier.weight(2f)
+                modifier = Modifier.weight(2f),
+                readOnly = true
             )
             IconButton(
                 modifier = Modifier
                     .weight(1f)
-                    .background(colorResource(id = R.color.grass_green), shape = RoundedCornerShape(4.dp)),
+                    .background(
+                        colorResource(id = R.color.grass_green),
+                        shape = RoundedCornerShape(4.dp)
+                    ),
 
                 onClick = {
                     if (!authState.isLocationLoading) {
-                        if (isLocationPermissionGranted(context) && LocationManager.isLocationEnabled(context)) {
+                        if (isLocationPermissionGranted(context) && LocationManager.isLocationEnabled(
+                                context
+                            )
+                        ) {
                             getLocation()
-                        } else if(!LocationManager.isLocationEnabled(context)){
+                        } else if (!LocationManager.isLocationEnabled(context)) {
                             enableLocationPermission()
-                        }
-                            else{
+                        } else {
 
                             requestPermission = true
                         }
@@ -163,14 +177,16 @@ fun SignUpScreen(
                 onValueChange = { district = it },
                 label = stringResource(id = R.string.district),
                 supportingText = "",
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                readOnly = true
             )
             CustomOutlinedTextField(
                 value = state,
                 onValueChange = { state = it },
                 label = stringResource(id = R.string.state),
                 supportingText = "",
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                readOnly = true
 
             )
         }
@@ -248,6 +264,7 @@ fun SignUpScreen(
                         text = stringResource(id = R.string.pin_no)
                     )
                 },
+                readOnly = true,
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedBorderColor = colorResource(id = R.color.grass_green),
                     focusedBorderColor = colorResource(id = R.color.grass_green),
@@ -324,7 +341,10 @@ fun SignUpScreen(
                             district = district,
                             state = state,
                             mobileNo = mobileNo,
-                            pinCode = pinCode
+                            pinCode = pinCode,
+                            latitude = latitude,
+                            longitude = longitude
+
                         )
                     )
 

@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import com.example.krishimitra.data.local.KrishiMitraDatabase
 import com.example.krishimitra.data.local.dao.MandiPriceDao
+import com.example.krishimitra.data.remote.CropDiseasePredictionApiService
 import com.example.krishimitra.data.remote.MandiPriceApiService
+import com.example.krishimitra.data.repo.DataStoreManager
 import com.example.krishimitra.data.repo.RepoImpl
 import com.example.krishimitra.data.repo.lang_manager.LanguageManager
 import com.example.krishimitra.data.repo.location_manager.LocationManager
@@ -13,6 +15,9 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestoreSettings
+import com.google.firebase.firestore.memoryCacheSettings
+import com.google.firebase.firestore.persistentCacheSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +34,7 @@ import javax.inject.Singleton
 object DIModule {
 
     const val MANDI_PRICE_RETROFIT = "mandi_price"
+    const val DISEASE_PREDICTION_RETROFIT = "disease_prediction"
 
     @Provides
     @Singleton
@@ -39,7 +45,13 @@ object DIModule {
     @Provides
     @Singleton
     fun provideFirebaseFirestore(): FirebaseFirestore {
-        return FirebaseFirestore.getInstance()
+        val settings = firestoreSettings {
+            setLocalCacheSettings(memoryCacheSettings {})
+            setLocalCacheSettings(persistentCacheSettings {})
+        }
+        val firestore = FirebaseFirestore.getInstance()
+        firestore.firestoreSettings = settings
+        return firestore
     }
 
     @Provides
@@ -65,13 +77,21 @@ object DIModule {
         languageManager: LanguageManager,
         locationManager: LocationManager,
         mandiApiService: MandiPriceApiService,
-        localDb: KrishiMitraDatabase
+        localDb: KrishiMitraDatabase,
+        dataStoreManager: DataStoreManager,
+        firestoreDb: FirebaseFirestore,
+        diseasePredictionApiService: CropDiseasePredictionApiService,
+        @ApplicationContext context: Context
     ): Repo {
         return RepoImpl(
             languageManager = languageManager,
             locationManager = locationManager,
             mandiApiService = mandiApiService,
-            localDb = localDb
+            localDb = localDb,
+            dataStoreManager = dataStoreManager,
+            firestoreDb = firestoreDb,
+            diseasePredictionApiService = diseasePredictionApiService,
+            context = context
         )
     }
 
@@ -95,6 +115,26 @@ object DIModule {
             .baseUrl(MandiPriceApiService.mandi_base_url)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    @Named(DISEASE_PREDICTION_RETROFIT)
+    fun provideDiseasePredictionRetrofit(): Retrofit {
+        return Retrofit
+            .Builder()
+            .baseUrl("https://0ef701d64c53.ngrok-free.app/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideCropDiseasePredictionApi(
+        @Named(DISEASE_PREDICTION_RETROFIT) retrofit: Retrofit
+    ): CropDiseasePredictionApiService {
+        return retrofit.create(CropDiseasePredictionApiService::class.java)
     }
 
     @Provides
@@ -128,5 +168,13 @@ object DIModule {
         return krishiMitraDatabase.mandiPriceDao()
     }
 
+
+    @Provides
+    @Singleton
+    fun provideDataStoreManager(
+        @ApplicationContext context: Context
+    ): DataStoreManager {
+        return DataStoreManager(context)
+    }
 
 }

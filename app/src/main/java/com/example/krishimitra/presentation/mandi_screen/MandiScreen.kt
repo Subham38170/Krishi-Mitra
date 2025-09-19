@@ -161,7 +161,14 @@ fun MandiScreen(
                 }
                 item {
                     if (mandiPrice.loadState.append is LoadState.Loading) {
-                        CircularProgressIndicator()
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ){
+                            CircularProgressIndicator()
+                        }
                     }
                 }
             }

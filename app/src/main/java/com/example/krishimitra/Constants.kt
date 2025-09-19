@@ -1,7 +1,6 @@
 package com.example.krishimitra
 
 import android.content.Context
-import androidx.compose.ui.res.stringResource
 import androidx.datastore.preferences.preferencesDataStore
 
 
@@ -13,36 +12,6 @@ data class Language(
 
 object Constants {
 
-    val INDIAN_STATES = listOf(
-        "Andhra Pradesh",
-        "Arunachal Pradesh",
-        "Assam",
-        "Bihar",
-        "Chhattisgarh",
-        "Goa",
-        "Gujarat",
-        "Haryana",
-        "Himachal Pradesh",
-        "Jharkhand",
-        "Karnataka",
-        "Kerala",
-        "Madhya Pradesh",
-        "Maharashtra",
-        "Manipur",
-        "Meghalaya",
-        "Mizoram",
-        "Nagaland",
-        "Odisha",
-        "Punjab",
-        "Rajasthan",
-        "Sikkim",
-        "Tamil Nadu",
-        "Telangana",
-        "Tripura",
-        "Uttar Pradesh",
-        "Uttarakhand",
-        "West Bengal"
-    )
     val SUPPORTED_LANGUAGES = listOf(
         Language("eng", "English", "English"),
         Language("as", "Assamese", "অসমীয়া"),
@@ -69,9 +38,17 @@ object Constants {
 
 
     val Context.dataStore by preferencesDataStore(name = "settings")
-
+    val Context.userDataStore by preferencesDataStore(name = "user_data")
 
     const val MANDI_API_KEY = BuildConfig.MANDI_API_KEY
 
+
+}
+
+object FirebaseConstants {
+    const val USERS = "users"
+    const val STATES = "states"
+    const val GOVT_SCHEMES = "govt_schemes"
+    const val KRISHI_NEWS = "krishi_news"
 }
 

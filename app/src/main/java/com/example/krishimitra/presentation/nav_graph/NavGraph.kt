@@ -1,13 +1,25 @@
 package com.example.krishimitra.presentation.nav_graph
 
+
 import android.app.Activity
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.material3.BottomAppBarDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -17,12 +29,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.krishimitra.presentation.auth_screen.AuthScreen
 import com.example.krishimitra.presentation.auth_screen.AuthViewModel
 import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreen
 import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreenViewModel
+import com.example.krishimitra.presentation.community_screen.ComunityMainScreen
+import com.example.krishimitra.presentation.community_screen.StateCommunityScreen
 import com.example.krishimitra.presentation.disease_prediction_screen.DiseasePredictionScreen
+import com.example.krishimitra.presentation.disease_prediction_screen.DiseasePredictionViewModel
 import com.example.krishimitra.presentation.home_screen.HomeScreen
 import com.example.krishimitra.presentation.home_screen.HomeScreenViewModel
 import com.example.krishimitra.presentation.mandi_screen.MandiScreen
@@ -30,7 +46,7 @@ import com.example.krishimitra.presentation.mandi_screen.MandiScreenViewModel
 import com.example.krishimitra.presentation.profile_screen.ProfileScreen
 import com.google.firebase.auth.FirebaseAuth
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavGraph(
     navController: NavHostController = rememberNavController(),
@@ -40,32 +56,44 @@ fun NavGraph(
     val firebaseAuth = FirebaseAuth.getInstance()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
+    val scrollBehavior = BottomAppBarDefaults.exitAlwaysScrollBehavior()
+
     Scaffold(
         bottomBar = {
-            if (firebaseAuth.uid != null) {
+            if (firebaseAuth.uid != null && navController.currentDestination != Routes.StateCommunityScreen && navController.currentDestination != Routes.CommunityMainScreen && navController.currentDestination != Routes.DiseasePredictionScreen) {
+                AnimatedVisibility(
+                    visible = scrollBehavior.state.contentOffset >= 0f,
+                    enter = slideInVertically(
+                        initialOffsetY = { it },
+                        animationSpec = tween(durationMillis = 100)
+                    ) + fadeIn(),
 
-                NavigationBar(
-                    containerColor = Color.White
+                    exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
                 ) {
-                    BottomBarInfo.bottomBarList.forEach { bottomBarInfo ->
-                        val isSelected =
-                            currentDestination?.hierarchy?.any { it.hasRoute(bottomBarInfo.route::class) } == true
-                        NavigationBarItem(
-                            selected = isSelected, onClick = {
-                                navController.navigate(bottomBarInfo.route) {
-                                    popUpTo(Routes.HomeScreen) { saveState = true }
-                                    launchSingleTop = true
-                                }
+                    NavigationBar {
+                        BottomBarInfo.bottomBarList.forEach { bottomBarInfo ->
+                            val isSelected =
+                                currentDestination?.hierarchy?.any { it.hasRoute(bottomBarInfo.route::class) } == true
+                            NavigationBarItem(
+                                selected = isSelected, onClick = {
+                                    navController.navigate(bottomBarInfo.route) {
+                                        popUpTo(Routes.HomeScreen) { saveState = true }
+                                        launchSingleTop = true
+                                    }
 
-                            }, icon = {
-                                Icon(
-                                    imageVector = bottomBarInfo.icon,
-                                    contentDescription = bottomBarInfo.name
-                                )
-                            }, colors = NavigationBarItemDefaults.colors(
+                                }, icon = {
+                                    Icon(
+                                        imageVector = bottomBarInfo.icon,
+                                        contentDescription = bottomBarInfo.name
+                                    )
+                                },
+                                colors = NavigationBarItemDefaults.colors(
 
+                                ),
+                                modifier = Modifier
+                                    .clip(RectangleShape)
                             )
-                        )
+                        }
                     }
                 }
             }
@@ -102,11 +130,12 @@ fun NavGraph(
                     moveToMandiScreen = {
                         navController.navigate(Routes.MandiScreen) { launchSingleTop = true }
                     },
-                    moveToDiseasePredictionScreen = {
-                        navController.navigate(Routes.DiseasePredictionScreen) {
+                    moveToDiseasePredictionScreen = { uri ->
+                        navController.navigate(Routes.DiseasePredictionScreen(uri.toString())) {
                             launchSingleTop = true
                         }
-                    }
+                    },
+                    scrollBehavior = scrollBehavior
                 )
 
             }
@@ -138,9 +167,37 @@ fun NavGraph(
                 )
             }
             composable<Routes.DiseasePredictionScreen> {
-                DiseasePredictionScreen()
+                val diseasePredictionViewModel = hiltViewModel<DiseasePredictionViewModel>()
+                val data = it.toRoute<Routes.DiseasePredictionScreen>()
+                DiseasePredictionScreen(
+                    imageUri = data.imageUri?.toUri(),
+                    moveBackToScreen = {
+                        navController.popBackStack()
+                    },
+                    state = diseasePredictionViewModel.state.collectAsStateWithLifecycle().value,
+                    event = diseasePredictionViewModel.event,
+                    onEvent = diseasePredictionViewModel::onEvent
+                )
             }
 
+            composable<Routes.CommunityMainScreen> {
+                ComunityMainScreen(
+                    moveToMessageScreen = { name ->
+                        navController.navigate(Routes.StateCommunityScreen(name)) {
+                            launchSingleTop = true
+                        }
+                    }
+                )
+            }
+            composable<Routes.StateCommunityScreen> {
+                val data = it.toRoute<Routes.StateCommunityScreen>()
+                StateCommunityScreen(
+                    state = data.state,
+                    onBackClick = {
+                        navController.popBackStack()
+                    }
+                )
+            }
         }
     }
 

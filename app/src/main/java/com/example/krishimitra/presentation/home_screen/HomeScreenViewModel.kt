@@ -1,9 +1,9 @@
 package com.example.krishimitra.presentation.home_screen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.krishimitra.Constants
+import com.example.krishimitra.domain.ResultState
 import com.example.krishimitra.domain.repo.Repo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,11 +20,10 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(
     val repo: Repo
-): ViewModel() {
+) : ViewModel() {
 
     private val _state = MutableStateFlow<HomeScreenState>(HomeScreenState())
     val state = _state.asStateFlow()
-
 
 
     private val _eventFlow = MutableSharedFlow<HomeScreenEvent>()
@@ -32,14 +31,19 @@ class HomeScreenViewModel @Inject constructor(
 
     init {
         getLanguage()
+        loadGovtSchemes()
+        loadKrishiNews()
     }
 
-    fun onEvent(event: HomeScreenEvent){
-        when(event){
+    fun onEvent(event: HomeScreenEvent) {
+        when (event) {
             is HomeScreenEvent.ChangeLanguage -> {
                 changeLanguage(event.lang)
             }
 
+            is HomeScreenEvent.Error ->{
+
+            }
         }
     }
 
@@ -64,5 +68,78 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
+    private fun loadGovtSchemes() {
+        viewModelScope.launch {
+
+            repo.loadGovtSchemes()
+                .collectLatest { action ->
+                    when (action) {
+                        is ResultState.Error -> {
+                            _eventFlow.emit(HomeScreenEvent.Error(action.exception))
+                            _state.update {
+                                it.copy(
+                                    isBannersLoading = false
+                                )
+                            }
+                        }
+
+                        ResultState.Loading -> {
+                            _state.update {
+                                it.copy(
+                                    isBannersLoading = true
+                                )
+                            }
+                        }
+
+                        is ResultState.Success -> {
+                            _state.update {
+                                it.copy(
+                                    isBannersLoading = true,
+                                    schemeBannersList = action.data
+                                )
+                            }
+                        }
+                    }
+
+                }
+        }
+    }
+
+    private fun loadKrishiNews() {
+        viewModelScope.launch {
+
+            repo.loadKrishiNews()
+                .collectLatest { action ->
+                    when (action) {
+                        is ResultState.Error -> {
+                            _eventFlow.emit(HomeScreenEvent.Error(action.exception))
+                            _state.update {
+                                it.copy(
+                                    isKrishiNewsLoading = false
+                                )
+                            }
+                        }
+
+                        ResultState.Loading -> {
+                            _state.update {
+                                it.copy(
+                                    isKrishiNewsLoading = true
+                                )
+                            }
+                        }
+
+                        is ResultState.Success -> {
+                            _state.update {
+                                it.copy(
+                                    isKrishiNewsLoading = true,
+                                    krishiNewsBannerList = action.data
+                                )
+                            }
+                        }
+                    }
+
+                }
+        }
+    }
 
 }

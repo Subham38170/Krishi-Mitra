@@ -1,25 +1,33 @@
 package com.example.krishimitra.presentation.nav_graph
 
+import android.net.Uri
 import kotlinx.serialization.Serializable
 
 sealed class Routes {
 
     @Serializable
-    data object AuthScreen: Routes()
+    data object AuthScreen : Routes()
 
     @Serializable
-    data object HomeScreen: Routes()
+    data object HomeScreen : Routes()
 
     @Serializable
-    data object ProfileScreen: Routes()
+    data object ProfileScreen : Routes()
 
     @Serializable
-    data object BuySellScreen: Routes()
+    data object BuySellScreen : Routes()
 
     @Serializable
-    data object MandiScreen: Routes()
+    data object MandiScreen : Routes()
 
 
     @Serializable
-    data object DiseasePredictionScreen: Routes()
+    data class DiseasePredictionScreen(val imageUri: String?) : Routes()
+
+
+    @Serializable
+    data object CommunityMainScreen : Routes()
+
+    @Serializable
+    data class StateCommunityScreen(val state: String) : Routes()
 }

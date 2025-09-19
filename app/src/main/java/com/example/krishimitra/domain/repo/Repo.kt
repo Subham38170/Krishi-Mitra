@@ -1,9 +1,13 @@
 package com.example.krishimitra.domain.repo
 
 import android.app.Activity
+import android.net.Uri
 import androidx.paging.PagingData
 import com.example.krishimitra.data.local.entity.MandiPriceEntity
 import com.example.krishimitra.domain.ResultState
+import com.example.krishimitra.domain.disease_prediction_model.DiseasePredictionResponse
+import com.example.krishimitra.domain.farmer_data.UserDataModel
+import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
 import kotlinx.coroutines.flow.Flow
@@ -19,6 +23,13 @@ interface Repo {
 
     fun requestLocationPermission(activity: Activity)
 
+    suspend fun storeUserData(userData: UserDataModel)
+
+    fun getUserData(): Flow<UserDataModel>
+
+    fun getUserName(): Flow<String>
+
+    fun getStateName(): Flow<String>
 
     suspend fun getMandiPrices(
         offset: Int? = null,
@@ -40,4 +51,14 @@ interface Repo {
         variety: String? = null,
         grade: String? = null
     ): Flow<PagingData<MandiPriceEntity>>
+
+
+    fun loadGovtSchemes(): Flow<ResultState<List<BannerModel>>>
+
+    fun predictCropDisease(
+        lang: String,
+        filePath: Uri
+    ): Flow<ResultState<DiseasePredictionResponse>>
+
+    suspend fun loadKrishiNews(): Flow<ResultState<List<BannerModel>>>
 }

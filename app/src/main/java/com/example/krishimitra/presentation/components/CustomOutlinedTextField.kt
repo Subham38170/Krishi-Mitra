@@ -19,6 +19,7 @@ fun CustomOutlinedTextField(
     label: String,
     supportingText: String,
     modifier: Modifier = Modifier,
+    readOnly: Boolean
 ) {
 
 
@@ -33,6 +34,7 @@ fun CustomOutlinedTextField(
                 text = label
             )
         },
+        readOnly = readOnly,
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = colorResource(id = R.color.grass_green),
             focusedBorderColor = colorResource(id = R.color.grass_green),

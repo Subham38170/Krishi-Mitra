@@ -4,6 +4,8 @@ import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.krishimitra.Constants
+import com.example.krishimitra.FirebaseConstants
+import com.example.krishimitra.data.repo.DataStoreManager
 import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.domain.repo.Repo
 import com.google.firebase.auth.FirebaseAuth
@@ -23,7 +25,8 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val fireStore: FirebaseFirestore,
-    private val repo: Repo
+    private val repo: Repo,
+    private val dataStoreManager: DataStoreManager
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(AuthState())
@@ -86,6 +89,16 @@ class AuthViewModel @Inject constructor(
             firebaseAuth.signInWithEmailAndPassword(userData.email, userData.password)
                 .addOnSuccessListener {
                     _state.update { it.copy(isSignLoading = false, isSuccess = true) }
+                    fireStore.collection(FirebaseConstants.USERS)
+                        .document(firebaseAuth.uid ?: "Unknown")
+                        .get()
+                        .addOnSuccessListener {
+                            viewModelScope.launch {
+                                dataStoreManager.storeUserData(
+                                    it.toObject(UserDataModel::class.java) ?: UserDataModel()
+                                )
+                            }
+                        }
                 }
                 .addOnFailureListener { e ->
                     _state.update { it.copy(isSignLoading = false) }
@@ -99,11 +112,14 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             firebaseAuth.createUserWithEmailAndPassword(userData.email, userData.password)
                 .addOnSuccessListener {
-                    fireStore.collection("users")
+                    fireStore.collection(FirebaseConstants.USERS)
                         .document(firebaseAuth.uid ?: "Unknown")
                         .set(userData)
                         .addOnSuccessListener {
                             _state.update { it.copy(isSignLoading = false, isSuccess = true) }
+                            viewModelScope.launch {
+                                dataStoreManager.storeUserData(userData)
+                            }
                         }
                         .addOnFailureListener { e ->
                             _state.update { it.copy(isSignLoading = false) }

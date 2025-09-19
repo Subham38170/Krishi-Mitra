@@ -4,4 +4,6 @@ sealed class HomeScreenEvent {
 
     data class ChangeLanguage(val lang: String): HomeScreenEvent()
 
+
+    data class Error(val message: String ): HomeScreenEvent()
 }

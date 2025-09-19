@@ -19,6 +19,7 @@ class LanguageManager @Inject constructor(
 
     companion object {
         private val LANGUAGE_KEY = stringPreferencesKey("app_language")
+
     }
 
     // Update / save language
@@ -50,5 +51,6 @@ class LanguageManager @Inject constructor(
             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(languageCode))
         }
     }
+
 
 }

@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.IntentSender
 import android.location.Geocoder
 import android.location.LocationManager
-import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresPermission
 import com.example.krishimitra.domain.location_model.Location
@@ -16,7 +15,6 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.Priority
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -35,38 +33,53 @@ constructor(
         return suspendCancellableCoroutine { cont ->
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 if (location == null) {
-                    cont.resume(null)
-                    return@addOnSuccessListener
-                }
+                    // Request a fresh location update
+                    val locationRequest = LocationRequest.Builder(
+                        Priority.PRIORITY_HIGH_ACCURACY,
+                        2000L
+                    ).setMinUpdateIntervalMillis(1000L).build()
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    // API 33+: async callback
-                    try {
-                        geocoder.getFromLocation(
-                            location.latitude,
-                            location.longitude,
-                            1
-                        ) { addresses ->
-                            if (addresses.isNotEmpty()) {
-                                val address = addresses[0]
-                                cont.resume(
-                                    Location(
-                                        village = address.subLocality ?: address.locality
-                                        ?: address.featureName ?: "",
-                                        state = address.adminArea ?: "",
-                                        district = address.subAdminArea ?: address.locality ?: "",
-                                        pinCode = address.postalCode ?: ""
-                                    )
-                                )
-                            } else {
-                                cont.resume(null)
+                    fusedLocationClient.requestLocationUpdates(
+                        locationRequest,
+                        object : com.google.android.gms.location.LocationCallback() {
+                            override fun onLocationResult(result: com.google.android.gms.location.LocationResult) {
+                                fusedLocationClient.removeLocationUpdates(this)
+                                val freshLocation = result.lastLocation
+                                if (freshLocation != null) {
+                                    try {
+                                        val addresses = geocoder.getFromLocation(
+                                            freshLocation.latitude,
+                                            freshLocation.longitude,
+                                            1
+                                        )
+                                        if (!addresses.isNullOrEmpty()) {
+                                            val address = addresses[0]
+                                            cont.resume(
+                                                Location(
+                                                    village = address.subLocality
+                                                        ?: address.locality ?: "",
+                                                    state = address.adminArea ?: "",
+                                                    district = address.subAdminArea ?: "",
+                                                    pinCode = address.postalCode ?: "",
+                                                    latitude = freshLocation.latitude,
+                                                    longitude = freshLocation.longitude
+                                                )
+                                            )
+                                        } else {
+                                            cont.resume(null)
+                                        }
+                                    } catch (e: Exception) {
+                                        cont.resumeWithException(e)
+                                    }
+                                } else {
+                                    cont.resume(null)
+                                }
                             }
-                        }
-                    } catch (e: Exception) {
-                        cont.resumeWithException(e)
-                    }
+                        },
+                        android.os.Looper.getMainLooper()
+                    )
                 } else {
-                    // API < 33: synchronous, run on background thread
+                    // Cached location is available
                     try {
                         val addresses =
                             geocoder.getFromLocation(location.latitude, location.longitude, 1)
@@ -74,10 +87,12 @@ constructor(
                             val address = addresses[0]
                             cont.resume(
                                 Location(
-                                    village = address.subLocality ?: "",
+                                    village = address.subLocality ?: address.locality?: "",
                                     state = address.adminArea ?: "",
-                                    district = address.subAdminArea ?: "",
-                                    pinCode = address.postalCode ?: ""
+                                    district = address.subAdminArea?: "",
+                                    pinCode = address.postalCode ?: "",
+                                    latitude = location.latitude,
+                                    longitude = location.longitude
                                 )
                             )
                         } else {
@@ -92,6 +107,7 @@ constructor(
             }
         }
     }
+
 
     companion object {
         fun isLocationEnabled(context: Context): Boolean {
@@ -129,6 +145,4 @@ constructor(
             }
         }
     }
-
-
 }

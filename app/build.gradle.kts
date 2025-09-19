@@ -103,4 +103,13 @@ dependencies {
     //Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+
+    //Coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
+
+
+    //Lottie Animation
+    implementation(libs.lottie.compose)
 }
