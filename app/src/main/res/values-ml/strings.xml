@@ -48,5 +48,32 @@
     <string name="krishi_bazar">കൃഷി മാർക്കറ്റ്</string>
     <string name="search_for_crops">പടവുകൾ തിരയുക</string>
 
+
+    <string name="disease_prediction">രോഗ പ്രവചനം</string>
+    <string name="crop_recommendataion">വിള ശുപാർശ</string>
+    <string name="mandi_price">മണ്ടി വില</string>
+    <string name="agri_news">കൃഷി വാർത്തകൾ</string>
+    <string name="predict">പ്രവചിക്കുക</string>
+    <string name="disease">രോഗം</string>
+    <string name="confidence">വിശ്വാസം</string>
+    <string name="description">വിവരണം</string>
+    <string name="treatement">ചികിത്സ</string>
+    <string name="precautions">മുൻകരുതലുകൾ</string>
+    <string name="search_crops">വിളകൾ തിരയുക</string>
+    <string name="buy">വാങ്ങുക</string>
+    <string name="sell">വിൽക്കുക</string>
+    <string name="variety">വിവിധതരം</string>
+    <string name="price">വില</string>
+    <string name="quantity">അളവ്</string>
+    <string name="crop_data">വിള ഡാറ്റ</string>
+    <string name="upload_image">ചിത്രം അപ്ലോഡ് ചെയ്യുക</string>
+    <string name="cancel">റദ്ദാക്കുക</string>
+    <string name="submit">സമർപ്പിക്കുക</string>
+    <string name="update">അപ്ഡേറ്റ് ചെയ്യുക</string>
+    <string name="remoge">നീക്കം ചെയ്യുക</string>
+    <string name="recently_added">പുതിയതായി ചേർത്തത്</string>
+    <string name="schemes">പദ്ധതികൾ</string>
+    <string name="read_more">കൂടുതൽ വായിക്കുക</string>
+
 </resources>
 

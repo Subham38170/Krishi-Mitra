@@ -10,14 +10,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.BottomAppBarScrollBehavior
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -34,6 +37,7 @@ fun MandiScreen(
     state: MandiScreenState,
     mandiPrice: LazyPagingItems<MandiPriceEntity>,
     onEvent: (MandiPriceScreenEvent) -> Unit,
+    scrollBehavior: BottomAppBarScrollBehavior,
 ) {
 
 
@@ -60,7 +64,7 @@ fun MandiScreen(
                 onMicClick = {
 
                 },
-                placeHolder = "Search crops"
+                placeHolder = stringResource(id = R.string.search_crops)
 
             )
 
@@ -104,7 +108,8 @@ fun MandiScreen(
             }
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .nestedScroll(scrollBehavior.nestedScrollConnection),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
 

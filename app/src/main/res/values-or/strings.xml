@@ -48,4 +48,31 @@
     <string name="krishi_bazar">କୃଷି ବଜାର</string>
     <string name="search_for_crops">ଚାଷ ଖୋଜନ୍ତୁ</string>
 
+
+    <string name="disease_prediction">ରୋଗର ପୂର୍ବାନୁମାନ</string>
+    <string name="crop_recommendataion">ଫସଲ ସୁପାରିଶ</string>
+    <string name="mandi_price">ମଣ୍ଡି ମୂଲ୍ୟ</string>
+    <string name="agri_news">କୃଷି ଖବର</string>
+    <string name="predict">ପୂର୍ବାନୁମାନ କରନ୍ତୁ</string>
+    <string name="disease">ରୋଗ</string>
+    <string name="confidence">ବିଶ୍ବାସ</string>
+    <string name="description">ବିବରଣୀ</string>
+    <string name="treatement">ଚିକିତ୍ସା</string>
+    <string name="precautions">ସତର୍କତା</string>
+    <string name="search_crops">ଫସଲ ଖୋଜନ୍ତୁ</string>
+    <string name="buy">କିଣନ୍ତୁ</string>
+    <string name="sell">ବିକ୍ରି କରନ୍ତୁ</string>
+    <string name="variety">ବିଭିନ୍ନତା</string>
+    <string name="price">ମୂଲ୍ୟ</string>
+    <string name="quantity">ପରିମାଣ</string>
+    <string name="crop_data">ଫସଲ ତଥ୍ୟ</string>
+    <string name="upload_image">ପ୍ରତିଛବି ଅପଲୋଡ୍ କରନ୍ତୁ</string>
+    <string name="cancel">ବାତିଲ କରନ୍ତୁ</string>
+    <string name="submit">ଦାଖଲ କରନ୍ତୁ</string>
+    <string name="update">ଅଦ୍ୟତନ କରନ୍ତୁ</string>
+    <string name="remoge">କାଢ଼ି ଦିଅନ୍ତୁ</string>
+    <string name="recently_added">ସମ୍ପ୍ରତି ଯୋଡ଼ାଯାଇଥିବା</string>
+    <string name="schemes">ଯୋଜନାଗୁଡ଼ିକ</string>
+    <string name="read_more">ଅଧିକ ପଢ଼ନ୍ତୁ</string>
+
 </resources>

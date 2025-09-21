@@ -18,7 +18,7 @@
       "districts": ["Chandigarh"]
    },
    {
-      "state": "Chhattisgarh",
+      "state": "Chattisgarh",
       "districts": ["Koria", "Narayanpur", "Surajpur"]
    },
    {
@@ -301,7 +301,7 @@
       ]
    },
    {
-      "state": "Uttarakhand",
+      "state": "Uttrakhand",
       "districts": [
          "Dehradoon",
          "Garhwal (Pauri)",

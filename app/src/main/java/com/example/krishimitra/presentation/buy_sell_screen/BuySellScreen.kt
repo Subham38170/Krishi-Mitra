@@ -18,6 +18,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.BottomAppBarScrollBehavior
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -44,7 +45,8 @@ fun BuySellScreen(
     buyScreenState: BuyScreenState,
     sellScreenState: SellScreenState,
     onEvent: (BuySellScreenEvent) -> Unit,
-    event: SharedFlow<String>
+    event: SharedFlow<String>,
+    scrollBahavior: BottomAppBarScrollBehavior
 ) {
 
     val context = LocalContext.current
@@ -157,7 +159,7 @@ fun BuySellToggleButton(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Text(
-                    text = "Buy",
+                    text = stringResource(id = R.string.buy),
                     color = if (pagerState.currentPage == 1) colorResource(id = R.color.slight_dark_green) else Color.White,
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.clickable(
@@ -174,7 +176,7 @@ fun BuySellToggleButton(
                 )
 
                 Text(
-                    text = "Sell",
+                    text = stringResource(id = R.string.sell),
                     color = if (pagerState.currentPage == 0) colorResource(id = R.color.slight_dark_green) else Color.White,
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.clickable(

@@ -47,6 +47,35 @@
     <string name="fodder_crops">Fodder Crops</string>
 
     <string name="krishi_bazar">Krishi Bazar</string>
-    <string name="search_for_crops">Search for crops</string>
+    <string name="search_for_crops">Search for crops</string>\
+
+
+
+    <string name="disease_prediction">Disease Prediction</string>
+    <string name="crop_recommendataion">Crop Recommendation</string>
+    <string name="mandi_price">Mandi Price</string>
+    <string name="agri_news">Agri News</string>
+    <string name="predict">Predict</string>
+    <string name="disease">Disease</string>
+    <string name="confidence">Confidence</string>
+    <string name="description">Description</string>
+    <string name="treatement">Treatment</string>
+    <string name="precautions">Precautions</string>
+    <string name="search_crops">Search crops</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
+    <string name="variety">Variety</string>
+    <string name="price">Price</string>
+    <string name="quantity">Quantity</string>
+    <string name="crop_data">Crop Data</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="update">Update</string>
+    <string name="remoge">Remove</string>
+    <string name="recently_added">Recently Added</string>
+    <string name="schemes">Schemes</string>
+    <string name="read_more">Read more</string>
+
 
 </resources>

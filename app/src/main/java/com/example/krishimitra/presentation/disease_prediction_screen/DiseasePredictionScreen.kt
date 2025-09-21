@@ -38,6 +38,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
@@ -144,7 +145,7 @@ fun DiseasePredictionScreen(
                     CircularProgressIndicator()
                 } else {
                     Text(
-                        text = "Predict"
+                        text = stringResource(id = R.string.predict)
                     )
                 }
             }
@@ -196,7 +197,7 @@ fun PredictionData(
             }
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
-                    text = "Disease: ${predictedData.Disease}",
+                    text = stringResource(id = R.string.disease) + ": ${predictedData.Disease}",
                     color = Color.Red,
                     style = MaterialTheme.typography.titleMedium
                 )
@@ -204,14 +205,14 @@ fun PredictionData(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Confidence: ${(predictedData.confidence * 100).toInt()}%",
+                    text = stringResource(id = R.string.confidence) + ": ${(predictedData.confidence)}%",
                     style = MaterialTheme.typography.bodyMedium
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Description:",
+                    text = stringResource(id = R.string.description) + ":",
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
                 )
                 Text(
@@ -222,7 +223,7 @@ fun PredictionData(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Treatment:",
+                    text = stringResource(id = R.string.treatement) + ":",
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
                 )
                 predictedData.Treatment.forEach { treatment ->
@@ -232,7 +233,7 @@ fun PredictionData(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Precautions:",
+                    text = stringResource(id = R.string.precautions) + ":",
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
                 )
                 predictedData.Precautions.forEach { precaution ->

@@ -8,24 +8,26 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
@@ -35,6 +37,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.krishimitra.R
 import com.example.krishimitra.presentation.auth_screen.AuthScreen
 import com.example.krishimitra.presentation.auth_screen.AuthViewModel
 import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreen
@@ -49,7 +52,6 @@ import com.example.krishimitra.presentation.mandi_screen.MandiScreen
 import com.example.krishimitra.presentation.mandi_screen.MandiScreenViewModel
 import com.example.krishimitra.presentation.profile_screen.ProfileScreen
 import com.google.firebase.auth.FirebaseAuth
-import com.example.krishimitra.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -67,42 +69,24 @@ fun NavGraph(
         bottomBar = {
             if (firebaseAuth.uid != null && navController.currentDestination != Routes.StateCommunityScreen && navController.currentDestination != Routes.CommunityMainScreen && navController.currentDestination != Routes.DiseasePredictionScreen) {
                 AnimatedVisibility(
-                    visible = scrollBehavior.state.contentOffset >= 0f,
+                    visible = scrollBehavior.state.contentOffset >= -12f,
                     enter = slideInVertically(
                         initialOffsetY = { it },
-                        animationSpec = tween(durationMillis = 100)
+                        animationSpec = tween(durationMillis = 50)
                     ) + fadeIn(),
 
-                    exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
+                    exit = slideOutVertically(
+                        targetOffsetY = { it },
+                        animationSpec = tween(durationMillis = 150)
+                    ) + fadeOut()
                 ) {
-                    NavigationBar(
-                        modifier = Modifier
-                            .height(72.dp)
-                    ){
-                        BottomBarInfo.bottomBarList.forEach { bottomBarInfo ->
-                            val isSelected =
-                                currentDestination?.hierarchy?.any { it.hasRoute(bottomBarInfo.route::class) } == true
-                            NavigationBarItem(
-                                selected = isSelected, onClick = {
-                                    navController.navigate(bottomBarInfo.route) {
-                                        popUpTo(Routes.HomeScreen) { saveState = true }
-                                        launchSingleTop = true
-                                    }
-
-                                }, icon = {
-                                    Icon(
-                                        imageVector = bottomBarInfo.icon,
-                                        contentDescription = bottomBarInfo.name
-                                    )
-                                },
-                                colors = NavigationBarItemDefaults.colors(
-                                    selectedIconColor = colorResource(id = R.color.slight_dark_green),
-                                    indicatorColor = Color.White
-                                )
-                            )
-                        }
-                    }
+                    CustomizedBottomAppBar(
+                        navController = navController,
+                        currentDestination = currentDestination
+                    )
                 }
+
+
             }
         }) { innerpadding ->
         NavHost(
@@ -118,7 +102,7 @@ fun NavGraph(
                     signUp = authViewModel::signUp,
                     moveToHomeScreen = {
                         navController.navigate(Routes.HomeScreen) {
-                            popUpTo(0)
+                            popUpTo(0) { saveState = true }
                             launchSingleTop = true
                         }
                     },
@@ -144,8 +128,8 @@ fun NavGraph(
                     },
                     scrollBehavior = scrollBehavior,
                     moveToKrishiBazar = {
-                        navController.navigate(Routes.BuySellScreen){
-                            launchSingleTop=true
+                        navController.navigate(Routes.BuySellScreen) {
+                            launchSingleTop = true
                         }
                     }
                 )
@@ -156,7 +140,7 @@ fun NavGraph(
                     logOut = {
                         firebaseAuth.signOut()
                         navController.navigate(Routes.AuthScreen) {
-                            popUpTo(0)
+                            popUpTo(0) { saveState = true }
                             launchSingleTop = true
                         }
                     }
@@ -168,7 +152,8 @@ fun NavGraph(
                     buyScreenState = buySellViewModel.buyScreenState.collectAsStateWithLifecycle().value,
                     onEvent = buySellViewModel::onEvent,
                     sellScreenState = buySellViewModel.sellScreenState.collectAsStateWithLifecycle().value,
-                    event = buySellViewModel.event
+                    event = buySellViewModel.event,
+                    scrollBahavior = scrollBehavior
                 )
             }
 
@@ -177,7 +162,8 @@ fun NavGraph(
                 MandiScreen(
                     state = mandiViewModel.state.collectAsStateWithLifecycle().value,
                     mandiPrice = mandiViewModel.pagingData.collectAsLazyPagingItems(),
-                    onEvent = mandiViewModel::onEvent
+                    onEvent = mandiViewModel::onEvent,
+                    scrollBehavior = scrollBehavior
                 )
             }
             composable<Routes.DiseasePredictionScreen> {
@@ -198,7 +184,9 @@ fun NavGraph(
                 ComunityMainScreen(
                     moveToMessageScreen = { name ->
                         navController.navigate(Routes.StateCommunityScreen(name)) {
+
                             launchSingleTop = true
+
                         }
                     }
                 )
@@ -215,6 +203,55 @@ fun NavGraph(
         }
     }
 
+}
+
+
+@Composable
+fun CustomizedBottomAppBar(
+    navController: NavHostController,
+    currentDestination: NavDestination?
+) {
+    BottomAppBar(
+        modifier = Modifier
+            .height(100.dp),
+        containerColor = colorResource(id = R.color.light_green)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+            ,
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            BottomBarInfo.bottomBarList.forEach { bottomBarInfo ->
+                val isSelected = currentDestination?.hierarchy?.any { it.hasRoute(bottomBarInfo.route::class) } == true
+
+                IconButton(
+                    onClick = {
+                        if (!isSelected) {
+                            navController.navigate(bottomBarInfo.route) {
+                                popUpTo(Routes.HomeScreen){saveState=true}
+                                launchSingleTop = true
+                            }
+                        }
+                    },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = if (isSelected) colorResource(
+                            id = R.color.slight_dark_green
+                        ) else Color.Black
+                    )
+
+                ) {
+                    Icon(
+                        imageVector = bottomBarInfo.icon,
+                        contentDescription = bottomBarInfo.name
+                    )
+
+                }
+            }
+
+        }
+    }
 }
 
 

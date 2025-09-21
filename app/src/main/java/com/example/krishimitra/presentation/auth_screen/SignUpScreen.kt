@@ -43,7 +43,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.krishimitra.R
-import com.example.krishimitra.data.repo.location_manager.LocationManager
+import com.example.krishimitra.data.repo.LocationManager
 import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.presentation.components.CustomOutlinedTextField
 import com.example.krishimitra.utils.AskLocationPermission

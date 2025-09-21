@@ -1,4 +1,4 @@
-package com.example.krishimitra.data.repo.lang_manager
+package com.example.krishimitra.data.repo
 
 import android.app.LocaleManager
 import android.content.Context

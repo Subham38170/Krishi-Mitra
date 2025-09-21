@@ -125,7 +125,7 @@ fun SellScreen(
         }
         Column {
             Text(
-                text = "Recently added",
+                text = stringResource(id = R.string.recently_added),
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier
                     .padding(8.dp)
@@ -215,7 +215,7 @@ fun SellScreenAlertDialog(
                     enabled = !isUploading
                 ) {
                     Text(
-                        text = "Cancel"
+                        text = stringResource(id = R.string.cancel)
                     )
                 }
                 Button(
@@ -245,7 +245,7 @@ fun SellScreenAlertDialog(
                 ) {
                     if (!isUploading) {
                         Text(
-                            text = "Submit"
+                            text = stringResource(id = R.string.remoge)
                         )
                     } else {
                         CircularProgressIndicator()
@@ -255,7 +255,7 @@ fun SellScreenAlertDialog(
         },
         title = {
             Text(
-                text = "Crop Data"
+                text = stringResource(id = R.string.crop_data)
             )
         },
         text = {
@@ -279,7 +279,7 @@ fun SellScreenAlertDialog(
                         CustomOutlinedTextField(
                             value = variety,
                             onValueChange = { variety = it },
-                            label = "Variety",
+                            label = stringResource(id = R.string.variety),
                             supportingText = "",
                             readOnly = false
                         )
@@ -303,7 +303,7 @@ fun SellScreenAlertDialog(
                     ) {
                         if (imageUploadUri == null) {
                             Text(
-                                text = "Upload Image",
+                                text = stringResource(id = R.string.upload_image),
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         } else {
@@ -332,7 +332,7 @@ fun SellScreenAlertDialog(
                         modifier = Modifier.weight(1f),
                         label = {
                             Text(
-                                text = "Price"
+                                text = stringResource(id = R.string.price)
                             )
                         },
                         colors = OutlinedTextFieldDefaults.colors(
@@ -352,7 +352,7 @@ fun SellScreenAlertDialog(
                         modifier = Modifier.weight(1f),
                         label = {
                             Text(
-                                text = "Quantity"
+                                text = stringResource(id = R.string.quantity)
                             )
                         },
                         colors = OutlinedTextFieldDefaults.colors(
@@ -458,7 +458,7 @@ fun CropSellDataItem(
                         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp)
                     ) {
                         Text(
-                            text = "Update"
+                            text = stringResource(id = R.string.cancel)
                         )
                     }
                     Button(
@@ -476,7 +476,7 @@ fun CropSellDataItem(
 
                     ) {
                         Text(
-                            text = "Remove"
+                            text = stringResource(id = R.string.remoge)
                         )
                     }
                 }

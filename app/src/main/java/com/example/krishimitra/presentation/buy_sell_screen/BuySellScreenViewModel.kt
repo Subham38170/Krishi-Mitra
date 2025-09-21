@@ -40,10 +40,10 @@ constructor(
     }
 
 
-    private val _sellScreenState = MutableStateFlow<SellScreenState>(SellScreenState())
+    private val _sellScreenState = MutableStateFlow(SellScreenState())
     val sellScreenState = _sellScreenState.asStateFlow()
 
-    private val _buyScreenState = MutableStateFlow<BuyScreenState>(BuyScreenState())
+    private val _buyScreenState = MutableStateFlow(BuyScreenState())
     val buyScreenState = _buyScreenState.asStateFlow()
 
     private fun getAllUserData() {

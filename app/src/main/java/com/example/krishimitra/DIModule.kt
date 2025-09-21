@@ -12,8 +12,8 @@ import com.example.krishimitra.data.remote_meidator.WeatherRemoteMediator
 import com.example.krishimitra.data.repo.DataStoreManager
 import com.example.krishimitra.data.repo.NetworkConnectivityObserverImpl
 import com.example.krishimitra.data.repo.RepoImpl
-import com.example.krishimitra.data.repo.lang_manager.LanguageManager
-import com.example.krishimitra.data.repo.location_manager.LocationManager
+import com.example.krishimitra.data.repo.LanguageManager
+import com.example.krishimitra.data.repo.LocationManager
 import com.example.krishimitra.domain.repo.NetworkConnectivityObserver
 import com.example.krishimitra.domain.repo.Repo
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -148,7 +148,7 @@ object DIModule {
     fun provideDiseasePredictionRetrofit(): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("https://0ef701d64c53.ngrok-free.app/")
+            .baseUrl("https://99ccf1317e5e.ngrok-free.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

@@ -48,4 +48,30 @@
     <string name="krishi_bazar">వ్యవసాయ మార్కెట్</string>
     <string name="search_for_crops">పంటలు వెతకండి</string>
 
+    <string name="disease_prediction">వ్యాధి అంచనా</string>
+    <string name="crop_recommendataion">పంట సిఫార్సు</string>
+    <string name="mandi_price">మండి ధర</string>
+    <string name="agri_news">వ్యవసాయ వార్తలు</string>
+    <string name="predict">అంచనా వేయండి</string>
+    <string name="disease">వ్యాధి</string>
+    <string name="confidence">నమ్మకం</string>
+    <string name="description">వివరణ</string>
+    <string name="treatement">చికిత్స</string>
+    <string name="precautions">జాగ్రత్తలు</string>
+    <string name="search_crops">పంటలను వెతకండి</string>
+    <string name="buy">కొను</string>
+    <string name="sell">అమ్ము</string>
+    <string name="variety">రకం</string>
+    <string name="price">ధర</string>
+    <string name="quantity">పరిమాణం</string>
+    <string name="crop_data">పంట డేటా</string>
+    <string name="upload_image">చిత్రాన్ని అప్‌లోడ్ చేయండి</string>
+    <string name="cancel">రద్దు చేయండి</string>
+    <string name="submit">సమర్పించండి</string>
+    <string name="update">అప్‌డేట్ చేయండి</string>
+    <string name="remoge">తొలగించండి</string>
+    <string name="recently_added">ఇటీవల జోడించబడినవి</string>
+    <string name="schemes">పథకాలు</string>
+    <string name="read_more">మరిన్ని చదవండి</string>
+
 </resources>

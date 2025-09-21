@@ -1,4 +1,4 @@
-package com.example.krishimitra.data.repo.location_manager
+package com.example.krishimitra.data.repo
 
 import android.Manifest
 import android.app.Activity
@@ -6,12 +6,15 @@ import android.content.Context
 import android.content.IntentSender
 import android.location.Geocoder
 import android.location.LocationManager
+import android.os.Looper
 import android.util.Log
 import androidx.annotation.RequiresPermission
 import com.example.krishimitra.domain.location_model.Location
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.Priority
@@ -41,8 +44,8 @@ constructor(
 
                     fusedLocationClient.requestLocationUpdates(
                         locationRequest,
-                        object : com.google.android.gms.location.LocationCallback() {
-                            override fun onLocationResult(result: com.google.android.gms.location.LocationResult) {
+                        object : LocationCallback() {
+                            override fun onLocationResult(result: LocationResult) {
                                 fusedLocationClient.removeLocationUpdates(this)
                                 val freshLocation = result.lastLocation
                                 if (freshLocation != null) {
@@ -76,7 +79,7 @@ constructor(
                                 }
                             }
                         },
-                        android.os.Looper.getMainLooper()
+                        Looper.getMainLooper()
                     )
                 } else {
                     // Cached location is available
@@ -87,9 +90,9 @@ constructor(
                             val address = addresses[0]
                             cont.resume(
                                 Location(
-                                    village = address.subLocality ?: address.locality?: "",
+                                    village = address.subLocality ?: address.locality ?: "",
                                     state = address.adminArea ?: "",
-                                    district = address.subAdminArea?: "",
+                                    district = address.subAdminArea ?: "",
                                     pinCode = address.postalCode ?: "",
                                     latitude = location.latitude,
                                     longitude = location.longitude

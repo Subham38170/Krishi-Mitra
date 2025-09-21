@@ -48,4 +48,30 @@
     <string name="krishi_bazar">ಕೃಷಿ ಮಾರುಕಟ್ಟೆ</string>
     <string name="search_for_crops">ಬೆಳೆ ಹುಡುಕಿ</string>
 
+
+    <string name="disease_prediction">ರೋಗದ ಮುನ್ಸೂಚನೆ</string>
+    <string name="crop_recommendataion">ಬೆಳೆ ಶಿಫಾರಸು</string>
+    <string name="mandi_price">ಮಂಡಿ ಬೆಲೆ</string>
+    <string name="agri_news">ಕೃಷಿ ಸುದ್ದಿ</string>
+    <string name="predict">ಮುನ್ಸೂಚನೆ</string>
+    <string name="disease">ರೋಗ</string>
+    <string name="confidence">ವಿಶ್ವಾಸ</string>
+    <string name="description">ವಿವರಣೆ</string>
+    <string name="treatement">ಚಿಕಿತ್ಸೆ</string>
+    <string name="precautions">ಮುನ್ನೆಚ್ಚರಿಕೆಗಳು</string>
+    <string name="search_crops">ಬೆಳೆಗಳನ್ನು ಹುಡುಕಿ</string>
+    <string name="buy">ಖರೀದಿ</string>
+    <string name="sell">ಮಾರಾಟ</string>
+    <string name="variety">ಪ್ರಭೇದ</string>
+    <string name="price">ಬೆಲೆ</string>
+    <string name="quantity">ಪ್ರಮಾಣ</string>
+    <string name="crop_data">ಬೆಳೆ ಡೇಟಾ</string>
+    <string name="upload_image">ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ</string>
+    <string name="cancel">ರದ್ದುಗೊಳಿಸಿ</string>
+    <string name="submit">ಸಲ್ಲಿಸಿ</string>
+    <string name="update">ನವೀಕರಿಸಿ</string>
+    <string name="remoge">ತೆಗೆದುಹಾಕಿ</string>
+    <string name="recently_added">ಇತ್ತೀಚೆಗೆ ಸೇರಿಸಲಾಗಿದೆ</string>
+    <string name="schemes">ಯೋಜನೆಗಳು</string>
+    <string name="read_more">ಹೆಚ್ಚು ಓದಿ</string>
 </resources>

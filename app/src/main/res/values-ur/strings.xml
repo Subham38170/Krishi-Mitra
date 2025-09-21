@@ -48,5 +48,31 @@
     <string name="krishi_bazar">زرعی بازار</string>
     <string name="search_for_crops">فصل تلاش کریں</string>
 
+    <string name="disease_prediction">بیماری کی پیش گوئی</string>
+    <string name="crop_recommendataion">فصل کی سفارش</string>
+    <string name="mandi_price">منڈی کی قیمت</string>
+    <string name="agri_news">زرعی خبریں</string>
+    <string name="predict">پیش گوئی کریں</string>
+    <string name="disease">بیماری</string>
+    <string name="confidence">اعتماد</string>
+    <string name="description">تفصیل</string>
+    <string name="treatement">علاج</string>
+    <string name="precautions">احتیاطی تدابیر</string>
+    <string name="search_crops">فصلیں تلاش کریں</string>
+    <string name="buy">خریدیں</string>
+    <string name="sell">فروخت کریں</string>
+    <string name="variety">قسم</string>
+    <string name="price">قیمت</string>
+    <string name="quantity">مقدار</string>
+    <string name="crop_data">فصل کا ڈیٹا</string>
+    <string name="upload_image">تصویر اپ لوڈ کریں</string>
+    <string name="cancel">منسوخ کریں</string>
+    <string name="submit">جمع کرائیں</string>
+    <string name="update">اپ ڈیٹ کریں</string>
+    <string name="remoge">ہٹائیں</string>
+    <string name="recently_added">حال ہی میں شامل کیا گیا</string>
+    <string name="schemes">سکیمیں</string>
+    <string name="read_more">مزید پڑھیں</string>
+
 
 </resources>

@@ -48,4 +48,30 @@
     <string name="krishi_bazar">कृषि बाज़ारः</string>
     <string name="search_for_crops">कृषि अन्वेषणं कुर्वन्तु</string>
 
+
+    <string name="disease_prediction">रोगस्य प्राक्कथनम्</string>
+    <string name="crop_recommendataion">सस्यस्य संस्तुतिः</string>
+    <string name="mandi_price">पण्यवीथि-मूल्यम्</string>
+    <string name="agri_news">कृषिसम्बद्धाः वार्ताः</string>
+    <string name="predict">प्राक्कथनं करोतु</string>
+    <string name="disease">रोगः</string>
+    <string name="confidence">विश्वासः</string>
+    <string name="description">विवरणम्</string>
+    <string name="treatement">चिकित्सा</string>
+    <string name="precautions">सावधानता</string>
+    <string name="search_crops">सस्यानि अन्वेष्टुम्</string>
+    <string name="buy">क्रीणातु</string>
+    <string name="sell">विक्रीणातु</string>
+    <string name="variety">प्रकारः</string>
+    <string name="price">मूल्यम्</string>
+    <string name="quantity">मात्रा</string>
+    <string name="crop_data">सस्य-दत्तांशः</string>
+    <string name="upload_image">चित्रं उपलोड् करोतु</string>
+    <string name="cancel">निरस्तं करोतु</string>
+    <string name="submit">समर्पयतु</string>
+    <string name="update">अद्यतनं करोतु</string>
+    <string name="remoge">अपसारयतु</string>
+    <string name="recently_added">नूतनतया योजितानि</string>
+    <string name="schemes">योजनाः</string>
+    <string name="read_more">अधिकं पठतु</string>
 </resources>

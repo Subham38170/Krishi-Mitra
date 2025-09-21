@@ -48,4 +48,30 @@
     <string name="krishi_bazar">விவசாய சந்தை</string>
     <string name="search_for_crops">பயிர்களை தேடு</string>
 
+
+    <string name="disease_prediction">நோய் கணிப்பு</string>
+    <string name="crop_recommendataion">பயிர் பரிந்துரை</string>
+    <string name="mandi_price">மண்டி விலை</string>
+    <string name="agri_news">விவசாயச் செய்திகள்</string>
+    <string name="predict">கணிக்கவும்</string>
+    <string name="disease">நோய்</string>
+    <string name="confidence">நம்பிக்கை</string>
+    <string name="description">விளக்கம்</string>
+    <string name="treatement">சிகிச்சை</string>
+    <string name="precautions">முன்னெச்சரிக்கைகள்</string>
+    <string name="search_crops">பயிர்களைத் தேடு</string>
+    <string name="buy">வாங்கு</string>
+    <string name="sell">விற்க</string>
+    <string name="variety">வகை</string>
+    <string name="price">விலை</string>
+    <string name="quantity">அளவு</string>
+    <string name="crop_data">பயிர் தரவு</string>
+    <string name="upload_image">படத்தை பதிவேற்று</string>
+    <string name="cancel">ரத்து செய்</string>
+    <string name="submit">சமர்ப்பி</string>
+    <string name="update">புதுப்பி</string>
+    <string name="remoge">அகற்று</string>
+    <string name="recently_added">சமீபத்தில் சேர்க்கப்பட்டது</string>
+    <string name="schemes">திட்டங்கள்</string>
+    <string name="read_more">மேலும் படிக்க</string>
 </resources>

@@ -48,4 +48,31 @@
     <string name="krishi_bazar">زرعی بازار</string>
     <string name="search_for_crops">فصل تلاش کریں</string>
 
+
+    <string name="disease_prediction">بؠماریٖی ہُنٛد پَرٛناوُن</string>
+    <string name="crop_recommendataion">فَصلَن ہٕنٛز تَجویٖز</string>
+    <string name="mandi_price">مَنڈی ہُنٛد رَتہٕ</string>
+    <string name="agri_news">زٔمینٲج خَبَر</string>
+    <string name="predict">پَرٛناوُن</string>
+    <string name="disease">بؠماریٖی</string>
+    <string name="confidence">یَقیٖن</string>
+    <string name="description">تَشیٖر</string>
+    <string name="treatement">عِلاج</string>
+    <string name="precautions">اِحتیٲط</string>
+    <string name="search_crops">فَصلَن ہُنٛد تٲشیٖر</string>
+    <string name="buy">کھریدُن</string>
+    <string name="sell">وٕچھُن</string>
+    <string name="variety">قِسَم</string>
+    <string name="price">رَتہٕ</string>
+    <string name="quantity">مِقدار</string>
+    <string name="crop_data">فَصلَن ہُنٛد مَلوٗمات</string>
+    <string name="upload_image">تَصویٖر اَپلوڈ کَرُن</string>
+    <string name="cancel">مَنسوٗخ کَرُن</string>
+    <string name="submit">جَمع کَرُن</string>
+    <string name="update">اَپڈیٹ کَرُن</string>
+    <string name="remoge">یِتھَر کَرُن</string>
+    <string name="recently_added">نوٛن کٔرِتھ شٲمِل</string>
+    <string name="schemes">یَتِیم</string>
+    <string name="read_more">بیٚیِہ پَرُن</string>
+
 </resources>

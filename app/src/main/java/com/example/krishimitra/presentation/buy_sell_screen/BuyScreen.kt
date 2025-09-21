@@ -41,6 +41,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -65,6 +66,7 @@ fun BuyScreen(
     state: BuyScreenState,
     onEvent: (BuySellScreenEvent) -> Unit
 ) {
+
 
 
     val context = LocalContext.current
@@ -93,7 +95,7 @@ fun BuyScreen(
                 onEvent(BuySellScreenEvent.loadAllCrops)
             },
             onMicClick = {},
-            placeHolder = "Search crops"
+            placeHolder = stringResource(id = R.string.search_crops)
         )
 
         LazyColumn(
@@ -104,25 +106,28 @@ fun BuyScreen(
                     CircularProgressIndicator()
                 }
             }
-            items(state.cropList) { item ->
+            if (state.cropList.isNotEmpty()) {
+                items(state.cropList) { item ->
 
-                CropBuyDataItem(
-                    crop = item,
-                    onCallClick = {
-                        try {
-                            val intent = Intent(Intent.ACTION_DIAL)
-                                .apply {
-                                    data = "tel:${item.mobileNo}".toUri()
-                                }
-                            context.startActivity(intent)
-                        } catch (e: Exception) {
-                            Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
-                        }
-                    },
-                    context = context,
-                    imageLoader = imageLoader
-                )
+                    CropBuyDataItem(
+                        crop = item,
+                        onCallClick = {
+                            try {
+                                val intent = Intent(Intent.ACTION_DIAL)
+                                    .apply {
+                                        data = "tel:${item.mobileNo}".toUri()
+                                    }
+                                context.startActivity(intent)
+                            } catch (e: Exception) {
+                                Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        },
+                        context = context,
+                        imageLoader = imageLoader
+                    )
 
+                }
             }
         }
 

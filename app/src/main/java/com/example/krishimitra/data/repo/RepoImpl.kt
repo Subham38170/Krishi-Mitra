@@ -19,8 +19,8 @@ import com.example.krishimitra.data.remote.MandiPriceApiService
 import com.example.krishimitra.data.remote.WeatherApiService
 import com.example.krishimitra.data.remote_meidator.MandiPriceRemoteMediator
 import com.example.krishimitra.data.remote_meidator.WeatherRemoteMediator
-import com.example.krishimitra.data.repo.lang_manager.LanguageManager
-import com.example.krishimitra.data.repo.location_manager.LocationManager
+import com.example.krishimitra.data.repo.LanguageManager
+import com.example.krishimitra.data.repo.LocationManager
 import com.example.krishimitra.domain.ResultState
 import com.example.krishimitra.domain.crops_model.CropModel
 import com.example.krishimitra.domain.disease_prediction_model.DiseasePredictionResponse
@@ -280,9 +280,13 @@ class RepoImpl @Inject constructor(
                         return@addSnapshotListener
                     }
 
-                    snapshot?.let {
-                        val crops = it.toObjects(CropModel::class.java)
-                        trySend(ResultState.Success(crops))
+                    if(snapshot != null) {
+                            val crops = snapshot.toObjects(CropModel::class.java)
+                            trySend(ResultState.Success(crops))
+
+                    }
+                    else{
+                        trySend(ResultState.Success(emptyList()))
                     }
                 }
             awaitClose { close() }

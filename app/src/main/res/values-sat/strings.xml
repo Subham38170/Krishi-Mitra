@@ -48,4 +48,30 @@
     <string name="krishi_bazar">ᱠᱨᱤᱥᱤ ᱵᱟᱡᱟᱨ</string>
     <string name="search_for_crops">ᱯᱤᱠᱮ ᱯᱟᱲᱤ ᱠᱷᱟᱹᱨᱤ</string>
 
+    <string name="disease_prediction">ᱨᱚᱜ ᱯᱨᱮᱰᱤᱠᱥᱚᱱ</string>
+    <string name="crop_recommendataion">ᱥᱟᱦᱟᱱ ᱨᱮᱠᱚᱢᱮᱱᱰᱮᱥᱚᱱ</string>
+    <string name="mandi_price">ᱢᱟᱱᱰᱤ ᱨᱮᱴ</string>
+    <string name="agri_news">ᱠᱷᱮᱛᱤ ᱠᱷᱟᱵᱚᱨ</string>
+    <string name="predict">ᱯᱨᱮᱰᱤᱠᱴ</string>
+    <string name="disease">ᱨᱚᱜ</string>
+    <string name="confidence">ᱵᱷᱚᱨᱚᱥᱚ</string>
+    <string name="description">ᱵᱤᱵᱚᱨᱚᱱ</string>
+    <string name="treatement">ᱤᱞᱟᱡ</string>
+    <string name="precautions">ᱥᱚᱛᱚᱨᱠᱚᱛᱟ</string>
+    <string name="search_crops">ᱥᱟᱦᱟᱱ ᱥᱮᱸᱫᱨᱟ ᱢᱮ</string>
+    <string name="buy">ᱦᱟᱛᱟᱣ ᱢᱮ</string>
+    <string name="sell">ᱟᱠᱷᱨᱤᱧ ᱢᱮ</string>
+    <string name="variety">ᱠᱤᱥᱢ</string>
+    <string name="price">ᱨᱮᱴ</string>
+    <string name="quantity">ᱞᱮᱠᱷᱟ</string>
+    <string name="crop_data">ᱥᱟᱦᱟᱱ ᱰᱟᱴᱟ</string>
+    <string name="upload_image">ᱯᱷᱚᱴᱚ ᱟᱯᱞᱚᱰ ᱢᱮ</string>
+    <string name="cancel">ᱵᱟᱛᱤᱞ ᱢᱮ</string>
+    <string name="submit">ᱡᱚᱢᱟ ᱢᱮ</string>
+    <string name="update">ᱟᱯᱰᱮᱴ ᱢᱮ</string>
+    <string name="remoge">ᱵᱟᱜᱤ ᱢᱮ</string>
+    <string name="recently_added">ᱱᱟᱣᱟ ᱥᱮᱸᱫᱨᱟ</string>
+    <string name="schemes">ᱥᱠᱤᱢ</string>
+    <string name="read_more">ᱟᱨᱦᱚᱸ ᱯᱟᱲᱦᱟᱣ ᱢᱮ</string>
+
 </resources>

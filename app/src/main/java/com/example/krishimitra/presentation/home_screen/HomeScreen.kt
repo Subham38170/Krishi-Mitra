@@ -55,6 +55,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -77,7 +78,7 @@ fun HomeScreen(
     state: HomeScreenState,
     moveToMandiScreen: () -> Unit,
     moveToDiseasePredictionScreen: (Uri?) -> Unit,
-    moveToKrishiBazar: ()-> Unit,
+    moveToKrishiBazar: () -> Unit,
     scrollBehavior: BottomAppBarScrollBehavior
 ) {
 
@@ -124,40 +125,43 @@ fun HomeScreen(
         })
 
     if (showDiseasePredictionAlertDialog) {
-        AlertDialog(onDismissRequest = {
-            showDiseasePredictionAlertDialog = !showDiseasePredictionAlertDialog
-        }, confirmButton = {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                TextButton(
-                    onClick = {
-                        if (imagePermissionState.status.isGranted) {
-                            galleryLauncher.launch("image/*")
-                        } else {
-                            imagePermissionState.launchPermissionRequest()
-                        }
-                    }) {
-                    Text(
-                        text = "Upload Image"
-                    )
+
+        AlertDialog(
+            containerColor = colorResource(id = R.color.light_green),
+            onDismissRequest = {
+                showDiseasePredictionAlertDialog = !showDiseasePredictionAlertDialog
+            }, confirmButton = {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    TextButton(
+                        onClick = {
+                            if (imagePermissionState.status.isGranted) {
+                                galleryLauncher.launch("image/*")
+                            } else {
+                                imagePermissionState.launchPermissionRequest()
+                            }
+                        }) {
+                        Text(
+                            text = stringResource(id = R.string.upload_image)
+                        )
+                    }
+                    TextButton(
+                        onClick = {
+                            if (cameraPermissionState.status.isGranted) {
+                                launcher.launch(uri)
+                            } else {
+                                cameraPermissionState.launchPermissionRequest()
+                            }
+                        }) {
+                        Text(
+                            text = "Click Photo"
+                        )
+                    }
                 }
-                TextButton(
-                    onClick = {
-                        if (cameraPermissionState.status.isGranted) {
-                            launcher.launch(uri)
-                        } else {
-                            cameraPermissionState.launchPermissionRequest()
-                        }
-                    }) {
-                    Text(
-                        text = "Click Photo"
-                    )
-                }
-            }
-        })
+            })
     }
 
 
@@ -208,7 +212,7 @@ fun HomeScreen(
                             )
                             .shimmerEffect(),
                         contentAlignment = Alignment.Center
-                    ){
+                    ) {
                         Text(
                             text = "Loading...",
                             fontWeight = FontWeight.Bold,
@@ -244,7 +248,7 @@ fun HomeScreen(
                         modifier = Modifier
                             .weight(1f)
                             .shadow(2.dp, RoundedCornerShape(12.dp)),
-                        text = "Disease Prediction"
+                        text = stringResource(id = R.string.disease_prediction)
                     )
                     CustomizedHomeButton(
                         onClick = {},
@@ -252,7 +256,7 @@ fun HomeScreen(
                         modifier = Modifier
                             .weight(1f)
                             .shadow(2.dp, RoundedCornerShape(12.dp)),
-                        text = "Crop Recommendataion"
+                        text = stringResource(id = R.string.crop_recommendataion)
                     )
 
                 }
@@ -269,7 +273,7 @@ fun HomeScreen(
                         modifier = Modifier
                             .weight(1f)
                             .shadow(2.dp, RoundedCornerShape(12.dp)),
-                        text = "Mandi Price"
+                        text = stringResource(id = R.string.mandi_price)
                     )
                     CustomizedHomeButton(
                         onClick = moveToKrishiBazar,
@@ -277,13 +281,13 @@ fun HomeScreen(
                         modifier = Modifier
                             .weight(1f)
                             .shadow(2.dp, RoundedCornerShape(12.dp)),
-                        text = "Krishi Bazar"
+                        text = stringResource(id = R.string.krishi_bazar)
                     )
 
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Agri News",
+                    text = stringResource(id = R.string.agri_news),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(16.dp)

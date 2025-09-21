@@ -44,6 +44,7 @@ class MandiPriceRemoteMediator(
                     currentOffset
                 }
             }
+
             val response = mandiPriceApi.getMandiPrices(
                 offset = loadOffset,
                 limit = state.config.pageSize,
@@ -73,6 +74,8 @@ class MandiPriceRemoteMediator(
         } catch (e: IOException) {
             MediatorResult.Error(e)
         } catch (e: HttpException) {
+            MediatorResult.Error(e)
+        } catch (e: Exception) {
             MediatorResult.Error(e)
         }
     }

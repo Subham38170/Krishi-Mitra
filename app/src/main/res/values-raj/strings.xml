@@ -48,4 +48,30 @@
     <string name="krishi_bazar">कृषि बाजार</string>
     <string name="search_for_crops">फसल खोजो</string>
 
+    <string name="disease_prediction">रोग री भविष्यवाणी</string>
+    <string name="crop_recommendataion">फसल री सिफारिश</string>
+    <string name="mandi_price">मंडी रो भाव</string>
+    <string name="agri_news">खेती री खबर</string>
+    <string name="predict">भविष्यवाणी करो</string>
+    <string name="disease">रोग</string>
+    <string name="confidence">विश्वास</string>
+    <string name="description">विवरण</string>
+    <string name="treatement">इलाज</string>
+    <string name="precautions">सावधानी</string>
+    <string name="search_crops">फसल खोजो</string>
+    <string name="buy">खरीदो</string>
+    <string name="sell">बेचो</string>
+    <string name="variety">किस्म</string>
+    <string name="price">भाव</string>
+    <string name="quantity">मात्रा</string>
+    <string name="crop_data">फसल रो डेटा</string>
+    <string name="upload_image">फोटो अपलोड करो</string>
+    <string name="cancel">रद्द करो</string>
+    <string name="submit">जमा करो</string>
+    <string name="update">अपडेट करो</string>
+    <string name="remoge">हटाओ</string>
+    <string name="recently_added">हाल ही में जोड़े गया</string>
+    <string name="schemes">योजना</string>
+    <string name="read_more">और पढ़ो</string>
+
 </resources>

@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,6 +34,7 @@ import coil3.disk.directory
 import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.example.krishimitra.R
 
 
 
@@ -110,7 +112,7 @@ fun AutoImageNewsSlider(
 
                 ) {
                     Text(
-                        text = "Read more -->",
+                        text = stringResource(id = R.string.read_more)+" -->",
                         style = MaterialTheme.typography.bodySmall,
                         textAlign = TextAlign.Center,
                         color = Color.Blue
