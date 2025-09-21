@@ -8,6 +8,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -18,7 +19,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -45,6 +49,7 @@ import com.example.krishimitra.presentation.mandi_screen.MandiScreen
 import com.example.krishimitra.presentation.mandi_screen.MandiScreenViewModel
 import com.example.krishimitra.presentation.profile_screen.ProfileScreen
 import com.google.firebase.auth.FirebaseAuth
+import com.example.krishimitra.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -70,7 +75,10 @@ fun NavGraph(
 
                     exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
                 ) {
-                    NavigationBar {
+                    NavigationBar(
+                        modifier = Modifier
+                            .height(72.dp)
+                    ){
                         BottomBarInfo.bottomBarList.forEach { bottomBarInfo ->
                             val isSelected =
                                 currentDestination?.hierarchy?.any { it.hasRoute(bottomBarInfo.route::class) } == true
@@ -88,10 +96,9 @@ fun NavGraph(
                                     )
                                 },
                                 colors = NavigationBarItemDefaults.colors(
-
-                                ),
-                                modifier = Modifier
-                                    .clip(RectangleShape)
+                                    selectedIconColor = colorResource(id = R.color.slight_dark_green),
+                                    indicatorColor = Color.White
+                                )
                             )
                         }
                     }
@@ -135,7 +142,12 @@ fun NavGraph(
                             launchSingleTop = true
                         }
                     },
-                    scrollBehavior = scrollBehavior
+                    scrollBehavior = scrollBehavior,
+                    moveToKrishiBazar = {
+                        navController.navigate(Routes.BuySellScreen){
+                            launchSingleTop=true
+                        }
+                    }
                 )
 
             }
@@ -153,8 +165,10 @@ fun NavGraph(
             composable<Routes.BuySellScreen> {
                 val buySellViewModel = hiltViewModel<BuySellScreenViewModel>()
                 BuySellScreen(
-                    state = buySellViewModel.state.collectAsStateWithLifecycle().value,
-                    onEvent = buySellViewModel::onEvent
+                    buyScreenState = buySellViewModel.buyScreenState.collectAsStateWithLifecycle().value,
+                    onEvent = buySellViewModel::onEvent,
+                    sellScreenState = buySellViewModel.sellScreenState.collectAsStateWithLifecycle().value,
+                    event = buySellViewModel.event
                 )
             }
 

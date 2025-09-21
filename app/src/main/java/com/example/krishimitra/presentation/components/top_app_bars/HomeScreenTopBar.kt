@@ -1,5 +1,6 @@
 package com.example.krishimitra.presentation.components.top_app_bars
 
+
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -9,12 +10,14 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,11 +25,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.krishimitra.Constants
-
-
 import com.example.krishimitra.R
 import com.example.krishimitra.presentation.components.LangDropDownMenu
 
@@ -38,9 +41,14 @@ fun HomeScreenTopBar(
 ) {
     var expandDropDownMenu by remember { mutableStateOf(false) }
     TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = colorResource(id = R.color.slight_dark_green)
+        ),
         title = {
             Text(
-                text = stringResource(id = R.string.app_name)
+                text = stringResource(id = R.string.app_name),
+                style = MaterialTheme.typography.titleLarge,
+                color = Color.White
             )
         },
         actions = {
@@ -50,15 +58,16 @@ fun HomeScreenTopBar(
                     onClick = {
                         expandDropDownMenu = true
                     },
-                    shape = RoundedCornerShape(4.dp),
+                    shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White.copy(alpha = 0.7f),
+                        containerColor = Color.White,
                         contentColor = Color.Black
                     )
                 ) {
                     Text(
                         text = currentLanguage,
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold
                     )
                 }
                 LangDropDownMenu(
@@ -73,8 +82,11 @@ fun HomeScreenTopBar(
                         .height(400.dp)
                 )
             }
-            FilledIconButton(
-                onClick = {}
+            IconButton(
+                onClick = {},
+                colors = IconButtonDefaults.iconButtonColors(
+                    contentColor = Color.White
+                )
             ) {
                 Icon(
                     imageVector = Icons.Default.Notifications,

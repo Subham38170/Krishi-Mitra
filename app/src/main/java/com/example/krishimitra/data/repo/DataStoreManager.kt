@@ -64,11 +64,25 @@ class DataStoreManager @Inject constructor(
             prefs[USER_STATE] ?: ""
         }
     }
+    fun getDistrictName(): Flow<String> {
+        return context.userDataStore.data.map { prefs ->
+            prefs[USER_DISTRICT] ?: ""
+        }
+    }
+    fun getVillageName(): Flow<String> {
+        return context.userDataStore.data.map { prefs ->
+            prefs[USER_VILLAGE] ?: ""
+        }
+    }
 
     fun getLatAndLang(): Flow<List<Double>> {
         return context.userDataStore.data.map { prefs ->
             listOf(prefs[USER_LATITUDE] ?: 28.6139, prefs[USER_LONGITUDE] ?: 77.2090)
         }
     }
-
+    fun getMobileNo(): Flow<String> {
+        return context.userDataStore.data.map { prefs ->
+            prefs[USER_MOBILE] ?: ""
+        }
+    }
 }

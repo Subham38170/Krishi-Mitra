@@ -66,6 +66,13 @@ class MandiScreenViewModel @Inject constructor(
                     commodity = event.searchText
                 )
             }
+
+            is MandiPriceScreenEvent.loadAllCrops -> {
+                getMandiPrices(
+                    state = if(state.value.state.isNotEmpty()) state.value.state else null,
+                    district = if(state.value.district.isNotEmpty()) state.value.district else null
+                )
+            }
         }
     }
 

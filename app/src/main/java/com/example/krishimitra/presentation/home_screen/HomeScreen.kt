@@ -5,11 +5,13 @@ import android.net.Uri
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,12 +19,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBarScrollBehavior
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -43,12 +53,17 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.example.krishimitra.R
+import com.example.krishimitra.domain.farmer_data.UserDataModel
+import com.example.krishimitra.domain.weather_models.WeatherApiResponseItem
+import com.example.krishimitra.presentation.components.shimmerEffect
 import com.example.krishimitra.presentation.components.top_app_bars.HomeScreenTopBar
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
@@ -62,6 +77,7 @@ fun HomeScreen(
     state: HomeScreenState,
     moveToMandiScreen: () -> Unit,
     moveToDiseasePredictionScreen: (Uri?) -> Unit,
+    moveToKrishiBazar: ()-> Unit,
     scrollBehavior: BottomAppBarScrollBehavior
 ) {
 
@@ -74,8 +90,8 @@ fun HomeScreen(
 
     val photoFile = remember {
         File(context.cacheDir, "captured_image.jpg").apply {
-                createNewFile()
-            }
+            createNewFile()
+        }
     }
 
     val uri = FileProvider.getUriForFile(
@@ -146,6 +162,7 @@ fun HomeScreen(
 
 
     Scaffold(
+        containerColor = colorResource(id = R.color.light_green),
         topBar = {
             HomeScreenTopBar(
                 currentLanguage = state.currentLanguage, onLanguageChange = {
@@ -156,23 +173,67 @@ fun HomeScreen(
         ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
+                .background(colorResource(id = R.color.light_green))
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(8.dp)
         ) {
-
+            item {
+                HorizontalDivider(thickness = 1.dp, color = Color.White)
+            }
+            item {
+                if (state.weatherData.isNotEmpty()) {
+                    WeatherCard(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        userData = state.userData,
+                        weatherApiResponseItem = state.weatherData[0]
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(220.dp)
+                            .background(
+                                brush = Brush
+                                    .verticalGradient(
+                                        colors = listOf(
+                                            colorResource(id = R.color.slight_dark_green),
+                                            colorResource(id = R.color.slight_dark_green),
+                                            colorResource(id = R.color.slight_dark_green),
+                                            colorResource(id = R.color.light_green),
+                                            Color.White
+                                        )
+                                    )
+                            )
+                            .shimmerEffect(),
+                        contentAlignment = Alignment.Center
+                    ){
+                        Text(
+                            text = "Loading...",
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
             item {
                 if (state.schemeBannersList.isNotEmpty()) {
                     AutoImageSchemeSlider(
-                        banners = state.schemeBannersList, modifier = Modifier.fillMaxWidth()
+
+                        banners = state.schemeBannersList,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp)
                     )
                 }
             }
             item {
 
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     CustomizedHomeButton(
@@ -197,7 +258,9 @@ fun HomeScreen(
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     CustomizedHomeButton(
@@ -209,7 +272,7 @@ fun HomeScreen(
                         text = "Mandi Price"
                     )
                     CustomizedHomeButton(
-                        onClick = {},
+                        onClick = moveToKrishiBazar,
                         painter = painterResource(id = R.drawable.buy_sell_crop),
                         modifier = Modifier
                             .weight(1f)
@@ -223,7 +286,7 @@ fun HomeScreen(
                     text = "Agri News",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(16.dp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
 
@@ -231,7 +294,10 @@ fun HomeScreen(
             item {
                 if (state.krishiNewsBannerList.isNotEmpty()) {
                     AutoImageNewsSlider(
-                        banners = state.krishiNewsBannerList, modifier = Modifier.fillMaxWidth()
+                        banners = state.krishiNewsBannerList,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp)
                     )
                 }
             }
@@ -290,3 +356,114 @@ fun CustomizedHomeButton(
 }
 
 
+@Composable
+fun WeatherCard(
+    modifier: Modifier,
+    userData: UserDataModel,
+    weatherApiResponseItem: WeatherApiResponseItem
+) {
+
+    Column(
+        modifier = modifier
+            .height(220.dp)
+            .background(
+                brush = Brush
+                    .verticalGradient(
+                        colors = listOf(
+                            colorResource(id = R.color.slight_dark_green),
+                            colorResource(id = R.color.slight_dark_green),
+                            colorResource(id = R.color.slight_dark_green),
+                            colorResource(id = R.color.light_green),
+                            Color.White
+                        )
+                    )
+            )
+            .padding(8.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .height(40.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.Default.LocationOn,
+                contentDescription = "Location",
+                tint = Color.White
+            )
+            Text(
+                text = buildAnnotatedString {
+                    append(userData.village)
+                    append(", ")
+                    append(userData.district)
+                    append(", ")
+                    append(userData.state)
+                },
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+        }
+        LazyRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            items(weatherApiResponseItem.hourly) { data ->
+                WeatherIcon(
+                    time = data.time,
+                    drawable = getWeatherIcon(data.condition),
+                    temperature = "${data.temperature} \u00B0C"
+                )
+            }
+        }
+    }
+
+
+}
+
+fun getWeatherIcon(condition: String): Int {
+    return when (condition.trim().lowercase()) {
+        "clear" -> R.mipmap.sunny
+        "sunny" -> R.mipmap.sunny
+        "partly cloudy" -> R.mipmap.cloudy_sunny
+        "patchy rain nearby" -> R.mipmap.rainy
+        "patchy light drizzle" -> R.mipmap.rain
+        "light rain shower" -> R.mipmap.rain
+        "thundery outbreaks in nearby" -> R.mipmap.storm
+        else -> R.drawable.outline_error_24
+    }
+}
+
+
+@Composable
+fun WeatherIcon(
+    time: String,
+    @DrawableRes drawable: Int,
+    temperature: String
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .height(100.dp)
+            .width(60.dp)
+            .padding(horizontal = 8.dp)
+    ) {
+        Text(
+            text = temperature,
+            fontWeight = FontWeight.Bold,
+            color = Color.White
+        )
+        Image(
+            painter = painterResource(id = drawable),
+            contentDescription = "Weather",
+            modifier = Modifier
+                .size(52.dp)
+
+        )
+        Text(
+            text = time,
+            fontWeight = FontWeight.Bold,
+            color = Color.White
+        )
+    }
+
+}

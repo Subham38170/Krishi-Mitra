@@ -29,6 +29,7 @@ android {
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
         buildConfigField("String","MANDI_API_KEY",properties.getProperty("MANDI_API_KEY"))
+        buildConfigField("String","WEATHER_API_KEY",properties.getProperty("WEATHER_API_KEY"))
     }
 
     buildTypes {
@@ -67,6 +68,7 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.paging.compose)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

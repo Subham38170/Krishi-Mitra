@@ -14,4 +14,6 @@ sealed class MandiPriceScreenEvent {
 
 
     data class onSearch(val searchText: String): MandiPriceScreenEvent()
+
+    data object loadAllCrops: MandiPriceScreenEvent()
 }

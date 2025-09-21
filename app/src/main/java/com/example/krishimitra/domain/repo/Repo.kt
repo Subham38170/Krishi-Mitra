@@ -5,11 +5,13 @@ import android.net.Uri
 import androidx.paging.PagingData
 import com.example.krishimitra.data.local.entity.MandiPriceEntity
 import com.example.krishimitra.domain.ResultState
+import com.example.krishimitra.domain.crops_model.CropModel
 import com.example.krishimitra.domain.disease_prediction_model.DiseasePredictionResponse
 import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
+import com.example.krishimitra.domain.weather_models.WeatherApiResponse
 import kotlinx.coroutines.flow.Flow
 
 interface Repo {
@@ -61,4 +63,26 @@ interface Repo {
     ): Flow<ResultState<DiseasePredictionResponse>>
 
     suspend fun loadKrishiNews(): Flow<ResultState<List<BannerModel>>>
+
+
+    suspend fun sellCrop(cropData: CropModel): Flow<ResultState<Boolean>>
+
+
+    suspend fun getAllBuyingCrops(): Flow<ResultState<List<CropModel>>>
+
+    suspend fun getMyListedItems(): Flow<ResultState<List<CropModel>>>
+
+
+    suspend fun getUserDataFromFirebase(): Flow<ResultState<UserDataModel>>
+
+
+    suspend fun searchBuyingCrops(cropName: String): Flow<ResultState<List<CropModel>>>
+    suspend fun deleteListedCrop(cropModel: CropModel): Flow<ResultState<Boolean>>
+
+
+    suspend fun getWeatherData(
+        location: String
+    ): Flow<ResultState<WeatherApiResponse>>
+
+
 }

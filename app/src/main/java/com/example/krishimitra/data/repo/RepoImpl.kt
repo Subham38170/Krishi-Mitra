@@ -6,51 +6,60 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.annotation.RequiresPermission
+import androidx.core.net.toUri
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.krishimitra.Constants
 import com.example.krishimitra.FirebaseConstants
 import com.example.krishimitra.data.local.KrishiMitraDatabase
 import com.example.krishimitra.data.local.entity.MandiPriceEntity
 import com.example.krishimitra.data.remote.CropDiseasePredictionApiService
 import com.example.krishimitra.data.remote.MandiPriceApiService
+import com.example.krishimitra.data.remote.WeatherApiService
 import com.example.krishimitra.data.remote_meidator.MandiPriceRemoteMediator
+import com.example.krishimitra.data.remote_meidator.WeatherRemoteMediator
 import com.example.krishimitra.data.repo.lang_manager.LanguageManager
 import com.example.krishimitra.data.repo.location_manager.LocationManager
 import com.example.krishimitra.domain.ResultState
+import com.example.krishimitra.domain.crops_model.CropModel
 import com.example.krishimitra.domain.disease_prediction_model.DiseasePredictionResponse
 import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
 import com.example.krishimitra.domain.repo.Repo
+import com.example.krishimitra.domain.weather_models.WeatherApiResponse
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.util.UUID
 import javax.inject.Inject
 
 class RepoImpl @Inject constructor(
     private val firestoreDb: FirebaseFirestore,
+    private val firebaseStorage: FirebaseStorage,
+    private val firebaseAuth: FirebaseAuth,
     private val languageManager: LanguageManager,
     private val locationManager: LocationManager,
     private val mandiApiService: MandiPriceApiService,
     private val diseasePredictionApiService: CropDiseasePredictionApiService,
+    private val weatherApiService: WeatherApiService,
     private val localDb: KrishiMitraDatabase,
     private val dataStoreManager: DataStoreManager,
+    private val weatherRemoteMediator: WeatherRemoteMediator,
     private val context: Context
 ) : Repo {
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     override suspend fun getLocation(): Location? {
         return locationManager.getLocation()
     }
-
-
 
 
     override fun getLanguage(): Flow<String> {
@@ -72,6 +81,7 @@ class RepoImpl @Inject constructor(
     override fun getUserData(): Flow<UserDataModel> {
         return dataStoreManager.getUser()
     }
+
 
     override fun getUserName(): Flow<String> {
         return dataStoreManager.getUserName()
@@ -164,12 +174,15 @@ class RepoImpl @Inject constructor(
     }
 
 
-    override  fun predictCropDisease(lang: String,filePath: Uri): Flow<ResultState<DiseasePredictionResponse>> {
+    override fun predictCropDisease(
+        lang: String,
+        filePath: Uri
+    ): Flow<ResultState<DiseasePredictionResponse>> {
         return callbackFlow {
             trySend(ResultState.Loading)
             try {
                 val imagePart = uriToMultipart(context, filePath)
-                val response = diseasePredictionApiService.uploadImage(lang,imagePart)
+                val response = diseasePredictionApiService.uploadImage(lang, imagePart)
                 if (response.isSuccessful) {
                     val result = response.body()
                     result?.let {
@@ -200,8 +213,180 @@ class RepoImpl @Inject constructor(
                     }
                 }
             awaitClose { close() }
-        }    }
+        }
+    }
 
+    override suspend fun sellCrop(cropData: CropModel): Flow<ResultState<Boolean>> {
+        return callbackFlow {
+            trySend(ResultState.Loading)
+            if (cropData.imageUrl != null) {
+                val fileName = "${firebaseAuth.uid}{System.currentTimeMillis()}.jpg"
+                val storageRef = firebaseStorage
+                    .getReference(FirebaseConstants.CROP_BAZAR_IMAGES)
+                    .child(fileName)
+
+
+                val documentPath = UUID.randomUUID().toString()
+
+                storageRef.putFile(cropData.imageUrl.toUri())
+                    .addOnSuccessListener {
+                        storageRef.downloadUrl.addOnSuccessListener { link ->
+                            firestoreDb.collection(FirebaseConstants.CROP_BAZAR)
+                                .document(documentPath)
+                                .set(
+                                    cropData.copy(
+                                        imageUrl = link.toString(),
+                                        cropId = documentPath
+                                    )
+                                )
+                                .addOnSuccessListener {
+                                    trySend(ResultState.Success(true))
+                                }
+                                .addOnFailureListener {
+                                    trySend(ResultState.Error(it.message.toString()))
+                                }
+                        }.addOnFailureListener {
+                            trySend(ResultState.Error(it.message.toString()))
+
+                        }
+                    }
+            } else {
+                firestoreDb.collection(FirebaseConstants.CROP_BAZAR)
+                    .document()
+                    .set(cropData)
+                    .addOnSuccessListener {
+                        trySend(ResultState.Success(true))
+                    }
+                    .addOnFailureListener {
+                        trySend(ResultState.Error(it.message.toString()))
+                    }
+            }
+            awaitClose {
+                close()
+            }
+        }
+
+    }
+
+
+    override suspend fun getAllBuyingCrops(): Flow<ResultState<List<CropModel>>> {
+        return callbackFlow {
+            trySend(ResultState.Loading)
+
+            firestoreDb.collection(FirebaseConstants.CROP_BAZAR)
+                .addSnapshotListener { snapshot, error ->
+                    if (error != null) {
+                        trySend(ResultState.Error(error.message.toString()))
+                        return@addSnapshotListener
+                    }
+
+                    snapshot?.let {
+                        val crops = it.toObjects(CropModel::class.java)
+                        trySend(ResultState.Success(crops))
+                    }
+                }
+            awaitClose { close() }
+        }
+    }
+
+    override suspend fun getMyListedItems(): Flow<ResultState<List<CropModel>>> {
+        return callbackFlow {
+            trySend(ResultState.Loading)
+            firestoreDb.collection(FirebaseConstants.CROP_BAZAR)
+                .whereEqualTo("farmerId", firebaseAuth.uid)
+                .addSnapshotListener { snapshot, error ->
+                    if (error != null) {
+                        trySend(ResultState.Error(error.message.toString()))
+                        return@addSnapshotListener
+                    }
+                    snapshot?.let {
+                        val crops = it.toObjects(CropModel::class.java)
+
+
+                        trySend(ResultState.Success(crops))
+                    }
+
+
+                }
+            awaitClose { close() }
+        }
+    }
+
+    override suspend fun getUserDataFromFirebase(): Flow<ResultState<UserDataModel>> {
+        return callbackFlow {
+
+            firestoreDb
+                .collection(FirebaseConstants.USERS)
+                .document(firebaseAuth.uid ?: "")
+                .get()
+                .addOnSuccessListener {
+                    val userData = it.toObject(UserDataModel::class.java)
+                    userData?.let {
+                        trySend(ResultState.Success(userData))
+                    }
+                }
+                .addOnFailureListener {
+                    trySend(ResultState.Error(it.message.toString()))
+                }
+            awaitClose { close() }
+        }
+
+    }
+
+    override suspend fun searchBuyingCrops(cropName: String): Flow<ResultState<List<CropModel>>> {
+        return callbackFlow {
+            trySend(ResultState.Loading)
+            firestoreDb
+                .collection(FirebaseConstants.CROP_BAZAR)
+                .whereEqualTo("cropName", cropName)
+                .addSnapshotListener { result, e ->
+                    if (e != null) {
+                        trySend(ResultState.Error(e.message.toString()))
+                    }
+                    result?.let {
+                        val crops = it.toObjects(CropModel::class.java)
+                        trySend(ResultState.Success(crops))
+                    }
+                }
+            awaitClose { close() }
+        }
+    }
+
+    override suspend fun deleteListedCrop(cropModel: CropModel): Flow<ResultState<Boolean>> {
+        return callbackFlow {
+            trySend(ResultState.Loading)
+            firestoreDb
+                .collection(FirebaseConstants.CROP_BAZAR)
+                .document(cropModel.cropId.toString())
+                .delete()
+                .addOnSuccessListener {
+                    deleteImagefromCropBazar(cropModel.imageUrl.toString())
+                    trySend(ResultState.Success(true))
+
+                }
+                .addOnFailureListener {
+                    trySend(ResultState.Error(it.message.toString()))
+                }
+            awaitClose { close() }
+
+        }
+    }
+
+    override suspend fun getWeatherData(location: String): Flow<ResultState<WeatherApiResponse>> {
+        return weatherRemoteMediator.getWeather(location)
+
+    }
+
+    private fun deleteImagefromCropBazar(imageUrl: String) {
+        try {
+            val storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl)
+            storageRef.delete()
+
+        } catch (e: Exception) {
+
+        }
+
+    }
 
     fun uriToMultipart(context: Context, uri: Uri): MultipartBody.Part {
         val inputStream = context.contentResolver.openInputStream(uri)!!
@@ -210,11 +395,6 @@ class RepoImpl @Inject constructor(
         val fileName = "image.jpg" // you can extract name from uri if needed
         return MultipartBody.Part.createFormData("file", fileName, requestBody)
     }
-
-
-
-
-
 
 
 }

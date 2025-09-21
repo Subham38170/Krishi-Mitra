@@ -1,5 +1,6 @@
 package com.example.krishimitra.presentation.home_screen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.krishimitra.Constants
@@ -26,13 +27,14 @@ class HomeScreenViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
 
-    private val _eventFlow = MutableSharedFlow<HomeScreenEvent>()
-    val eventFlow = _eventFlow.asSharedFlow()
+    private val _event = MutableSharedFlow<String>()
+    val event = _event.asSharedFlow()
 
     init {
         getLanguage()
         loadGovtSchemes()
         loadKrishiNews()
+        getUserData()
     }
 
     fun onEvent(event: HomeScreenEvent) {
@@ -41,7 +43,7 @@ class HomeScreenViewModel @Inject constructor(
                 changeLanguage(event.lang)
             }
 
-            is HomeScreenEvent.Error ->{
+            is HomeScreenEvent.Error -> {
 
             }
         }
@@ -61,6 +63,27 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
+    private fun getUserData() {
+        viewModelScope.launch {
+            repo.getUserDataFromFirebase().collectLatest { result ->
+                when (result) {
+                    is ResultState.Error -> {
+                        _event.emit(result.exception)
+                    }
+
+                    ResultState.Loading -> {
+                    }
+
+                    is ResultState.Success -> {
+                        _state.update { it.copy(userData = result.data) }
+
+                        loadWeatherDataForVillage(result.data.village)
+                    }
+                }
+            }
+        }
+    }
+
     fun changeLanguage(langCode: String) {
         viewModelScope.launch {
             repo.changeLanguage(langCode)
@@ -75,7 +98,7 @@ class HomeScreenViewModel @Inject constructor(
                 .collectLatest { action ->
                     when (action) {
                         is ResultState.Error -> {
-                            _eventFlow.emit(HomeScreenEvent.Error(action.exception))
+                            _event.emit(action.exception)
                             _state.update {
                                 it.copy(
                                     isBannersLoading = false
@@ -112,7 +135,7 @@ class HomeScreenViewModel @Inject constructor(
                 .collectLatest { action ->
                     when (action) {
                         is ResultState.Error -> {
-                            _eventFlow.emit(HomeScreenEvent.Error(action.exception))
+                            _event.emit(action.exception)
                             _state.update {
                                 it.copy(
                                     isKrishiNewsLoading = false
@@ -139,6 +162,35 @@ class HomeScreenViewModel @Inject constructor(
                     }
 
                 }
+        }
+    }
+
+    private fun loadWeatherDataForVillage(village: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.getWeatherData(village).collectLatest { result ->
+                when (result) {
+                    is ResultState.Error -> {
+                        _event.emit(result.exception)
+                        _state.update { it.copy(isWeatherDataLoading = false) }
+                        Log.d("WEATHER_DATA", result.exception)
+                    }
+
+                    ResultState.Loading -> {
+                        _state.update { it.copy(isWeatherDataLoading = true) }
+                        Log.d("WEATHER_DATA", "Loading")
+                    }
+
+                    is ResultState.Success -> {
+                        _state.update {
+                            it.copy(
+                                isWeatherDataLoading = false,
+                                weatherData = result.data
+                            )
+                        }
+                        Log.d("WEATHER_DATA", state.value.weatherData.toString())
+                    }
+                }
+            }
         }
     }
 

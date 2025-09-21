@@ -28,6 +28,7 @@ firebaseAuth = "24.0.1"
 firebaseFirestore = "26.0.0"
 appcompat = "1.7.1"
 pagingCompose = "3.3.6"
+firebaseStorage = "22.0.1"
 
 
 
@@ -71,6 +72,7 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "pagingCompose" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 
 
 

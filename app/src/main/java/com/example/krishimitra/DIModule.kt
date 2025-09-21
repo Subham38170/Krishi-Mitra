@@ -4,12 +4,17 @@ import android.content.Context
 import androidx.room.Room
 import com.example.krishimitra.data.local.KrishiMitraDatabase
 import com.example.krishimitra.data.local.dao.MandiPriceDao
+import com.example.krishimitra.data.local.dao.WeatherDao
 import com.example.krishimitra.data.remote.CropDiseasePredictionApiService
 import com.example.krishimitra.data.remote.MandiPriceApiService
+import com.example.krishimitra.data.remote.WeatherApiService
+import com.example.krishimitra.data.remote_meidator.WeatherRemoteMediator
 import com.example.krishimitra.data.repo.DataStoreManager
+import com.example.krishimitra.data.repo.NetworkConnectivityObserverImpl
 import com.example.krishimitra.data.repo.RepoImpl
 import com.example.krishimitra.data.repo.lang_manager.LanguageManager
 import com.example.krishimitra.data.repo.location_manager.LocationManager
+import com.example.krishimitra.domain.repo.NetworkConnectivityObserver
 import com.example.krishimitra.domain.repo.Repo
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -18,11 +23,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestoreSettings
 import com.google.firebase.firestore.memoryCacheSettings
 import com.google.firebase.firestore.persistentCacheSettings
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
@@ -35,6 +44,7 @@ object DIModule {
 
     const val MANDI_PRICE_RETROFIT = "mandi_price"
     const val DISEASE_PREDICTION_RETROFIT = "disease_prediction"
+    const val WEATHER_DATA_RETROFIT = "weather_data"
 
     @Provides
     @Singleton
@@ -52,6 +62,12 @@ object DIModule {
         val firestore = FirebaseFirestore.getInstance()
         firestore.firestoreSettings = settings
         return firestore
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage {
+        return FirebaseStorage.getInstance()
     }
 
     @Provides
@@ -81,6 +97,10 @@ object DIModule {
         dataStoreManager: DataStoreManager,
         firestoreDb: FirebaseFirestore,
         diseasePredictionApiService: CropDiseasePredictionApiService,
+        firebaseStorage: FirebaseStorage,
+        firebaseAuth: FirebaseAuth,
+        weatherApiService: WeatherApiService,
+        weatherRemoteMediator: WeatherRemoteMediator,
         @ApplicationContext context: Context
     ): Repo {
         return RepoImpl(
@@ -91,7 +111,11 @@ object DIModule {
             dataStoreManager = dataStoreManager,
             firestoreDb = firestoreDb,
             diseasePredictionApiService = diseasePredictionApiService,
-            context = context
+            context = context,
+            firebaseStorage = firebaseStorage,
+            firebaseAuth = firebaseAuth,
+            weatherApiService = weatherApiService,
+            weatherRemoteMediator = weatherRemoteMediator
         )
     }
 
@@ -116,6 +140,7 @@ object DIModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
 
     @Provides
     @Singleton
@@ -148,6 +173,26 @@ object DIModule {
 
     @Provides
     @Singleton
+    @Named(WEATHER_DATA_RETROFIT)
+    fun provideWeatherDataApi(
+
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://weather.indianapi.in/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherApi(
+        @Named(WEATHER_DATA_RETROFIT) retrofit: Retrofit
+    ): WeatherApiService {
+        return retrofit.create(WeatherApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideKrishiMitraDatabase(
         @ApplicationContext context: Context
     ): KrishiMitraDatabase {
@@ -175,6 +220,42 @@ object DIModule {
         @ApplicationContext context: Context
     ): DataStoreManager {
         return DataStoreManager(context)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideWeatherDao(
+        krishiMitraDatabase: KrishiMitraDatabase
+    ): WeatherDao {
+        return krishiMitraDatabase.weatherDataDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherRemoteMediator(
+        weatherApi: WeatherApiService,
+        weaterDao: WeatherDao,
+        networkConnectivityObserver: NetworkConnectivityObserver
+
+    ): WeatherRemoteMediator {
+        return WeatherRemoteMediator(
+            api = weatherApi,
+            dao = weaterDao,
+            networkObserver = networkConnectivityObserver
+        )
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideNetworkConnectivityObserver(
+        @ApplicationContext context: Context
+    ): NetworkConnectivityObserver{
+        return NetworkConnectivityObserverImpl(
+            context = context,
+            scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        )
     }
 
 }
