@@ -78,4 +78,10 @@
     <string name="read_more">Read more</string>
 
 
+    <string name="recommended_treatment_is">The recommended treatment is</string>
+    <string name="recommended_precautions_are">The recommended precautions are</string>
+    <string name="here_is_description">Here is the description</string>
+    <string name="the_predicted_disease_is">The predicted disease is </string>
+    <string name="click_photo">Click photo</string>
+
 </resources>

@@ -74,4 +74,10 @@
     <string name="recently_added">சமீபத்தில் சேர்க்கப்பட்டது</string>
     <string name="schemes">திட்டங்கள்</string>
     <string name="read_more">மேலும் படிக்க</string>
+
+    <string name="recommended_treatment_is">பரிந்துரைக்கப்பட்ட சிகிச்சை</string>
+    <string name="recommended_precautions_are">பரிந்துரைக்கப்பட்ட முன்னெச்சரிக்கைகள்</string>
+    <string name="here_is_description">இங்கே விளக்கம் உள்ளது</string>
+    <string name="the_predicted_disease_is">கணிக்கப்பட்ட நோய்</string>
+    <string name="click_photo">படத்தை கிளிக் செய்யவும்</string>
 </resources>

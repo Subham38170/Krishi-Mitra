@@ -74,5 +74,11 @@
     <string name="schemes">ਸਕੀਮਾਂ</string>
     <string name="read_more">ਹੋਰ ਪੜ੍ਹੋ</string>
 
+    <string name="recommended_treatment_is">ਸਿਫ਼ਾਰਸ਼ ਕੀਤਾ ਗਿਆ ਇਲਾਜ ਹੈ</string>
+    <string name="recommended_precautions_are">ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀਆਂ ਸਾਵਧਾਨੀਆਂ ਹਨ</string>
+    <string name="here_is_description">ਇੱਥੇ ਵੇਰਵਾ ਹੈ</string>
+    <string name="the_predicted_disease_is">ਅਨੁਮਾਨਿਤ ਰੋਗ ਹੈ</string>
+    <string name="click_photo">ਫੋਟੋ ਖਿੱਚੋ</string>
+
 
 </resources>

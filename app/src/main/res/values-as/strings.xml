@@ -73,4 +73,10 @@
     <string name="recently_added">শেহতীয়াকৈ যোগ কৰা</string>
     <string name="schemes">আঁচনি</string>
     <string name="read_more">অধিক পঢ়ক</string>
+
+    <string name="recommended_treatment_is">পৰামৰ্শিত চিকিৎসা হৈছে</string>
+    <string name="recommended_precautions_are">পৰামৰ্শিত সাৱধানতা হৈছে</string>
+    <string name="here_is_description">ইয়াত বিৱৰণ আছে</string>
+    <string name="the_predicted_disease_is">ভৱিষ্যতবাণী কৰা ৰোগটো হৈছে</string>
+    <string name="click_photo">ছবি উঠাওক</string>
 </resources>

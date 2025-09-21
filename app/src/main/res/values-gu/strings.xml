@@ -75,4 +75,10 @@
     <string name="schemes">યોજનાઓ</string>
     <string name="read_more">વધુ વાંચો</string>
 
+
+    <string name="recommended_treatment_is">ભલામણ કરેલ સારવાર છે</string>
+    <string name="recommended_precautions_are">ભલામણ કરેલ સાવચેતીઓ છે</string>
+    <string name="here_is_description">અહીં વર્ણન છે</string>
+    <string name="the_predicted_disease_is">પૂર્વાનુમાનિત રોગ છે</string>
+    <string name="click_photo">ફોટો લો</string>
 </resources>

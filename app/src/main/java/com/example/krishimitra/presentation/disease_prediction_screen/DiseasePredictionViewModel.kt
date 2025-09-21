@@ -7,6 +7,7 @@ import android.speech.tts.TextToSpeech
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.krishimitra.R
 import com.example.krishimitra.domain.ResultState
 import com.example.krishimitra.domain.repo.Repo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -59,16 +60,29 @@ class DiseasePredictionViewModel @Inject constructor(
             is DiseasePredictionScreenEvent.onSpeak -> {
                 val textToSpeak = buildString {
                     // Start with a clear introductory sentence
-                    append("The predicted disease is ${event.predictedData.Disease}. ")
+
+                    append("${context.getString(R.string.the_predicted_disease_is)} ${event.predictedData.Disease}. ")
 
                     // Provide the description as a separate, full sentence
-                    append("Here is the description: ${event.predictedData.Description}. ")
+                    append("${context.getString(R.string.the_predicted_disease_is)}: ${event.predictedData.Description}. ")
 
                     // Use a clear phrase for the precautions
-                    append("The recommended precautions are: ${event.predictedData.Precautions.joinToString(", ")}. ")
+                    append(
+                        "${context.getString(R.string.recommended_precautions_are)}: ${
+                            event.predictedData.Precautions.joinToString(
+                                ", "
+                            )
+                        }. "
+                    )
 
                     // Use a clear phrase for the treatment
-                    append("The recommended treatment is: ${event.predictedData.Treatment.joinToString(", ")}.")
+                    append(
+                        "${context.getString(R.string.recommended_treatment_is)}: ${
+                            event.predictedData.Treatment.joinToString(
+                                ", "
+                            )
+                        }."
+                    )
                 }
                 initAndSpeak(context, textToSpeak)
             }

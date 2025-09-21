@@ -74,4 +74,10 @@
     <string name="schemes">పథకాలు</string>
     <string name="read_more">మరిన్ని చదవండి</string>
 
+    <string name="recommended_treatment_is">సూచించబడిన చికిత్స</string>
+    <string name="recommended_precautions_are">సూచించబడిన జాగ్రత్తలు</string>
+    <string name="here_is_description">ఇక్కడ వివరణ ఉంది</string>
+    <string name="the_predicted_disease_is">అంచనా వేయబడిన వ్యాధి</string>
+    <string name="click_photo">ఫోటో తీయండి</string>
+
 </resources>

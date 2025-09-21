@@ -74,4 +74,11 @@
     <string name="schemes">योजना</string>
     <string name="read_more">अधिक वाचा</string>
 
+
+    <string name="recommended_treatment_is">शिफारस केलेला उपचार आहे</string>
+    <string name="recommended_precautions_are">शिफारस केलेली खबरदारी आहे</string>
+    <string name="here_is_description">येथे वर्णन आहे</string>
+    <string name="the_predicted_disease_is">अंदाज केलेला रोग आहे</string>
+    <string name="click_photo">फोटो काढा</string>
+
 </resources>

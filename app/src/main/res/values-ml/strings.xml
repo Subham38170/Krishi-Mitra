@@ -75,5 +75,11 @@
     <string name="schemes">പദ്ധതികൾ</string>
     <string name="read_more">കൂടുതൽ വായിക്കുക</string>
 
+    <string name="recommended_treatment_is">ശുപാർശ ചെയ്യുന്ന ചികിത്സ</string>
+    <string name="recommended_precautions_are">ശുപാർശ ചെയ്യുന്ന മുൻകരുതലുകൾ</string>
+    <string name="here_is_description">ഇവിടെ വിവരണം ഉണ്ട്</string>
+    <string name="the_predicted_disease_is">പ്രവചിക്കപ്പെട്ട രോഗം</string>
+    <string name="click_photo">ചിത്രം എടുക്കുക</string>
+
 </resources>
 

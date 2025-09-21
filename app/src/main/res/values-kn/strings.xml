@@ -74,4 +74,10 @@
     <string name="recently_added">ಇತ್ತೀಚೆಗೆ ಸೇರಿಸಲಾಗಿದೆ</string>
     <string name="schemes">ಯೋಜನೆಗಳು</string>
     <string name="read_more">ಹೆಚ್ಚು ಓದಿ</string>
+
+    <string name="recommended_treatment_is">ಶಿಫಾರಸು ಮಾಡಿದ ಚಿಕಿತ್ಸೆ</string>
+    <string name="recommended_precautions_are">ಶಿಫಾರಸು ಮಾಡಿದ ಮುನ್ನೆಚ್ಚರಿಕೆಗಳು</string>
+    <string name="here_is_description">ಇಲ್ಲಿ ವಿವರಣೆ ಇದೆ</string>
+    <string name="the_predicted_disease_is">ಮುನ್ಸೂಚನೆ ನೀಡಿದ ರೋಗ</string>
+    <string name="click_photo">ಫೋಟೋ ಕ್ಲಿಕ್ ಮಾಡಿ</string>
 </resources>

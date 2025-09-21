@@ -74,4 +74,10 @@
     <string name="schemes">ᱥᱠᱤᱢ</string>
     <string name="read_more">ᱟᱨᱦᱚᱸ ᱯᱟᱲᱦᱟᱣ ᱢᱮ</string>
 
+    <string name="recommended_treatment_is">ᱨᱤᱠᱚᱢᱮᱱᱰᱮᱰ ᱴᱨᱤᱴᱢᱮᱱᱴ ᱫᱚ</string>
+    <string name="recommended_precautions_are">ᱨᱤᱠᱚᱢᱮᱱᱰᱮᱰ ᱯᱨᱮᱠᱚᱥᱚᱱ ᱫᱚ</string>
+    <string name="here_is_description">ᱱᱚᱰᱮ ᱵᱤᱵᱚᱨᱚᱱ ᱢᱮᱱᱟᱜᱼᱟ</string>
+    <string name="the_predicted_disease_is">ᱯᱨᱤᱰᱤᱠᱴᱮᱰ ᱰᱤᱡᱤᱡ ᱫᱚ</string>
+    <string name="click_photo">ᱯᱷᱚᱴᱚ ᱠᱞᱤᱠ ᱢᱮ</string>
+
 </resources>

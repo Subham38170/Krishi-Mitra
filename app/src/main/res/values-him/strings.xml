@@ -73,4 +73,10 @@
     <string name="recently_added">भर्खरै थपिएको</string>
     <string name="schemes">योजनाहरू</string>
     <string name="read_more">थप पढ्नुहोस्</string>
+
+    <string name="recommended_treatment_is">सिफारिस गरिएको उपचार हो</string>
+    <string name="recommended_precautions_are">सिफारिस गरिएका सावधानीहरू हुन्</string>
+    <string name="here_is_description">यहाँ विवरण छ</string>
+    <string name="the_predicted_disease_is">भविष्यवाणी गरिएको रोग हो</string>
+    <string name="click_photo">फोटो खिच्नुहोस्</string>
 </resources>

@@ -74,4 +74,11 @@
     <string name="recently_added">हाल ही में जोड़ा गया</string>
     <string name="schemes">योजनाएं</string>
     <string name="read_more">और पढ़ें</string>
+
+
+    <string name="recommended_treatment_is">अनुशंसित उपचार है</string>
+    <string name="recommended_precautions_are">अनुशंसित सावधानियां हैं</string>
+    <string name="here_is_description">यहाँ विवरण है</string>
+    <string name="the_predicted_disease_is">पूर्वानुमानित रोग है</string>
+    <string name="click_photo">फोटो खींचें</string>
 </resources>

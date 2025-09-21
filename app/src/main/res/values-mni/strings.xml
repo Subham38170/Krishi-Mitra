@@ -74,4 +74,10 @@
     <string name="schemes">স্কিম</string>
     <string name="read_more">রিড মোর</string>
 
+    <string name="recommended_treatment_is">রিকমেন্ডেড ট্রিটমেন্ট</string>
+    <string name="recommended_precautions_are">রিকমেন্ডেড প্রেকাউশন</string>
+    <string name="here_is_description">হির ইজ ডিস্ক্রিপশন</string>
+    <string name="the_predicted_disease_is">দ প্রিডিক্টেড ডিজিজ ইজ</string>
+    <string name="click_photo">ক্লিক ফটো</string>
+
 </resources>

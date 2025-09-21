@@ -74,5 +74,11 @@
     <string name="schemes">سکیمیں</string>
     <string name="read_more">مزید پڑھیں</string>
 
+    <string name="recommended_treatment_is">تجویز کردہ علاج ہے</string>
+    <string name="recommended_precautions_are">تجویز کردہ احتیاطی تدابیر ہیں</string>
+    <string name="here_is_description">یہاں تفصیل ہے</string>
+    <string name="the_predicted_disease_is">پیش گوئی کی گئی بیماری ہے</string>
+    <string name="click_photo">تصویر کھینچیں</string>
+
 
 </resources>

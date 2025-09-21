@@ -74,4 +74,10 @@
     <string name="recently_added">नूतनतया योजितानि</string>
     <string name="schemes">योजनाः</string>
     <string name="read_more">अधिकं पठतु</string>
+
+    <string name="recommended_treatment_is">अनुशंसिता चिकित्सा अस्ति</string>
+    <string name="recommended_precautions_are">अनुशंसिताः सावधानताः सन्ति</string>
+    <string name="here_is_description">अत्र विवरणम् अस्ति</string>
+    <string name="the_predicted_disease_is">प्राक्कथितः रोगः अस्ति</string>
+    <string name="click_photo">चित्रं निष्पीडयतु</string>
 </resources>

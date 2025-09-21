@@ -75,4 +75,11 @@
     <string name="schemes">یَتِیم</string>
     <string name="read_more">بیٚیِہ پَرُن</string>
 
+
+    <string name="recommended_treatment_is">تجویز کرنہٕ آمُت علاج چھُ</string>
+    <string name="recommended_precautions_are">تجویز کرنہٕ آمٕتؠ احتیاط چھِ</string>
+    <string name="here_is_description">یِتھہِ چھُ تفصیل</string>
+    <string name="the_predicted_disease_is">پَرناوَن بؠماری چھِ</string>
+    <string name="click_photo">تصویر کلک کریو</string>
+
 </resources>

@@ -75,4 +75,10 @@
     <string name="schemes">اسڪيمون</string>
     <string name="read_more">وڌيڪ پڙهو</string>
 
+    <string name="recommended_treatment_is">سفارش ٿيل علاج آهي</string>
+    <string name="recommended_precautions_are">سفارش ٿيل احتياطي تدابيرون آهن</string>
+    <string name="here_is_description">هتي تفصيل آهي</string>
+    <string name="the_predicted_disease_is">اڳڪٿي ڪيل بيماري آهي</string>
+    <string name="click_photo">تصوير ڪلڪ ڪريو</string>
+
 </resources>
