@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBarScrollBehavior
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -58,6 +59,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.example.krishimitra.R
@@ -190,27 +192,7 @@ fun HomeScreen(
                         weatherApiResponseItem = state.weatherData
                     )
                 } else {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(220.dp)
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        colorResource(id = R.color.slight_dark_green),
-                                        colorResource(id = R.color.slight_dark_green),
-                                        colorResource(id = R.color.slight_dark_green),
-                                        colorResource(id = R.color.light_green),
-                                        Color.White
-                                    )
-                                )
-                            )
-                            .shimmerEffect(), contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Loading...", fontWeight = FontWeight.Bold, color = Color.White
-                        )
-                    }
+                    WeatherCardShimmerEffect()
                 }
             }
             item {
@@ -353,6 +335,39 @@ fun CustomizedHomeButton(
 
 
 @Composable
+fun WeatherCardShimmerEffect(
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .height(220.dp)
+            .background(
+                colorResource(id = R.color.slight_dark_green),
+                shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
+            )
+            .padding(8.dp)
+    ){
+        LazyRow(
+            modifier = Modifier.fillMaxWidth()
+                .padding(top = 32.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ){
+            items(5){
+                Box(
+                    modifier = Modifier
+                        .size(220.dp,160.dp)
+                        .clip(RoundedCornerShape(20.dp))
+                        .shimmerEffect()
+                )
+            }
+        }
+
+
+    }
+}
+
+
+@Composable
 fun WeatherCard(
     modifier: Modifier,
     userData: UserDataModel,
@@ -363,17 +378,11 @@ fun WeatherCard(
         modifier = modifier
             .height(220.dp)
             .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        colorResource(id = R.color.slight_dark_green),
-                        colorResource(id = R.color.slight_dark_green),
-                        colorResource(id = R.color.slight_dark_green),
-                        colorResource(id = R.color.light_green),
-                        Color.White
-                    )
-                )
+                colorResource(id = R.color.slight_dark_green),
+                shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
             )
             .padding(8.dp)
+
     ) {
         Row(
             modifier = Modifier.height(40.dp), verticalAlignment = Alignment.CenterVertically
@@ -394,7 +403,8 @@ fun WeatherCard(
             )
         }
         LazyRow(
-            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(weatherApiResponseItem) { data ->
                 WeatherIcon(
@@ -423,11 +433,88 @@ fun getWeatherIcon(condition: String): Int {
 fun WeatherIcon(
     dailyWeather: DailyWeather
 ) {
-    ElevatedCard {
-        Box(
+    ElevatedCard(
+        shape = RoundedCornerShape(20.dp),
+        modifier = Modifier
+            .background(color = Color.White, shape = RoundedCornerShape(20.dp))
+    ) {
+
+        Column(
             modifier = Modifier
-                .size(80.dp)
-        ){
+                .size(220.dp, 160.dp)
+                .padding(8.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .height(40.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "${dailyWeather.temp.toInt()} \u00B0 C",
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Color.Black.copy(alpha = 0.7f)
+                )
+                Image(
+                    painter = painterResource(getWeatherIcon(dailyWeather.icon)),
+                    contentDescription = ""
+                )
+
+            }
+            Text(
+                text = dailyWeather.date,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black.copy(alpha = 0.5f)
+            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Humidity",
+                    style = MaterialTheme.typography.titleSmall,
+                )
+                Text(
+                    text = "34"
+                )
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+
+            ) {
+                Text(
+                    text = "Condition",
+                    style = MaterialTheme.typography.titleSmall,
+                )
+                Text(
+                    text = dailyWeather.condition,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+
+            ) {
+                Text(
+                    text = "Rain Chances",
+                    style = MaterialTheme.typography.titleSmall,
+                )
+                Text(
+                    text = "34"
+                )
+            }
+
 
         }
     }

@@ -1,5 +1,6 @@
 package com.example.krishimitra.presentation.components
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -25,16 +27,24 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.ImageLoader
+import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.example.krishimitra.R
+import com.example.krishimitra.data.local.json.getMandiCropImageUrl
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
 
 @Composable
 fun MandiPriceItem(
     imageSize: Dp = 80.dp,
-    mandiPrice: MandiPriceDto
+    mandiPrice: MandiPriceDto,
+    context: Context,
+    imageLoader: ImageLoader
 ) {
 
 
+    val imageUrl = getMandiCropImageUrl(context,mandiPrice.commodity)
     Card {
         Row(
             modifier = Modifier
@@ -42,13 +52,18 @@ fun MandiPriceItem(
                 .background(Color.White)
                 .padding(4.dp)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.outline_error_24),
-                contentDescription = "",
+
+            AsyncImage(
+                model = ImageRequest.Builder(context).data(imageUrl).crossfade(true).build(),
+                contentDescription = "Crop Image",
+                imageLoader = imageLoader,
                 modifier = Modifier
                     .size(imageSize)
-                    .padding(4.dp)
+                    .padding(4.dp),
+                contentScale = ContentScale.FillBounds
+
             )
+
             Column {
                 Text(
                     text = buildAnnotatedString {

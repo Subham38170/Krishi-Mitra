@@ -41,7 +41,7 @@ fun WeatherResponse.toDailyWeather(): List<DailyWeather> {
 
     return dailyMap.map { (date, items) ->
         val first = items.first()
-        val avgTemp = items.map { it.main.temp }.average()
+        val avgTemp = kelvinToCelsius(items.map { it.main.temp }.average())
         val totalRain = items.sumOf { it.rain?.`3h` ?: 0.0 }
 
         // Pick the item with the most severe condition

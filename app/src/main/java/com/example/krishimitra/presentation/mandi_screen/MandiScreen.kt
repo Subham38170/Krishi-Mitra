@@ -18,14 +18,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import coil3.ImageLoader
+import coil3.disk.DiskCache
+import coil3.disk.directory
 import com.example.krishimitra.R
 import com.example.krishimitra.data.local.entity.MandiPriceEntity
+import com.example.krishimitra.data.local.json.getMandiCropImageUrl
 import com.example.krishimitra.data.mappers.toDto
 import com.example.krishimitra.presentation.buy_sell_screen.CustomizedSearchBar
 import com.example.krishimitra.presentation.components.CustomizedInputChip
@@ -40,6 +45,11 @@ fun MandiScreen(
     scrollBehavior: BottomAppBarScrollBehavior,
 ) {
 
+    val context = LocalContext.current
+    val imageLoader = ImageLoader.Builder(context).diskCache {
+        DiskCache.Builder().directory(context.cacheDir.resolve("offline_images"))
+            .maxSizeBytes(100L * 1024L * 1024).build()
+    }.build()
 
     val windowInfo = LocalWindowInfo.current
     val containerWidth = windowInfo.containerSize.width
@@ -56,15 +66,12 @@ fun MandiScreen(
 
             CustomizedSearchBar(
                 onSearch = {
-                    onEvent(MandiPriceScreenEvent.onSearch(it))
-                },
-                onEmptySearch = {
-                    onEvent(MandiPriceScreenEvent.loadAllCrops)
-                },
-                onMicClick = {
+                onEvent(MandiPriceScreenEvent.onSearch(it))
+            }, onEmptySearch = {
+                onEvent(MandiPriceScreenEvent.loadAllCrops)
+            }, onMicClick = {
 
-                },
-                placeHolder = stringResource(id = R.string.search_crops)
+            }, placeHolder = stringResource(id = R.string.search_crops)
 
             )
 
@@ -72,16 +79,11 @@ fun MandiScreen(
                 horizontalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 items(state.listOfStates) {
-                    CustomizedInputChip(
-                        isSelected = it == state.state,
-                        onSelect = {
-                            onEvent(MandiPriceScreenEvent.onStateSelect(it))
-                        },
-                        label = it,
-                        onDeselect = {
-                            onEvent(MandiPriceScreenEvent.onStateDeselect)
-                        }
-                    )
+                    CustomizedInputChip(isSelected = it == state.state, onSelect = {
+                        onEvent(MandiPriceScreenEvent.onStateSelect(it))
+                    }, label = it, onDeselect = {
+                        onEvent(MandiPriceScreenEvent.onStateDeselect)
+                    })
                 }
 
             }
@@ -92,16 +94,11 @@ fun MandiScreen(
                     horizontalArrangement = Arrangement.spacedBy(2.dp)
                 ) {
                     items(state.listOfDistricts) {
-                        CustomizedInputChip(
-                            isSelected = it == state.district,
-                            onSelect = {
-                                onEvent(MandiPriceScreenEvent.onDistrictSelect(it))
-                            },
-                            label = it,
-                            onDeselect = {
-                                onEvent(MandiPriceScreenEvent.onDistrictDeselect)
-                            }
-                        )
+                        CustomizedInputChip(isSelected = it == state.district, onSelect = {
+                            onEvent(MandiPriceScreenEvent.onDistrictSelect(it))
+                        }, label = it, onDeselect = {
+                            onEvent(MandiPriceScreenEvent.onDistrictDeselect)
+                        })
                     }
 
                 }
@@ -129,15 +126,16 @@ fun MandiScreen(
                     mandiPrice[index]?.let {
                         MandiPriceItem(
                             mandiPrice = it.toDto(),
-                            imageSize = if (containerWidth > 600) 100.dp else 80.dp
+                            imageSize = if (containerWidth > 600) 100.dp else 80.dp,
+                            context = context,
+                            imageLoader = imageLoader
                         )
                     }
                 }
                 item {
                     if (mandiPrice.loadState.append is LoadState.Loading) {
                         Row(
-                            modifier = Modifier
-                                .fillMaxWidth(),
+                            modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center
                         ) {

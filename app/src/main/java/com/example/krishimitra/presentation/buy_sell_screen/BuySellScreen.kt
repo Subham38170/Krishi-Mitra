@@ -56,17 +56,7 @@ fun BuySellScreen(
         }
 
     }
-    val cropList = listOf(
-        stringResource(R.string.vegetables),
-        stringResource(R.string.fruits),
-        stringResource(R.string.grains),
-        stringResource(R.string.pulses),
-        stringResource(R.string.oilseeds),
-        stringResource(R.string.spices),
-        stringResource(R.string.cash_crops),
-        stringResource(R.string.plantation_crops),
-        stringResource(R.string.fodder_crops)
-    )
+
 
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState { 2 }
