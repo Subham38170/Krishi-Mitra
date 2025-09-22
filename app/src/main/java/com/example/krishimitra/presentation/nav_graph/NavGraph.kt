@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -23,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -38,6 +40,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.krishimitra.R
+import com.example.krishimitra.presentation.assistant_screen.AssistantScreen
 import com.example.krishimitra.presentation.auth_screen.AuthScreen
 import com.example.krishimitra.presentation.auth_screen.AuthViewModel
 import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreen
@@ -67,6 +70,7 @@ fun NavGraph(
 
     Scaffold(
         bottomBar = {
+
             if (firebaseAuth.uid != null && navController.currentDestination != Routes.StateCommunityScreen && navController.currentDestination != Routes.CommunityMainScreen && navController.currentDestination != Routes.DiseasePredictionScreen) {
                 AnimatedVisibility(
                     visible = scrollBehavior.state.contentOffset >= -12f,
@@ -85,10 +89,26 @@ fun NavGraph(
                         currentDestination = currentDestination
                     )
                 }
-
-
             }
-        }) { innerpadding ->
+        },
+        floatingActionButton = {
+            if (navController.currentDestination == Routes.HomeScreen) {
+
+                FloatingActionButton(
+                    onClick = {
+                        navController.navigate(Routes.AssistantScreen) {
+                            launchSingleTop = true
+                        }
+                    }
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.sharp_support_agent_24),
+                        contentDescription = "Chat bot agent"
+                    )
+                }
+            }
+        }
+    ) { innerpadding ->
         NavHost(
             navController = navController,
             startDestination = if (firebaseAuth.uid == null) Routes.AuthScreen else Routes.HomeScreen
@@ -200,6 +220,10 @@ fun NavGraph(
                     }
                 )
             }
+            composable<Routes.AssistantScreen> {
+                val data = it.toRoute<Routes.AssistantScreen>()
+
+            }
         }
     }
 
@@ -218,18 +242,18 @@ fun CustomizedBottomAppBar(
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-            ,
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             BottomBarInfo.bottomBarList.forEach { bottomBarInfo ->
-                val isSelected = currentDestination?.hierarchy?.any { it.hasRoute(bottomBarInfo.route::class) } == true
+                val isSelected =
+                    currentDestination?.hierarchy?.any { it.hasRoute(bottomBarInfo.route::class) } == true
 
                 IconButton(
                     onClick = {
                         if (!isSelected) {
                             navController.navigate(bottomBarInfo.route) {
-                                popUpTo(Routes.HomeScreen){saveState=true}
+                                popUpTo(Routes.HomeScreen) { saveState = true }
                                 launchSingleTop = true
                             }
                         }

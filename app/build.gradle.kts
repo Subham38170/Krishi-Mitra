@@ -69,6 +69,8 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.paging.compose)
     implementation(libs.firebase.storage)
+    implementation(libs.google.generativeai)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -114,4 +116,12 @@ dependencies {
 
     //Lottie Animation
     implementation(libs.lottie.compose)
+
+    //Gemini sdk
+
+
+    implementation(libs.firebase.ai)
+    implementation(platform(libs.firebase.bom))
+
+
 }

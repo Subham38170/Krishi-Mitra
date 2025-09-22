@@ -1,6 +1,5 @@
 package com.example.krishimitra.presentation.nav_graph
 
-import android.net.Uri
 import kotlinx.serialization.Serializable
 
 sealed class Routes {
@@ -30,4 +29,10 @@ sealed class Routes {
 
     @Serializable
     data class StateCommunityScreen(val state: String) : Routes()
+
+
+    @Serializable
+    data class AssistantScreen(
+        val query: String = ""
+    ) : Routes()
 }

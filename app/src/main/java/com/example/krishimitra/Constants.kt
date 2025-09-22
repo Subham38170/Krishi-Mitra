@@ -43,6 +43,7 @@ object Constants {
     const val MANDI_API_KEY = BuildConfig.MANDI_API_KEY
 
     const val WEATHER_API_KEY = BuildConfig.WEATHER_API_KEY
+    const val GEMINI_API_KEY = "AIzaSyC06RscFEUVXSsHkg71iBWgQprFfVJlxG0"
 
 }
 
