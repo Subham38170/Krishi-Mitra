@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,7 +19,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -30,6 +28,7 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBarScrollBehavior
 import androidx.compose.material3.Card
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -63,7 +62,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.example.krishimitra.R
 import com.example.krishimitra.domain.farmer_data.UserDataModel
-import com.example.krishimitra.domain.weather_models.WeatherApiResponseItem
+import com.example.krishimitra.domain.weather_models.DailyWeather
 import com.example.krishimitra.presentation.components.shimmerEffect
 import com.example.krishimitra.presentation.components.top_app_bars.HomeScreenTopBar
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -126,42 +125,40 @@ fun HomeScreen(
 
     if (showDiseasePredictionAlertDialog) {
 
-        AlertDialog(
-            containerColor = colorResource(id = R.color.light_green),
-            onDismissRequest = {
-                showDiseasePredictionAlertDialog = !showDiseasePredictionAlertDialog
-            }, confirmButton = {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    TextButton(
-                        onClick = {
-                            if (imagePermissionState.status.isGranted) {
-                                galleryLauncher.launch("image/*")
-                            } else {
-                                imagePermissionState.launchPermissionRequest()
-                            }
-                        }) {
-                        Text(
-                            text = stringResource(id = R.string.upload_image)
-                        )
-                    }
-                    TextButton(
-                        onClick = {
-                            if (cameraPermissionState.status.isGranted) {
-                                launcher.launch(uri)
-                            } else {
-                                cameraPermissionState.launchPermissionRequest()
-                            }
-                        }) {
-                        Text(
-                            text = "Click Photo"
-                        )
-                    }
+        AlertDialog(containerColor = colorResource(id = R.color.light_green), onDismissRequest = {
+            showDiseasePredictionAlertDialog = !showDiseasePredictionAlertDialog
+        }, confirmButton = {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                TextButton(
+                    onClick = {
+                        if (imagePermissionState.status.isGranted) {
+                            galleryLauncher.launch("image/*")
+                        } else {
+                            imagePermissionState.launchPermissionRequest()
+                        }
+                    }) {
+                    Text(
+                        text = stringResource(id = R.string.upload_image)
+                    )
                 }
-            })
+                TextButton(
+                    onClick = {
+                        if (cameraPermissionState.status.isGranted) {
+                            launcher.launch(uri)
+                        } else {
+                            cameraPermissionState.launchPermissionRequest()
+                        }
+                    }) {
+                    Text(
+                        text = "Click Photo"
+                    )
+                }
+            }
+        })
     }
 
 
@@ -188,10 +185,9 @@ fun HomeScreen(
             item {
                 if (state.weatherData.isNotEmpty()) {
                     WeatherCard(
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth(),
                         userData = state.userData,
-                        weatherApiResponseItem = state.weatherData[0]
+                        weatherApiResponseItem = state.weatherData
                     )
                 } else {
                     Box(
@@ -199,24 +195,20 @@ fun HomeScreen(
                             .fillMaxWidth()
                             .height(220.dp)
                             .background(
-                                brush = Brush
-                                    .verticalGradient(
-                                        colors = listOf(
-                                            colorResource(id = R.color.slight_dark_green),
-                                            colorResource(id = R.color.slight_dark_green),
-                                            colorResource(id = R.color.slight_dark_green),
-                                            colorResource(id = R.color.light_green),
-                                            Color.White
-                                        )
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(
+                                        colorResource(id = R.color.slight_dark_green),
+                                        colorResource(id = R.color.slight_dark_green),
+                                        colorResource(id = R.color.slight_dark_green),
+                                        colorResource(id = R.color.light_green),
+                                        Color.White
                                     )
+                                )
                             )
-                            .shimmerEffect(),
-                        contentAlignment = Alignment.Center
+                            .shimmerEffect(), contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "Loading...",
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
+                            text = "Loading...", fontWeight = FontWeight.Bold, color = Color.White
                         )
                     }
                 }
@@ -364,30 +356,27 @@ fun CustomizedHomeButton(
 fun WeatherCard(
     modifier: Modifier,
     userData: UserDataModel,
-    weatherApiResponseItem: WeatherApiResponseItem
+    weatherApiResponseItem: List<DailyWeather>
 ) {
 
     Column(
         modifier = modifier
             .height(220.dp)
             .background(
-                brush = Brush
-                    .verticalGradient(
-                        colors = listOf(
-                            colorResource(id = R.color.slight_dark_green),
-                            colorResource(id = R.color.slight_dark_green),
-                            colorResource(id = R.color.slight_dark_green),
-                            colorResource(id = R.color.light_green),
-                            Color.White
-                        )
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        colorResource(id = R.color.slight_dark_green),
+                        colorResource(id = R.color.slight_dark_green),
+                        colorResource(id = R.color.slight_dark_green),
+                        colorResource(id = R.color.light_green),
+                        Color.White
                     )
+                )
             )
             .padding(8.dp)
     ) {
         Row(
-            modifier = Modifier
-                .height(40.dp),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier.height(40.dp), verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = Icons.Default.LocationOn,
@@ -401,20 +390,15 @@ fun WeatherCard(
                     append(userData.district)
                     append(", ")
                     append(userData.state)
-                },
-                fontWeight = FontWeight.Bold,
-                color = Color.White
+                }, fontWeight = FontWeight.Bold, color = Color.White
             )
         }
         LazyRow(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            items(weatherApiResponseItem.hourly) { data ->
+            items(weatherApiResponseItem) { data ->
                 WeatherIcon(
-                    time = data.time,
-                    drawable = getWeatherIcon(data.condition),
-                    temperature = "${data.temperature} \u00B0C"
+                    dailyWeather = data
                 )
             }
         }
@@ -424,14 +408,12 @@ fun WeatherCard(
 }
 
 fun getWeatherIcon(condition: String): Int {
-    return when (condition.trim().lowercase()) {
-        "clear" -> R.mipmap.sunny
-        "sunny" -> R.mipmap.sunny
-        "partly cloudy" -> R.mipmap.cloudy_sunny
-        "patchy rain nearby" -> R.mipmap.rainy
-        "patchy light drizzle" -> R.mipmap.rain
-        "light rain shower" -> R.mipmap.rain
-        "thundery outbreaks in nearby" -> R.mipmap.storm
+    return when (condition.lowercase()) {
+        "clear", "clear sky", "sunny" -> R.mipmap.sunny
+        "partly cloudy", "few clouds", "scattered clouds", "broken clouds", "overcast clouds" -> R.mipmap.cloudy_sunny
+        "patchy rain nearby", "light rain shower", "light rain", "moderate rain", "rain", "heavy intensity rain", "very heavy rain", "extreme rain", "light intensity shower rain", "shower rain", "heavy intensity shower rain", "ragged shower rain" -> R.mipmap.rainy
+        "patchy light drizzle", "drizzle", "light intensity drizzle", "heavy intensity drizzle", "light intensity drizzle rain", "drizzle rain", "heavy intensity drizzle rain", "shower rain and drizzle", "heavy shower rain and drizzle", "shower drizzle" -> R.mipmap.rainy
+        "thundery outbreaks in nearby", "thunderstorm", "thunderstorm with light rain", "thunderstorm with rain", "thunderstorm with heavy rain", "light thunderstorm", "heavy thunderstorm", "ragged thunderstorm", "thunderstorm with light drizzle", "thunderstorm with drizzle", "thunderstorm with heavy drizzle" -> R.mipmap.storm
         else -> R.drawable.outline_error_24
     }
 }
@@ -439,35 +421,15 @@ fun getWeatherIcon(condition: String): Int {
 
 @Composable
 fun WeatherIcon(
-    time: String,
-    @DrawableRes drawable: Int,
-    temperature: String
+    dailyWeather: DailyWeather
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .height(100.dp)
-            .width(60.dp)
-            .padding(horizontal = 8.dp)
-    ) {
-        Text(
-            text = temperature,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
-        Image(
-            painter = painterResource(id = drawable),
-            contentDescription = "Weather",
+    ElevatedCard {
+        Box(
             modifier = Modifier
-                .size(52.dp)
+                .size(80.dp)
+        ){
 
-        )
-        Text(
-            text = time,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
+        }
     }
 
 }

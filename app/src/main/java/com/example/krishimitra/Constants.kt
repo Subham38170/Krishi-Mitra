@@ -54,5 +54,6 @@ object FirebaseConstants {
     const val KRISHI_NEWS = "krishi_news"
     const val CROP_BAZAR_IMAGES = "Buy_Sell_Crops"
     const val CROP_BAZAR = "krishi_bazar"
+    const val MANDI_CROP_IMAGES = "mandi_price_crop_images"
 }
 

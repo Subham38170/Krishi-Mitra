@@ -19,8 +19,6 @@ import com.example.krishimitra.data.remote.MandiPriceApiService
 import com.example.krishimitra.data.remote.WeatherApiService
 import com.example.krishimitra.data.remote_meidator.MandiPriceRemoteMediator
 import com.example.krishimitra.data.remote_meidator.WeatherRemoteMediator
-import com.example.krishimitra.data.repo.LanguageManager
-import com.example.krishimitra.data.repo.LocationManager
 import com.example.krishimitra.domain.ResultState
 import com.example.krishimitra.domain.crops_model.CropModel
 import com.example.krishimitra.domain.disease_prediction_model.DiseasePredictionResponse
@@ -29,7 +27,8 @@ import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
 import com.example.krishimitra.domain.repo.Repo
-import com.example.krishimitra.domain.weather_models.WeatherApiResponse
+import com.example.krishimitra.domain.weather_models.DailyWeather
+import com.example.krishimitra.domain.weather_models.WeatherResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -280,12 +279,11 @@ class RepoImpl @Inject constructor(
                         return@addSnapshotListener
                     }
 
-                    if(snapshot != null) {
-                            val crops = snapshot.toObjects(CropModel::class.java)
-                            trySend(ResultState.Success(crops))
+                    if (snapshot != null) {
+                        val crops = snapshot.toObjects(CropModel::class.java)
+                        trySend(ResultState.Success(crops))
 
-                    }
-                    else{
+                    } else {
                         trySend(ResultState.Success(emptyList()))
                     }
                 }
@@ -376,8 +374,8 @@ class RepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun getWeatherData(location: String): Flow<ResultState<WeatherApiResponse>> {
-        return weatherRemoteMediator.getWeather(location)
+    override suspend fun getWeatherData(lat: Double,long: Double): Flow<ResultState<List<DailyWeather>>> {
+        return weatherRemoteMediator.getWeather(lat, long)
 
     }
 

@@ -178,7 +178,7 @@ object DIModule {
 
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://weather.indianapi.in/")
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

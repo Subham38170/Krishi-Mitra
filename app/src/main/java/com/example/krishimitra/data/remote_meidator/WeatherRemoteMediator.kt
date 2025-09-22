@@ -1,13 +1,14 @@
 package com.example.krishimitra.data.remote_meidator
 
 import com.example.krishimitra.data.local.dao.WeatherDao
-import com.example.krishimitra.data.mappers.toDomain
-import com.example.krishimitra.data.mappers.toEntity
+import com.example.krishimitra.data.mappers.toDailyWeather
+import com.example.krishimitra.data.mappers.toDomainList
+import com.example.krishimitra.data.mappers.toEntityList
 import com.example.krishimitra.data.remote.WeatherApiService
 import com.example.krishimitra.domain.ResultState
 import com.example.krishimitra.domain.repo.NetworkConnectivityObserver
 import com.example.krishimitra.domain.repo.NetworkStatus
-import com.example.krishimitra.domain.weather_models.WeatherApiResponseItem
+import com.example.krishimitra.domain.weather_models.DailyWeather
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -22,19 +23,20 @@ class WeatherRemoteMediator @Inject constructor(
 ) {
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun getWeather(location: String): Flow<ResultState<List<WeatherApiResponseItem>>> =
+    fun getWeather(lat: Double, long: Double): Flow<ResultState<List<DailyWeather>>> =
         networkObserver.networkStatus.flatMapLatest { status ->
             flow {
                 emit(ResultState.Loading)
-                val localData = dao.getALlWeatherData().map { it.toDomain() }
+                val localData = dao.getALlWeatherData().toDomainList()
 
                 if (status == NetworkStatus.Connected) {
                     try {
-                        val remoteData = api.getForecast(location)
+                        val remoteData = api.getWeatherForecast(lat, long)
                         if (remoteData.isSuccessful) {
-                            remoteData.body()?.let {
-                                dao.updateWeatherTransaction(it.map { it.toEntity() })
-                                emit(ResultState.Success(it))
+                            remoteData.body()?.let { weatherResponse ->
+                                val dailyWeather = weatherResponse.toDailyWeather()
+                                dao.updateWeatherTransaction(dailyWeather.toEntityList())
+                                emit(ResultState.Success(dailyWeather))
                             } ?: run {
                                 if (localData.isNotEmpty()) emit(ResultState.Success(localData))
                                 else emit(ResultState.Error("Empty API response"))
@@ -55,7 +57,6 @@ class WeatherRemoteMediator @Inject constructor(
         }.catch { e ->
             emit(ResultState.Error(e.message ?: "Unexpected error"))
         }
-
 
 
 }

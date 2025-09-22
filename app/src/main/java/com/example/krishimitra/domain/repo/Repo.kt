@@ -11,7 +11,7 @@ import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
-import com.example.krishimitra.domain.weather_models.WeatherApiResponse
+import com.example.krishimitra.domain.weather_models.DailyWeather
 import kotlinx.coroutines.flow.Flow
 
 interface Repo {
@@ -81,8 +81,9 @@ interface Repo {
 
 
     suspend fun getWeatherData(
-        location: String
-    ): Flow<ResultState<WeatherApiResponse>>
+        lat: Double,
+        long: Double
+    ): Flow<ResultState<List<DailyWeather>>>
 
 
 }

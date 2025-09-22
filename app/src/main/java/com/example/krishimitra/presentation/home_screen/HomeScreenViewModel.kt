@@ -23,7 +23,7 @@ class HomeScreenViewModel @Inject constructor(
     val repo: Repo
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<HomeScreenState>(HomeScreenState())
+    private val _state = MutableStateFlow(HomeScreenState())
     val state = _state.asStateFlow()
 
 
@@ -77,7 +77,7 @@ class HomeScreenViewModel @Inject constructor(
                     is ResultState.Success -> {
                         _state.update { it.copy(userData = result.data) }
 
-                        loadWeatherDataForVillage(result.data.village)
+                        loadWeatherDataForVillage(result.data.latitude, result.data.longitude)
                     }
                 }
             }
@@ -165,9 +165,9 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    private fun loadWeatherDataForVillage(village: String) {
+    private fun loadWeatherDataForVillage(lat: Double, long: Double) {
         viewModelScope.launch(Dispatchers.IO) {
-            repo.getWeatherData(village).collectLatest { result ->
+            repo.getWeatherData(lat, long).collectLatest { result ->
                 when (result) {
                     is ResultState.Error -> {
                         _event.emit(result.exception)
