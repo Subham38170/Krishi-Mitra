@@ -90,6 +90,16 @@ fun AutoImageNewsSlider(
                     fontWeight = FontWeight.ExtraBold,
                     modifier = Modifier
                         .padding(4.dp)
+                        .height(40.dp),
+                    overflow = TextOverflow.Ellipsis
+                )
+
+
+                Text(
+                    text = banners[page].description,
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier
+                        .padding(4.dp)
                         .height(120.dp),
                     overflow = TextOverflow.Ellipsis
 
@@ -113,7 +123,7 @@ fun AutoImageNewsSlider(
                 ) {
                     Text(
                         text = stringResource(id = R.string.read_more)+" -->",
-                        style = MaterialTheme.typography.bodySmall,
+                        style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Center,
                         color = Color.Blue
 

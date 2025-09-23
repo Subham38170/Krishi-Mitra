@@ -37,7 +37,8 @@ import com.example.krishimitra.presentation.components.LangDropDownMenu
 @Composable
 fun HomeScreenTopBar(
     currentLanguage: String,
-    onLanguageChange: (String) -> Unit
+    onLanguageChange: (String) -> Unit,
+    onNotificationClick: ()-> Unit
 ) {
     var expandDropDownMenu by remember { mutableStateOf(false) }
     TopAppBar(
@@ -83,7 +84,7 @@ fun HomeScreenTopBar(
                 )
             }
             IconButton(
-                onClick = {},
+                onClick = onNotificationClick,
                 colors = IconButtonDefaults.iconButtonColors(
                     contentColor = Color.White
                 )

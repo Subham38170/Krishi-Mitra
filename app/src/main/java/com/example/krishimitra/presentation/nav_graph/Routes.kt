@@ -35,4 +35,8 @@ sealed class Routes {
     data class AssistantScreen(
         val query: String = ""
     ) : Routes()
+
+
+    @Serializable
+    object NotificationScreen: Routes()
 }

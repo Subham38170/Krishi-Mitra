@@ -57,3 +57,7 @@ object FirebaseConstants {
     const val MANDI_CROP_IMAGES = "mandi_price_crop_images"
 }
 
+
+object NotificationConstants{
+    const val GLOBAL_CHANNEL_ID = "Global"
+}

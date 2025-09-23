@@ -35,12 +35,11 @@ class DiseasePredictionViewModel @Inject constructor(
     private var currentLangCode: String = "eng"
 
     init {
-        initTts()
 
+        initTts()
         viewModelScope.launch(Dispatchers.IO) {
             repo.getLanguage().collect { langCode ->
                 currentLangCode = langCode
-                initTts()
             }
         }
     }
@@ -165,7 +164,7 @@ class DiseasePredictionViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             repo.predictCropDisease(currentLangCode, filePath).collect { collect ->
                 when (collect) {
-                    is ResultState.Error<*> -> {
+                    is ResultState.Error -> {
                         _event.emit(collect.exception)
                         _state.update { it.copy(isLoading = false) }
                     }

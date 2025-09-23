@@ -52,12 +52,8 @@ fun AuthScreen(
 ) {
 
     var pagerScreen by remember { mutableStateOf(0) }
-    val pagerState = rememberPagerState(
-        initialPage = 0,
-        pageCount = { 2 }
-    )
+
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
     var expandDropDownMenu by remember { mutableStateOf(false) }
 
     LaunchedEffect(state.isSuccess) {

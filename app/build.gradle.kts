@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.google.generativeai)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.firebase.messaging)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -122,6 +123,5 @@ dependencies {
 
     implementation(libs.firebase.ai)
     implementation(platform(libs.firebase.bom))
-
 
 }

@@ -31,9 +31,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
 
-//    private val assistantViewModel: AssistantScreenViewModel by viewModels()
-//    private lateinit var tts: TextToSpeech
-//    private lateinit var speechRecognizer: SpeechRecognizer
+
     @Inject
     lateinit var languageManager: LanguageManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +69,8 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavGraph(
                     navController = navController,
-                    activity = this
+                    activity = this,
+                    intent
                 )
             }
         }

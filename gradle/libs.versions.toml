@@ -18,6 +18,7 @@ activityCompose = "1.10.1"
 composeBom = "2025.08.01"
 lottieVersion = "6.0.0"
 navigationCompose = "2.8.5"
+
 playServicesLocation = "21.3.0"
 retrofit = "3.0.0"
 translate = "17.0.3"
@@ -33,6 +34,7 @@ pagingCompose = "3.3.6"
 firebaseStorage = "22.0.1"
 generativeaiVersion = "0.9.0"
 lifecycleRuntimeCompose = "2.9.4"
+firebaseMessaging = "25.0.1"
 
 
 
@@ -82,6 +84,7 @@ androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", 
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 google-generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeaiVersion" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 
 
 

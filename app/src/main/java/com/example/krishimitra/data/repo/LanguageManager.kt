@@ -35,7 +35,7 @@ class LanguageManager @Inject constructor(
     fun getLanguage(): Flow<String> {
         return context.dataStore.data
             .map { preferences ->
-                preferences[LANGUAGE_KEY] ?: "en" // default English
+                preferences[LANGUAGE_KEY] ?: "eng" // default English
             }
     }
 

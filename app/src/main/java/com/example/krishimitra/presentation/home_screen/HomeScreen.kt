@@ -1,8 +1,10 @@
 package com.example.krishimitra.presentation.home_screen
 
 import android.Manifest
+import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -28,7 +30,6 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBarScrollBehavior
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -39,6 +40,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -62,6 +64,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
+import androidx.datastore.preferences.core.stringPreferencesKey
+import com.example.krishimitra.Constants.dataStore
 import com.example.krishimitra.R
 import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.domain.weather_models.DailyWeather
@@ -70,6 +74,8 @@ import com.example.krishimitra.presentation.components.top_app_bars.HomeScreenTo
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import java.io.File
 
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterial3Api::class)
@@ -80,13 +86,42 @@ fun HomeScreen(
     moveToMandiScreen: () -> Unit,
     moveToDiseasePredictionScreen: (Uri?) -> Unit,
     moveToKrishiBazar: () -> Unit,
-    scrollBehavior: BottomAppBarScrollBehavior
+    moveToNotificationScreen: () -> Unit,
+    scrollBehavior: BottomAppBarScrollBehavior,
+    intent: Intent
 ) {
 
 
     val context = LocalContext.current
-    var showDiseasePredictionAlertDialog by remember { mutableStateOf(false) }
 
+//    val fcmTokenKey = stringPreferencesKey("gcm_token")
+//    val fcmToken = flow<String> {
+//        context.dataStore.data.map {
+//            it[fcmTokenKey]
+//        }.collect(collector = {
+//            if (it != null) {
+//                this.emit(it)
+//            }
+//        })
+//    }.collectAsState(initial = "")
+//    LaunchedEffect(fcmToken.value) {
+//        Log.d("FCMTOKEN", fcmToken.value)
+//    }
+
+    val notificationTitle = remember {
+        mutableStateOf(
+            if (intent.hasExtra("title")) intent.getStringExtra("title")
+            else ""
+        )
+    }
+    val notificationBody = remember {
+        mutableStateOf(
+            if (intent.hasExtra("title")) intent.getStringExtra("body")
+            else ""
+        )
+    }
+
+    var showDiseasePredictionAlertDialog by remember { mutableStateOf(false) }
 
     var imageUri by remember { mutableStateOf<Uri?>(null) }
 
@@ -170,7 +205,9 @@ fun HomeScreen(
             HomeScreenTopBar(
                 currentLanguage = state.currentLanguage, onLanguageChange = {
                     onEvent(HomeScreenEvent.ChangeLanguage(it))
-                })
+                },
+                onNotificationClick = moveToNotificationScreen
+            )
         },
 
         ) { innerPadding ->
@@ -181,6 +218,16 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
+            //  item {
+//            Text(
+//                text = "FCM Token ${fcmToken}"
+//            )
+//        }
+   //         item {
+//                Text(
+//                    text = "${notificationBody.value} ${notificationTitle.value}"
+//                )
+//            }
             item {
                 HorizontalDivider(thickness = 1.dp, color = Color.White)
             }
@@ -218,7 +265,7 @@ fun HomeScreen(
                         onClick = {
                             showDiseasePredictionAlertDialog = true
                         },
-                        painter = painterResource(id = R.drawable.plant_disease),
+                        painter = painterResource(id = R.drawable.disease_prediction),
                         modifier = Modifier
                             .weight(1f)
                             .shadow(2.dp, RoundedCornerShape(12.dp)),
@@ -315,6 +362,8 @@ fun CustomizedHomeButton(
                 contentDescription = "Plant Disease",
                 modifier = Modifier
                     .height(120.dp)
+                    .fillMaxWidth()
+                    .padding(12.dp)
                     .clip(RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)),
 
                 contentScale = ContentScale.FillBounds
@@ -346,16 +395,17 @@ fun WeatherCardShimmerEffect(
                 shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
             )
             .padding(8.dp)
-    ){
+    ) {
         LazyRow(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(top = 32.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ){
-            items(5){
+        ) {
+            items(5) {
                 Box(
                     modifier = Modifier
-                        .size(220.dp,160.dp)
+                        .size(220.dp, 160.dp)
                         .clip(RoundedCornerShape(20.dp))
                         .shimmerEffect()
                 )

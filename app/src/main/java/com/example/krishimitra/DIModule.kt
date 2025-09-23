@@ -148,7 +148,7 @@ object DIModule {
     fun provideDiseasePredictionRetrofit(): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("https://609daac8c29c.ngrok-free.app/")
+            .baseUrl("https://23517c90c583.ngrok-free.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -257,6 +257,9 @@ object DIModule {
             scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
         )
     }
+
+
+
 
 
 

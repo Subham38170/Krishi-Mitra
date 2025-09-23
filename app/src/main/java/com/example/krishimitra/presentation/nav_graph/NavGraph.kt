@@ -2,6 +2,7 @@ package com.example.krishimitra.presentation.nav_graph
 
 
 import android.app.Activity
+import android.content.Intent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -37,10 +38,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.krishimitra.R
 import com.example.krishimitra.presentation.assistant_screen.AssistantScreen
+import com.example.krishimitra.presentation.assistant_screen.AssistantScreenViewModel
 import com.example.krishimitra.presentation.auth_screen.AuthScreen
 import com.example.krishimitra.presentation.auth_screen.AuthViewModel
 import com.example.krishimitra.presentation.buy_sell_screen.BuySellScreen
@@ -53,6 +56,8 @@ import com.example.krishimitra.presentation.home_screen.HomeScreen
 import com.example.krishimitra.presentation.home_screen.HomeScreenViewModel
 import com.example.krishimitra.presentation.mandi_screen.MandiScreen
 import com.example.krishimitra.presentation.mandi_screen.MandiScreenViewModel
+import com.example.krishimitra.presentation.notification_screen.NotificationScreen
+import com.example.krishimitra.presentation.notification_screen.NotificationScreenViewModel
 import com.example.krishimitra.presentation.profile_screen.ProfileScreen
 import com.google.firebase.auth.FirebaseAuth
 
@@ -60,7 +65,8 @@ import com.google.firebase.auth.FirebaseAuth
 @Composable
 fun NavGraph(
     navController: NavHostController = rememberNavController(),
-    activity: Activity
+    activity: Activity,
+    intent: Intent
 ) {
 
     val firebaseAuth = FirebaseAuth.getInstance()
@@ -68,10 +74,17 @@ fun NavGraph(
 
     val scrollBehavior = BottomAppBarDefaults.exitAlwaysScrollBehavior()
 
+
     Scaffold(
         bottomBar = {
 
-            if (firebaseAuth.uid != null && navController.currentDestination != Routes.StateCommunityScreen && navController.currentDestination != Routes.CommunityMainScreen && navController.currentDestination != Routes.DiseasePredictionScreen) {
+
+            val  shouldShowBottomBar = currentDestination?.hierarchy?.any { it.hasRoute(Routes.HomeScreen::class) } == true
+                    || currentDestination?.hierarchy?.any { it.hasRoute(Routes.BuySellScreen::class) } == true
+                    || currentDestination?.hierarchy?.any { it.hasRoute(Routes.MandiScreen::class) } == true
+                    || currentDestination?.hierarchy?.any { it.hasRoute(Routes.ProfileScreen::class) } == true
+
+            if (firebaseAuth.uid != null && shouldShowBottomBar) {
                 AnimatedVisibility(
                     visible = scrollBehavior.state.contentOffset >= -12f,
                     enter = slideInVertically(
@@ -151,6 +164,12 @@ fun NavGraph(
                         navController.navigate(Routes.BuySellScreen) {
                             launchSingleTop = true
                         }
+                    },
+                    intent = intent,
+                    moveToNotificationScreen = {
+                        navController.navigate(Routes.NotificationScreen) {
+                            launchSingleTop = true
+                        }
                     }
                 )
 
@@ -221,8 +240,29 @@ fun NavGraph(
                 )
             }
             composable<Routes.AssistantScreen> {
-                val data = it.toRoute<Routes.AssistantScreen>()
+                val assistantViewModel = hiltViewModel<AssistantScreenViewModel>()
+                AssistantScreen(
+                    viewModel = assistantViewModel
+                )
 
+            }
+
+            composable<Routes.NotificationScreen>(
+                deepLinks = listOf(
+                    navDeepLink {
+                        uriPattern = "app://krishimitra.com/notifications?title={title}&body={body}&imageUrl={imageUrl}&webLink={webLink}"
+                        action = Intent.ACTION_VIEW
+
+                    }
+                )
+            ){
+                val notificationViewModel = hiltViewModel<NotificationScreenViewModel>()
+                NotificationScreen(
+                    moveBackToHomeScreen = {
+                        navController.popBackStack()
+                    },
+                    state = notificationViewModel.state.collectAsStateWithLifecycle().value
+                )
             }
         }
     }
