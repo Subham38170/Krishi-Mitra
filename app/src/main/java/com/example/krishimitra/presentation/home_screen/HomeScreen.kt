@@ -107,19 +107,19 @@ fun HomeScreen(
 //    LaunchedEffect(fcmToken.value) {
 //        Log.d("FCMTOKEN", fcmToken.value)
 //    }
-
-    val notificationTitle = remember {
-        mutableStateOf(
-            if (intent.hasExtra("title")) intent.getStringExtra("title")
-            else ""
-        )
-    }
-    val notificationBody = remember {
-        mutableStateOf(
-            if (intent.hasExtra("title")) intent.getStringExtra("body")
-            else ""
-        )
-    }
+//
+//    val notificationTitle = remember {
+//        mutableStateOf(
+//            if (intent.hasExtra("title")) intent.getStringExtra("title")
+//            else ""
+//        )
+//    }
+//    val notificationBody = remember {
+//        mutableStateOf(
+//            if (intent.hasExtra("title")) intent.getStringExtra("body")
+//            else ""
+//        )
+//    }
 
     var showDiseasePredictionAlertDialog by remember { mutableStateOf(false) }
 
@@ -363,7 +363,7 @@ fun CustomizedHomeButton(
                 modifier = Modifier
                     .height(120.dp)
                     .fillMaxWidth()
-                    .padding(12.dp)
+                    .padding(4.dp)
                     .clip(RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)),
 
                 contentScale = ContentScale.FillBounds

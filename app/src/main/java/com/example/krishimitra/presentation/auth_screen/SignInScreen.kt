@@ -12,6 +12,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -34,10 +39,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.krishimitra.Constants
 import com.example.krishimitra.R
 import com.example.krishimitra.domain.farmer_data.UserDataModel
 
@@ -57,7 +65,6 @@ fun SignInScreen(
         modifier = modifier
             .fillMaxWidth()
             .height(360.dp)
-            .background(color = Color.White.copy(alpha = 0.6f), shape = RoundedCornerShape(8.dp))
             .padding(12.dp),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -65,6 +72,8 @@ fun SignInScreen(
         Text(
             text = stringResource(R.string.login),
             style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+            color = Color.White
         )
         OutlinedTextField(
             value = email,
@@ -73,17 +82,27 @@ fun SignInScreen(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier
                 .fillMaxWidth(),
-            label = {
+            placeholder = {
                 Text(
-                    text = stringResource(id = R.string.email)
-                )
+                    text = stringResource(id = R.string.email),
+                    fontSize = Constants.TEXT_FIELD_DEFAULT_SIZE,
+                    fontWeight = FontWeight.Bold                )
             },
             colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = colorResource(id = R.color.grass_green),
-                focusedBorderColor = colorResource(id = R.color.grass_green),
-                focusedLabelColor = colorResource(R.color.grass_green),
-                unfocusedTextColor = colorResource(id = R.color.grass_green),
-                cursorColor = colorResource(id = R.color.grass_green),
+                unfocusedBorderColor = colorResource(id = R.color.red),
+                focusedBorderColor = colorResource(id = R.color.red),
+                focusedLabelColor = colorResource(R.color.red),
+                unfocusedTextColor = colorResource(id = R.color.red),
+                cursorColor = colorResource(id = R.color.red),
+                focusedContainerColor = colorResource(id = R.color.white),
+                unfocusedContainerColor = colorResource(id = R.color.white),
+                focusedTrailingIconColor = colorResource(id = R.color.red),
+                unfocusedTrailingIconColor = colorResource(id = R.color.red),
+                focusedLeadingIconColor = colorResource(id = R.color.red),
+                unfocusedLeadingIconColor = colorResource(id = R.color.red),
+                focusedPlaceholderColor = colorResource(id = R.color.red),
+                unfocusedPlaceholderColor = colorResource(id = R.color.red),
+                focusedTextColor = colorResource(id = R.color.red)
             ),
             supportingText = {
                 if (email.isNotEmpty() && !email.matches(gmailRegex)) {
@@ -92,7 +111,14 @@ fun SignInScreen(
                         color = Color.Red
                     )
                 }
-            }
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.Person,
+                    contentDescription = ""
+                )
+            },
+            shape = RoundedCornerShape(Constants.TEXT_FIELD_ROUNDED_CORNER_SIZE)
         )
 
         OutlinedTextField(
@@ -105,17 +131,28 @@ fun SignInScreen(
             ),
             modifier = Modifier
                 .fillMaxWidth(),
-            label = {
+            placeholder = {
                 Text(
-                    text = stringResource(id = R.string.password)
+                    text = stringResource(id = R.string.password),
+                    fontSize = Constants.TEXT_FIELD_DEFAULT_SIZE,
+                    fontWeight = FontWeight.Bold
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = colorResource(id = R.color.grass_green),
-                focusedBorderColor = colorResource(id = R.color.grass_green),
-                focusedLabelColor = colorResource(R.color.grass_green),
-                unfocusedTextColor = colorResource(id = R.color.grass_green),
-                cursorColor = colorResource(id = R.color.grass_green),
+                unfocusedBorderColor = colorResource(id = R.color.red),
+                focusedBorderColor = colorResource(id = R.color.red),
+                focusedLabelColor = colorResource(R.color.red),
+                unfocusedTextColor = colorResource(id = R.color.red),
+                cursorColor = colorResource(id = R.color.red),
+                focusedContainerColor = colorResource(id = R.color.white),
+                unfocusedContainerColor = colorResource(id = R.color.white),
+                focusedTrailingIconColor = colorResource(id = R.color.red),
+                unfocusedTrailingIconColor = colorResource(id = R.color.red),
+                focusedLeadingIconColor = colorResource(id = R.color.red),
+                unfocusedLeadingIconColor = colorResource(id = R.color.red),
+                focusedPlaceholderColor = colorResource(id = R.color.red),
+                unfocusedPlaceholderColor = colorResource(id = R.color.red),
+                focusedTextColor = colorResource(id = R.color.red)
             ),
             trailingIcon = {
                 IconButton(
@@ -135,10 +172,18 @@ fun SignInScreen(
                     Text(
                         text = stringResource(R.string.password_must_be_8_characters_long),
                         color = Color.Red
-
                     )
                 }
+            },
+            shape = RoundedCornerShape(20.dp),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.Lock,
+                    contentDescription = ""
+                )
             }
+
+
 
         )
 
@@ -163,10 +208,12 @@ fun SignInScreen(
 
                 }
             },
-            shape = RoundedCornerShape(4.dp),
+            shape = RoundedCornerShape(Constants.TEXT_FIELD_ROUNDED_CORNER_SIZE),
             colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(id = R.color.grass_green)
+                containerColor = colorResource(id = R.color.red),
+                contentColor = Color.White
             )
+
         ) {
             if (authState.isSignLoading) {
                 CircularProgressIndicator(
@@ -175,7 +222,8 @@ fun SignInScreen(
             } else {
                 Text(
                     text = stringResource(id = R.string.login),
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold
                 )
             }
         }
@@ -186,13 +234,18 @@ fun SignInScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.dont_have_account),
-
-                )
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
             TextButton(
                 onClick = moveToSignUpScreen
             ) {
                 Text(
-                    text = "Create"
+                    text = stringResource(id = R.string.create),
+                    fontWeight = FontWeight.Bold,
+                    color = colorResource(id = R.color.yellow)
+
+
                 )
             }
         }

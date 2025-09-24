@@ -72,7 +72,6 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieVersion" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-translate = { module = "com.google.mlkit:translate", version.ref = "translate" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "roomRuntime" }

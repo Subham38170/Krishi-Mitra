@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.krishimitra.data.local.KrishiMitraDatabase
 import com.example.krishimitra.data.local.dao.MandiPriceDao
+import com.example.krishimitra.data.local.dao.NotificationDao
 import com.example.krishimitra.data.local.dao.WeatherDao
 import com.example.krishimitra.data.remote.CropDiseasePredictionApiService
 import com.example.krishimitra.data.remote.MandiPriceApiService
@@ -101,6 +102,7 @@ object DIModule {
         firebaseAuth: FirebaseAuth,
         weatherApiService: WeatherApiService,
         weatherRemoteMediator: WeatherRemoteMediator,
+        notificationDao: NotificationDao,
         @ApplicationContext context: Context
     ): Repo {
         return RepoImpl(
@@ -115,7 +117,8 @@ object DIModule {
             firebaseStorage = firebaseStorage,
             firebaseAuth = firebaseAuth,
             weatherApiService = weatherApiService,
-            weatherRemoteMediator = weatherRemoteMediator
+            weatherRemoteMediator = weatherRemoteMediator,
+            notificationDao = notificationDao
         )
     }
 
@@ -148,7 +151,7 @@ object DIModule {
     fun provideDiseasePredictionRetrofit(): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("https://23517c90c583.ngrok-free.app/")
+            .baseUrl("https://b21fa475910c.ngrok-free.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -213,6 +216,13 @@ object DIModule {
         return krishiMitraDatabase.mandiPriceDao()
     }
 
+    @Provides
+    @Singleton
+    fun provideNotificationDao(
+        krishiMitraDatabase: KrishiMitraDatabase
+    ): NotificationDao{
+        return krishiMitraDatabase.notificationDao()
+    }
 
     @Provides
     @Singleton

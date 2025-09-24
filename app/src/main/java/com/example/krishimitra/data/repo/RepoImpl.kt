@@ -13,7 +13,9 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.krishimitra.FirebaseConstants
 import com.example.krishimitra.data.local.KrishiMitraDatabase
+import com.example.krishimitra.data.local.dao.NotificationDao
 import com.example.krishimitra.data.local.entity.MandiPriceEntity
+import com.example.krishimitra.data.local.entity.NotificationEntity
 import com.example.krishimitra.data.remote.CropDiseasePredictionApiService
 import com.example.krishimitra.data.remote.MandiPriceApiService
 import com.example.krishimitra.data.remote.WeatherApiService
@@ -26,15 +28,16 @@ import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
+import com.example.krishimitra.domain.notification_model.GlobalNotificationData
 import com.example.krishimitra.domain.repo.Repo
 import com.example.krishimitra.domain.weather_models.DailyWeather
-import com.example.krishimitra.domain.weather_models.WeatherResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.map
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -50,6 +53,7 @@ class RepoImpl @Inject constructor(
     private val mandiApiService: MandiPriceApiService,
     private val diseasePredictionApiService: CropDiseasePredictionApiService,
     private val weatherApiService: WeatherApiService,
+    private val notificationDao: NotificationDao,
     private val localDb: KrishiMitraDatabase,
     private val dataStoreManager: DataStoreManager,
     private val weatherRemoteMediator: WeatherRemoteMediator,
@@ -374,9 +378,20 @@ class RepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun getWeatherData(lat: Double,long: Double): Flow<ResultState<List<DailyWeather>>> {
+    override suspend fun getWeatherData(
+        lat: Double,
+        long: Double
+    ): Flow<ResultState<List<DailyWeather>>> {
         return weatherRemoteMediator.getWeather(lat, long)
 
+    }
+
+    override suspend fun getAllNotifications(): Flow<List<NotificationEntity>>{
+      return notificationDao.getAllNotifications()
+    }
+
+    override suspend fun saveNotification(notification: NotificationEntity) {
+        notificationDao.insertNotification(notification)
     }
 
     private fun deleteImagefromCropBazar(imageUrl: String) {
@@ -397,8 +412,6 @@ class RepoImpl @Inject constructor(
         val fileName = "image.jpg" // you can extract name from uri if needed
         return MultipartBody.Part.createFormData("file", fileName, requestBody)
     }
-
-
 
 
 }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.net.Uri
 import androidx.paging.PagingData
 import com.example.krishimitra.data.local.entity.MandiPriceEntity
+import com.example.krishimitra.data.local.entity.NotificationEntity
 import com.example.krishimitra.domain.ResultState
 import com.example.krishimitra.domain.crops_model.CropModel
 import com.example.krishimitra.domain.disease_prediction_model.DiseasePredictionResponse
@@ -11,6 +12,7 @@ import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
+import com.example.krishimitra.domain.notification_model.GlobalNotificationData
 import com.example.krishimitra.domain.weather_models.DailyWeather
 import kotlinx.coroutines.flow.Flow
 
@@ -86,4 +88,7 @@ interface Repo {
     ): Flow<ResultState<List<DailyWeather>>>
 
 
+    suspend fun getAllNotifications(): Flow<List<NotificationEntity>>
+
+    suspend fun saveNotification(notification: NotificationEntity)
 }

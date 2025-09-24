@@ -1,6 +1,8 @@
 package com.example.krishimitra
 
 import android.content.Context
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.preferencesDataStore
 
 
@@ -10,7 +12,10 @@ data class Language(
     val nativeName: String
 )
 
+
 object Constants {
+    val TEXT_FIELD_DEFAULT_SIZE = 18.sp
+    val TEXT_FIELD_ROUNDED_CORNER_SIZE = 20.dp
 
     val SUPPORTED_LANGUAGES = listOf(
         Language("eng", "English", "English"),

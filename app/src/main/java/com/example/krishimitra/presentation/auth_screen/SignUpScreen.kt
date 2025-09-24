@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,6 +21,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -38,10 +40,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.krishimitra.Constants
 import com.example.krishimitra.R
 import com.example.krishimitra.data.repo.LocationManager
 import com.example.krishimitra.domain.farmer_data.UserDataModel
@@ -98,20 +102,19 @@ fun SignUpScreen(
         }
     }
 
-
-
     Column(
         modifier = modifier
             .fillMaxWidth()
             .height(640.dp)
-            .background(color = Color.White.copy(alpha = 0.6f), shape = RoundedCornerShape(8.dp))
             .padding(12.dp),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = stringResource(id = R.string.signup),
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.bodyLarge,
+            color = Color.White,
+            fontWeight = FontWeight.Bold
         )
 
         CustomOutlinedTextField(
@@ -120,11 +123,10 @@ fun SignUpScreen(
             label = stringResource(id = R.string.name),
             supportingText = "",
             readOnly = false
-
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
             CustomOutlinedTextField(
@@ -135,13 +137,18 @@ fun SignUpScreen(
                 modifier = Modifier.weight(2f),
                 readOnly = true
             )
+            Spacer(modifier = Modifier.width(4.dp))
             IconButton(
                 modifier = Modifier
                     .weight(1f)
                     .background(
-                        colorResource(id = R.color.grass_green),
+                        color = Color.White,
                         shape = RoundedCornerShape(4.dp)
                     ),
+                colors = IconButtonDefaults.iconButtonColors(
+                    containerColor = Color.White,
+                    contentColor = colorResource(id = R.color.red)
+                ),
 
                 onClick = {
                     if (!authState.isLocationLoading) {
@@ -157,13 +164,14 @@ fun SignUpScreen(
                             requestPermission = true
                         }
                     }
-                },
+                }
             ) {
                 if (authState.isLocationLoading) {
                     CircularProgressIndicator()
                 } else {
                     Icon(
-                        imageVector = Icons.Default.LocationOn, contentDescription = "Location"
+                        imageVector = Icons.Default.LocationOn,
+                        contentDescription = "Location"
                     )
                 }
             }
@@ -197,21 +205,34 @@ fun SignUpScreen(
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth(),
-            label = {
+            placeholder = {
                 Text(
-                    text = stringResource(id = R.string.mobile_no)
+                    text = stringResource(id = R.string.mobile_no),
+                    fontSize = Constants.TEXT_FIELD_DEFAULT_SIZE,
+                    fontWeight = FontWeight.Bold
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = colorResource(id = R.color.grass_green),
-                focusedBorderColor = colorResource(id = R.color.grass_green),
-                focusedLabelColor = colorResource(R.color.grass_green),
-                unfocusedTextColor = colorResource(id = R.color.grass_green),
-                cursorColor = colorResource(id = R.color.grass_green),
+                unfocusedBorderColor = colorResource(id = R.color.red),
+                focusedBorderColor = colorResource(id = R.color.red),
+                focusedLabelColor = colorResource(R.color.red),
+                unfocusedTextColor = colorResource(id = R.color.red),
+                cursorColor = colorResource(id = R.color.red),
+                focusedContainerColor = colorResource(id = R.color.white),
+                unfocusedContainerColor = colorResource(id = R.color.white),
+                focusedTrailingIconColor = colorResource(id = R.color.red),
+                unfocusedTrailingIconColor = colorResource(id = R.color.red),
+                focusedLeadingIconColor = colorResource(id = R.color.red),
+                unfocusedLeadingIconColor = colorResource(id = R.color.red),
+                focusedPlaceholderColor = colorResource(id = R.color.red),
+                unfocusedPlaceholderColor = colorResource(id = R.color.red),
+                focusedTextColor = colorResource(id = R.color.red)
             ),
             leadingIcon = {
                 Text(
-                    text = "+91"
+                    text = "+91",
+                    fontSize = Constants.TEXT_FIELD_DEFAULT_SIZE,
+                    fontWeight = FontWeight.Bold
                 )
 
             },
@@ -221,24 +242,37 @@ fun SignUpScreen(
                         text = "Enter valid mobile no.", color = Color.Red
                     )
                 }
-            })
+            },
+            shape = RoundedCornerShape(Constants.TEXT_FIELD_ROUNDED_CORNER_SIZE)
+        )
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier.fillMaxWidth(),
-            label = {
+            placeholder = {
                 Text(
-                    text = "Email"
+                    text = "Email",
+                    fontSize = Constants.TEXT_FIELD_DEFAULT_SIZE,
+                    fontWeight = FontWeight.Bold
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = colorResource(id = R.color.grass_green),
-                focusedBorderColor = colorResource(id = R.color.grass_green),
-                focusedLabelColor = colorResource(R.color.grass_green),
-                unfocusedTextColor = colorResource(id = R.color.grass_green),
-                cursorColor = colorResource(id = R.color.grass_green),
+                unfocusedBorderColor = colorResource(id = R.color.red),
+                focusedBorderColor = colorResource(id = R.color.red),
+                focusedLabelColor = colorResource(R.color.red),
+                unfocusedTextColor = colorResource(id = R.color.red),
+                cursorColor = colorResource(id = R.color.red),
+                focusedContainerColor = colorResource(id = R.color.white),
+                unfocusedContainerColor = colorResource(id = R.color.white),
+                focusedTrailingIconColor = colorResource(id = R.color.red),
+                unfocusedTrailingIconColor = colorResource(id = R.color.red),
+                focusedLeadingIconColor = colorResource(id = R.color.red),
+                unfocusedLeadingIconColor = colorResource(id = R.color.red),
+                focusedPlaceholderColor = colorResource(id = R.color.red),
+                unfocusedPlaceholderColor = colorResource(id = R.color.red),
+                focusedTextColor = colorResource(id = R.color.red)
             ),
             supportingText = {
                 if (email.isNotEmpty() && !email.matches(gmailRegex)) {
@@ -246,7 +280,10 @@ fun SignUpScreen(
                         text = "Enter a valid Gmail address", color = Color.Red
                     )
                 }
-            })
+            },
+            shape = RoundedCornerShape(Constants.TEXT_FIELD_ROUNDED_CORNER_SIZE)
+
+        )
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -259,24 +296,38 @@ fun SignUpScreen(
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.width(100.dp),
-                label = {
+                placeholder = {
                     Text(
-                        text = stringResource(id = R.string.pin_no)
+                        text = stringResource(id = R.string.pin_no),
+                        fontSize = Constants.TEXT_FIELD_DEFAULT_SIZE,
+                        fontWeight = FontWeight.Bold
                     )
                 },
                 readOnly = true,
                 colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = colorResource(id = R.color.grass_green),
-                    focusedBorderColor = colorResource(id = R.color.grass_green),
-                    focusedLabelColor = colorResource(R.color.grass_green),
-                    unfocusedTextColor = colorResource(id = R.color.grass_green),
-                    cursorColor = colorResource(id = R.color.grass_green),
+                    unfocusedBorderColor = colorResource(id = R.color.red),
+                    focusedBorderColor = colorResource(id = R.color.red),
+                    focusedLabelColor = colorResource(R.color.red),
+                    unfocusedTextColor = colorResource(id = R.color.red),
+                    cursorColor = colorResource(id = R.color.red),
+                    focusedContainerColor = colorResource(id = R.color.white),
+                    unfocusedContainerColor = colorResource(id = R.color.white),
+                    focusedTrailingIconColor = colorResource(id = R.color.red),
+                    unfocusedTrailingIconColor = colorResource(id = R.color.red),
+                    focusedLeadingIconColor = colorResource(id = R.color.red),
+                    unfocusedLeadingIconColor = colorResource(id = R.color.red),
+                    focusedPlaceholderColor = colorResource(id = R.color.red),
+                    unfocusedPlaceholderColor = colorResource(id = R.color.red),
+                    focusedTextColor = colorResource(id = R.color.red)
                 ),
                 supportingText = {
                     if (pinCode.length > 0 && pinCode.length != 6) Text(
                         text = "Invalid"
                     )
-                })
+                },
+                shape = RoundedCornerShape(Constants.TEXT_FIELD_ROUNDED_CORNER_SIZE)
+
+            )
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -286,17 +337,28 @@ fun SignUpScreen(
                     mask = '*'
                 ),
                 modifier = Modifier.fillMaxWidth(),
-                label = {
+                placeholder = {
                     Text(
-                        text = "Password"
+                        text = "Password",
+                        fontSize = Constants.TEXT_FIELD_DEFAULT_SIZE,
+                        fontWeight = FontWeight.Bold
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = colorResource(id = R.color.grass_green),
-                    focusedBorderColor = colorResource(id = R.color.grass_green),
-                    focusedLabelColor = colorResource(R.color.grass_green),
-                    unfocusedTextColor = colorResource(id = R.color.grass_green),
-                    cursorColor = colorResource(id = R.color.grass_green),
+                    unfocusedBorderColor = colorResource(id = R.color.red),
+                    focusedBorderColor = colorResource(id = R.color.red),
+                    focusedLabelColor = colorResource(R.color.red),
+                    unfocusedTextColor = colorResource(id = R.color.red),
+                    cursorColor = colorResource(id = R.color.red),
+                    focusedContainerColor = colorResource(id = R.color.white),
+                    unfocusedContainerColor = colorResource(id = R.color.white),
+                    focusedTrailingIconColor = colorResource(id = R.color.red),
+                    unfocusedTrailingIconColor = colorResource(id = R.color.red),
+                    focusedLeadingIconColor = colorResource(id = R.color.red),
+                    unfocusedLeadingIconColor = colorResource(id = R.color.red),
+                    focusedPlaceholderColor = colorResource(id = R.color.red),
+                    unfocusedPlaceholderColor = colorResource(id = R.color.red),
+                    focusedTextColor = colorResource(id = R.color.red)
                 ),
                 trailingIcon = {
                     IconButton(
@@ -317,7 +379,10 @@ fun SignUpScreen(
 
                         )
                     }
-                }
+                },
+
+                shape = RoundedCornerShape(Constants.TEXT_FIELD_ROUNDED_CORNER_SIZE)
+
 
             )
 
@@ -349,8 +414,11 @@ fun SignUpScreen(
                     )
 
                 }
-            }, shape = RoundedCornerShape(4.dp), colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(id = R.color.grass_green)
+            },
+            shape = RoundedCornerShape(Constants.TEXT_FIELD_ROUNDED_CORNER_SIZE),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(id = R.color.red),
+                contentColor = Color.White
             )
         ) {
             if (authState.isSignLoading) {
@@ -360,7 +428,9 @@ fun SignUpScreen(
             } else {
                 Text(
                     text = stringResource(id = R.string.signup),
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold
+
                 )
             }
         }
@@ -371,13 +441,16 @@ fun SignUpScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.already_have_account),
-
-                )
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
             TextButton(
                 onClick = moveToSignInScreen
             ) {
                 Text(
-                    text = stringResource(id = R.string.login)
+                    text = stringResource(id = R.string.login),
+                    fontWeight = FontWeight.Bold,
+                    color = colorResource(id = R.color.yellow)
                 )
             }
         }

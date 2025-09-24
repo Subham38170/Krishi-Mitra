@@ -245,7 +245,7 @@ fun SellScreenAlertDialog(
                 ) {
                     if (!isUploading) {
                         Text(
-                            text = stringResource(id = R.string.remoge)
+                            text = stringResource(id = R.string.sell)
                         )
                     } else {
                         CircularProgressIndicator()

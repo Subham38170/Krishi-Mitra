@@ -12,14 +12,22 @@ import com.example.krishimitra.Constants.dataStore
 import com.example.krishimitra.MainActivity
 import com.example.krishimitra.NotificationConstants
 import com.example.krishimitra.R
+import com.example.krishimitra.data.local.entity.NotificationEntity
+import com.example.krishimitra.domain.repo.Repo
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class KrishiMitraFirebaseMessagingService : FirebaseMessagingService() {
+    @Inject
+    lateinit var repo: Repo
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
@@ -30,11 +38,11 @@ class KrishiMitraFirebaseMessagingService : FirebaseMessagingService() {
         }
         if (message.notification != null) {
             Log.v("CloudMessage", "Notification Title: ${message.notification?.title}")
-            Log.v("CloudMessage", "Notification Body ${ message.notification?.body }")
+            Log.v("CloudMessage", "Notification Body ${message.notification?.body}")
         }
 
         val notificationData = mutableMapOf<String, String>()
-        message.data.forEach { (key,value) -> notificationData[key]= value}
+        message.data.forEach { (key, value) -> notificationData[key] = value }
 
 
         message.notification?.let {
@@ -62,6 +70,16 @@ class KrishiMitraFirebaseMessagingService : FirebaseMessagingService() {
 
         }
 
+        val entity = NotificationEntity(
+            title = notificationData["title"] ?: "KrishiMitra",
+            description = notificationData["body"] ?: "",
+            imageUrl = notificationData["imageUrl"],
+            webLink = notificationData["webLink"]
+        )
+        GlobalScope.launch(Dispatchers.IO) {
+            repo.saveNotification(entity)
+        }
+
     }
 
     private fun showGlobalNotification(data: Map<String, String>) {
@@ -71,7 +89,8 @@ class KrishiMitraFirebaseMessagingService : FirebaseMessagingService() {
         val body = data["body"] ?: ""
         val imageUrl = data["imageUrl"]
         val webLink = data["webLink"]
-        val notificationScreenUri = "app://krishimitra.com/notifications?title=${title}&body=${body}&imageUrl=${imageUrl}&webLink=${webLink}".toUri()
+        val notificationScreenUri =
+            "app://krishimitra.com/notifications?title=${title}&body=${body}&imageUrl=${imageUrl}&webLink=${webLink}".toUri()
 
 
         val intent = Intent(
