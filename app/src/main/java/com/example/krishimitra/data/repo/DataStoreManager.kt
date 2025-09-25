@@ -1,6 +1,7 @@
 package com.example.krishimitra.data.repo
 
 import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -25,7 +26,7 @@ class DataStoreManager @Inject constructor(
         private val USER_PINCODE = stringPreferencesKey("user_pincode")
         private val USER_LATITUDE = doublePreferencesKey("user_pincode")
         private val USER_LONGITUDE = doublePreferencesKey("user_pincode")
-
+        private val NOTIFICATON_STATUS = booleanPreferencesKey("new_notification_check")
 
     }
 
@@ -64,11 +65,13 @@ class DataStoreManager @Inject constructor(
             prefs[USER_STATE] ?: ""
         }
     }
+
     fun getDistrictName(): Flow<String> {
         return context.userDataStore.data.map { prefs ->
             prefs[USER_DISTRICT] ?: ""
         }
     }
+
     fun getVillageName(): Flow<String> {
         return context.userDataStore.data.map { prefs ->
             prefs[USER_VILLAGE] ?: ""
@@ -80,9 +83,23 @@ class DataStoreManager @Inject constructor(
             listOf(prefs[USER_LATITUDE] ?: 28.6139, prefs[USER_LONGITUDE] ?: 77.2090)
         }
     }
+
     fun getMobileNo(): Flow<String> {
         return context.userDataStore.data.map { prefs ->
             prefs[USER_MOBILE] ?: ""
+        }
+    }
+
+
+    fun newNotificationStatus(): Flow<Boolean> {
+        return context.dataStore.data.map { prefs ->
+            prefs[NOTIFICATON_STATUS] ?: false
+        }
+    }
+
+    suspend fun setNotificationStatus(status: Boolean) {
+        context.dataStore.edit { prefs ->
+            prefs[NOTIFICATON_STATUS] = status
         }
     }
 }

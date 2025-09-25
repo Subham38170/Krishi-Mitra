@@ -29,6 +29,7 @@ class KrishiMitraFirebaseMessagingService : FirebaseMessagingService() {
     @Inject
     lateinit var repo: Repo
 
+
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
         Log.v("CloudMessage", "From ${message.from}")

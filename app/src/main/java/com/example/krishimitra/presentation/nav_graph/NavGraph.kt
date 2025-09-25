@@ -79,10 +79,11 @@ fun NavGraph(
         bottomBar = {
 
 
-            val  shouldShowBottomBar = currentDestination?.hierarchy?.any { it.hasRoute(Routes.HomeScreen::class) } == true
-                    || currentDestination?.hierarchy?.any { it.hasRoute(Routes.BuySellScreen::class) } == true
-                    || currentDestination?.hierarchy?.any { it.hasRoute(Routes.MandiScreen::class) } == true
-                    || currentDestination?.hierarchy?.any { it.hasRoute(Routes.ProfileScreen::class) } == true
+            val shouldShowBottomBar =
+                currentDestination?.hierarchy?.any { it.hasRoute(Routes.HomeScreen::class) } == true
+                        || currentDestination?.hierarchy?.any { it.hasRoute(Routes.BuySellScreen::class) } == true
+                        || currentDestination?.hierarchy?.any { it.hasRoute(Routes.MandiScreen::class) } == true
+                        || currentDestination?.hierarchy?.any { it.hasRoute(Routes.ProfileScreen::class) } == true
 
             if (firebaseAuth.uid != null && shouldShowBottomBar) {
                 AnimatedVisibility(
@@ -250,18 +251,20 @@ fun NavGraph(
             composable<Routes.NotificationScreen>(
                 deepLinks = listOf(
                     navDeepLink {
-                        uriPattern = "app://krishimitra.com/notifications?title={title}&body={body}&imageUrl={imageUrl}&webLink={webLink}"
+                        uriPattern =
+                            "app://krishimitra.com/notifications?title={title}&body={body}&imageUrl={imageUrl}&webLink={webLink}"
                         action = Intent.ACTION_VIEW
 
                     }
                 )
-            ){
+            ) {
                 val notificationViewModel = hiltViewModel<NotificationScreenViewModel>()
                 NotificationScreen(
                     moveBackToHomeScreen = {
                         navController.popBackStack()
                     },
-                    state = notificationViewModel.state.collectAsStateWithLifecycle().value
+                    state = notificationViewModel.state.collectAsStateWithLifecycle().value,
+                    onEvent = notificationViewModel::onEvent
                 )
             }
         }

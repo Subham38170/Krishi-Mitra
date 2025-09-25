@@ -3,6 +3,7 @@ package com.example.krishimitra.presentation.home_screen
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.krishimitra.Constants
 import com.example.krishimitra.domain.ResultState
 import com.example.krishimitra.domain.repo.Repo
@@ -35,6 +36,7 @@ class HomeScreenViewModel @Inject constructor(
         loadGovtSchemes()
         loadKrishiNews()
         getUserData()
+        notificationStatus()
     }
 
     fun onEvent(event: HomeScreenEvent) {
@@ -189,6 +191,18 @@ class HomeScreenViewModel @Inject constructor(
                         }
                         Log.d("WEATHER_DATA", state.value.weatherData.toString())
                     }
+                }
+            }
+        }
+    }
+
+    fun notificationStatus(){
+        viewModelScope.launch {
+            repo.newNotificationStatus().collectLatest { status->
+                _state.update {
+                    it.copy(
+                        notificationStatus = status
+                    )
                 }
             }
         }

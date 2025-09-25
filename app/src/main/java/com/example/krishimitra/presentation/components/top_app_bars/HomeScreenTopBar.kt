@@ -10,7 +10,6 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -26,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -38,7 +38,8 @@ import com.example.krishimitra.presentation.components.LangDropDownMenu
 fun HomeScreenTopBar(
     currentLanguage: String,
     onLanguageChange: (String) -> Unit,
-    onNotificationClick: ()-> Unit
+    onNotificationClick: () -> Unit,
+    notificatonStatus: Boolean
 ) {
     var expandDropDownMenu by remember { mutableStateOf(false) }
     TopAppBar(
@@ -89,10 +90,17 @@ fun HomeScreenTopBar(
                     contentColor = Color.White
                 )
             ) {
-                Icon(
-                    imageVector = Icons.Default.Notifications,
-                    contentDescription = "Notification Icon",
-                )
+                if (notificatonStatus) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.outline_notifications_unread_24),
+                        contentDescription = "Notification Status"
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.Notifications,
+                        contentDescription = "Notification Icon",
+                    )
+                }
             }
         }
 

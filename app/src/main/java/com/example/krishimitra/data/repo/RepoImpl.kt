@@ -28,7 +28,6 @@ import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
-import com.example.krishimitra.domain.notification_model.GlobalNotificationData
 import com.example.krishimitra.domain.repo.Repo
 import com.example.krishimitra.domain.weather_models.DailyWeather
 import com.google.firebase.auth.FirebaseAuth
@@ -37,7 +36,6 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.map
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -386,12 +384,28 @@ class RepoImpl @Inject constructor(
 
     }
 
-    override suspend fun getAllNotifications(): Flow<List<NotificationEntity>>{
-      return notificationDao.getAllNotifications()
+    override suspend fun getAllNotifications(): Flow<List<NotificationEntity>> {
+        return notificationDao.getAllNotifications()
     }
 
     override suspend fun saveNotification(notification: NotificationEntity) {
         notificationDao.insertNotification(notification)
+    }
+
+    override suspend fun clearAllNotification() {
+        notificationDao.clearAll()
+    }
+
+    override suspend fun newNotificationStatus(): Flow<Boolean> {
+        return dataStoreManager.newNotificationStatus()
+    }
+
+    override suspend fun setNewNotificationStatus(status: Boolean) {
+        try {
+            dataStoreManager.setNotificationStatus(status)
+        } catch (e: Exception) {
+
+        }
     }
 
     private fun deleteImagefromCropBazar(imageUrl: String) {

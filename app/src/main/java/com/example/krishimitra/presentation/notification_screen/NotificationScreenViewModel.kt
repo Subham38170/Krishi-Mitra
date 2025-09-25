@@ -39,27 +39,20 @@ class NotificationScreenViewModel @Inject constructor(
         }
     }
 
-    private fun handleNotificationData() {
-
-        val title = saveStateHandle.get<String>("title")
-        val body = saveStateHandle.get<String>("body")
-        val imageUrl = saveStateHandle.get<String>("imageUrl")
-        val webLink = saveStateHandle.get<String>("webLink")
-        _state.update {
-            it.copy(
-                notificationList = listOf(
-                    GlobalNotificationData(
-                        title = title ?: "KrishiMitra",
-                        description = body ?: "Error",
-                        imageUrl = imageUrl,
-                        webLink = webLink
-                    )
-                )
-            )
+    fun onEvent(event: NotificationScreenEvent){
+        when(event){
+            is NotificationScreenEvent.ClearAllNotfication -> {
+                clearAllNotification()
+            }
         }
-
-
     }
+
+    private fun clearAllNotification(){
+        viewModelScope.launch {
+            repo.clearAllNotification()
+        }
+    }
+
 
 
 }

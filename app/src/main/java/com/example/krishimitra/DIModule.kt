@@ -151,7 +151,7 @@ object DIModule {
     fun provideDiseasePredictionRetrofit(): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("https://b21fa475910c.ngrok-free.app/")
+            .baseUrl("https://74b67b519e32.ngrok-free.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

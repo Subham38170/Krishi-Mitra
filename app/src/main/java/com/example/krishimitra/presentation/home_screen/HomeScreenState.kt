@@ -12,5 +12,6 @@ data class HomeScreenState(
     val krishiNewsBannerList: List<BannerModel> = emptyList(),
     val weatherData: List<DailyWeather> = emptyList(),
     val userData: UserDataModel = UserDataModel(),
-    val isWeatherDataLoading: Boolean = false
+    val isWeatherDataLoading: Boolean = false,
+    val notificationStatus: Boolean = false
 )

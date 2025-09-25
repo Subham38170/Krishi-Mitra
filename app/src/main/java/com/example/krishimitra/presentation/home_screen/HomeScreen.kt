@@ -206,7 +206,8 @@ fun HomeScreen(
                 currentLanguage = state.currentLanguage, onLanguageChange = {
                     onEvent(HomeScreenEvent.ChangeLanguage(it))
                 },
-                onNotificationClick = moveToNotificationScreen
+                onNotificationClick = moveToNotificationScreen,
+                notificatonStatus = state.notificationStatus
             )
         },
 

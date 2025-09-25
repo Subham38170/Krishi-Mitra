@@ -91,4 +91,10 @@ interface Repo {
     suspend fun getAllNotifications(): Flow<List<NotificationEntity>>
 
     suspend fun saveNotification(notification: NotificationEntity)
+
+    suspend fun clearAllNotification()
+
+    suspend fun newNotificationStatus(): Flow<Boolean>
+
+    suspend fun setNewNotificationStatus(status: Boolean)
 }

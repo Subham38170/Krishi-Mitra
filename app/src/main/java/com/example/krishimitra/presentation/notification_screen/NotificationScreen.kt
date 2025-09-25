@@ -1,8 +1,13 @@
 package com.example.krishimitra.presentation.notification_screen
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,16 +29,23 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import coil3.compose.rememberAsyncImagePainter
 import com.example.krishimitra.R
@@ -46,8 +58,29 @@ import java.util.Locale
 @Composable
 fun NotificationScreen(
     moveBackToHomeScreen: () -> Unit,
-    state: NotificationScreenState
+    state: NotificationScreenState,
+    onEvent: (NotificationScreenEvent) -> Unit
 ) {
+
+    val context = LocalContext.current
+    val permissinLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { granted ->
+    }
+
+    LaunchedEffect(Unit) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val hasPermission = ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+            if (!hasPermission) {
+                permissinLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
+
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -66,7 +99,20 @@ fun NotificationScreen(
                     containerColor = colorResource(id = R.color.slight_dark_green),
                     navigationIconContentColor = Color.White,
                     titleContentColor = Color.White
-                )
+                ),
+                actions = {
+                    TextButton(
+                        onClick = {
+                            onEvent(NotificationScreenEvent.ClearAllNotfication)
+                        }
+                    ) {
+                        Text(
+                            text = "Clear All",
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                }
             )
         }
     ) { innerPadding ->
@@ -111,6 +157,13 @@ fun NotificationItem(
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
+            Text(
+                text = formatTime(notificationData.timeStamp),
+                fontWeight = FontWeight.Light,
+                modifier = Modifier
+                    .fillMaxWidth(),
+                textAlign = TextAlign.End
+            )
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -120,10 +173,7 @@ fun NotificationItem(
                     text = notificationData.title,
                     fontWeight = FontWeight.Bold
                 )
-                Text(
-                    text = formatTime(notificationData.timeStamp),
-                    fontWeight = FontWeight.Light
-                )
+
             }
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -144,7 +194,6 @@ fun NotificationItem(
     }
 }
 
-@Composable
 fun formatTime(timestamp: Long): String {
     val currentTime = System.currentTimeMillis()
     val difference = currentTime - timestamp
@@ -155,6 +204,7 @@ fun formatTime(timestamp: Long): String {
     val days = hours / 24
 
     return when {
+        seconds < 60 -> "just now"
         minutes < 60 -> "$minutes m ago"
         hours < 24 -> "$hours h ago"
         days < 7 -> "$days d ago"
