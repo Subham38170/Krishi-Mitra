@@ -35,6 +35,7 @@ firebaseStorage = "22.0.1"
 generativeaiVersion = "0.9.0"
 lifecycleRuntimeCompose = "2.9.4"
 firebaseMessaging = "25.0.1"
+uiText = "1.9.2"
 
 
 
@@ -54,6 +55,7 @@ converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref
 firebase-ai = { module = "com.google.firebase:firebase-ai" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 generativeai = { module = "com.google.ai.client.generativeai:generativeai", version.ref = "generativeai" }
+google-firebase-ai = { module = "com.google.firebase:firebase-ai" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidCompiler" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -84,6 +86,7 @@ firebase-storage = { group = "com.google.firebase", name = "firebase-storage", v
 google-generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeaiVersion" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
+androidx-compose-ui-text = { group = "androidx.compose.ui", name = "ui-text", version.ref = "uiText" }
 
 
 

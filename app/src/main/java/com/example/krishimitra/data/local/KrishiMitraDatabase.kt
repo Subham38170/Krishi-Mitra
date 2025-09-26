@@ -23,4 +23,6 @@ abstract class KrishiMitraDatabase : RoomDatabase() {
 
 
     abstract fun notificationDao(): NotificationDao
+
+
 }

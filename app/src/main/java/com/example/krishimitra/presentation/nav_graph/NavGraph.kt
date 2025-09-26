@@ -65,25 +65,25 @@ import com.google.firebase.auth.FirebaseAuth
 @Composable
 fun NavGraph(
     navController: NavHostController = rememberNavController(),
-    activity: Activity,
-    intent: Intent
+    activity: Activity
 ) {
+
 
     val firebaseAuth = FirebaseAuth.getInstance()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
     val scrollBehavior = BottomAppBarDefaults.exitAlwaysScrollBehavior()
 
+    val shouldShowBottomBar =
+        currentDestination?.hierarchy?.any { it.hasRoute(Routes.HomeScreen::class) } == true
+                || currentDestination?.hierarchy?.any { it.hasRoute(Routes.BuySellScreen::class) } == true
+                || currentDestination?.hierarchy?.any { it.hasRoute(Routes.MandiScreen::class) } == true
+                || currentDestination?.hierarchy?.any { it.hasRoute(Routes.ProfileScreen::class) } == true
+
 
     Scaffold(
         bottomBar = {
 
-
-            val shouldShowBottomBar =
-                currentDestination?.hierarchy?.any { it.hasRoute(Routes.HomeScreen::class) } == true
-                        || currentDestination?.hierarchy?.any { it.hasRoute(Routes.BuySellScreen::class) } == true
-                        || currentDestination?.hierarchy?.any { it.hasRoute(Routes.MandiScreen::class) } == true
-                        || currentDestination?.hierarchy?.any { it.hasRoute(Routes.ProfileScreen::class) } == true
 
             if (firebaseAuth.uid != null && shouldShowBottomBar) {
                 AnimatedVisibility(
@@ -106,14 +106,16 @@ fun NavGraph(
             }
         },
         floatingActionButton = {
-            if (navController.currentDestination == Routes.HomeScreen) {
+            if (navController.currentDestination?.hierarchy?.any { it.hasRoute(Routes.HomeScreen::class) } == true) {
 
                 FloatingActionButton(
                     onClick = {
-                        navController.navigate(Routes.AssistantScreen) {
+                        navController.navigate(Routes.AssistantScreen()) {
                             launchSingleTop = true
                         }
-                    }
+                    },
+                    containerColor = colorResource(id = R.color.slight_dark_green),
+                    contentColor = Color.White
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.sharp_support_agent_24),
@@ -166,7 +168,6 @@ fun NavGraph(
                             launchSingleTop = true
                         }
                     },
-                    intent = intent,
                     moveToNotificationScreen = {
                         navController.navigate(Routes.NotificationScreen) {
                             launchSingleTop = true
@@ -242,8 +243,14 @@ fun NavGraph(
             }
             composable<Routes.AssistantScreen> {
                 val assistantViewModel = hiltViewModel<AssistantScreenViewModel>()
+
                 AssistantScreen(
-                    viewModel = assistantViewModel
+                    onEvent = assistantViewModel::onEvent,
+                    state = assistantViewModel.state.collectAsStateWithLifecycle().value,
+                    moveBackToHomeScreen = {
+                        navController.popBackStack()
+                    },
+                    event = assistantViewModel.event
                 )
 
             }

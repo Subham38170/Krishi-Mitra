@@ -11,10 +11,11 @@ import com.example.krishimitra.data.remote.MandiPriceApiService
 import com.example.krishimitra.data.remote.WeatherApiService
 import com.example.krishimitra.data.remote_meidator.WeatherRemoteMediator
 import com.example.krishimitra.data.repo.DataStoreManager
-import com.example.krishimitra.data.repo.NetworkConnectivityObserverImpl
-import com.example.krishimitra.data.repo.RepoImpl
 import com.example.krishimitra.data.repo.LanguageManager
 import com.example.krishimitra.data.repo.LocationManager
+import com.example.krishimitra.data.repo.NetworkConnectivityObserverImpl
+import com.example.krishimitra.data.repo.RepoImpl
+import com.example.krishimitra.data.repo.TextToSpeechManager
 import com.example.krishimitra.domain.repo.NetworkConnectivityObserver
 import com.example.krishimitra.domain.repo.Repo
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -103,6 +104,7 @@ object DIModule {
         weatherApiService: WeatherApiService,
         weatherRemoteMediator: WeatherRemoteMediator,
         notificationDao: NotificationDao,
+        networkConnectivityObserver: NetworkConnectivityObserver,
         @ApplicationContext context: Context
     ): Repo {
         return RepoImpl(
@@ -118,7 +120,8 @@ object DIModule {
             firebaseAuth = firebaseAuth,
             weatherApiService = weatherApiService,
             weatherRemoteMediator = weatherRemoteMediator,
-            notificationDao = notificationDao
+            notificationDao = notificationDao,
+            networkConnectivityObserver = networkConnectivityObserver
         )
     }
 
@@ -151,7 +154,7 @@ object DIModule {
     fun provideDiseasePredictionRetrofit(): Retrofit {
         return Retrofit
             .Builder()
-            .baseUrl("https://74b67b519e32.ngrok-free.app/")
+            .baseUrl("https://7492600e58f7.ngrok-free.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -220,7 +223,7 @@ object DIModule {
     @Singleton
     fun provideNotificationDao(
         krishiMitraDatabase: KrishiMitraDatabase
-    ): NotificationDao{
+    ): NotificationDao {
         return krishiMitraDatabase.notificationDao()
     }
 
@@ -261,7 +264,7 @@ object DIModule {
     @Singleton
     fun provideNetworkConnectivityObserver(
         @ApplicationContext context: Context
-    ): NetworkConnectivityObserver{
+    ): NetworkConnectivityObserver {
         return NetworkConnectivityObserverImpl(
             context = context,
             scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
@@ -269,6 +272,15 @@ object DIModule {
     }
 
 
+    @Singleton
+    @Provides
+    fun provideTextToSpeechManager(
+        @ApplicationContext context: Context
+    ): TextToSpeechManager {
+        return TextToSpeechManager(
+            context = context
+        )
+    }
 
 
 

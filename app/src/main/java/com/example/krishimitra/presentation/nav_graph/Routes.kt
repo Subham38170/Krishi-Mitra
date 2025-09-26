@@ -19,7 +19,6 @@ sealed class Routes {
     @Serializable
     data object MandiScreen : Routes()
 
-
     @Serializable
     data class DiseasePredictionScreen(val imageUri: String?) : Routes()
 

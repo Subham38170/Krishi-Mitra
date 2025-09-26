@@ -97,4 +97,7 @@ interface Repo {
     suspend fun newNotificationStatus(): Flow<Boolean>
 
     suspend fun setNewNotificationStatus(status: Boolean)
+
+    fun networkStatus(): Flow<NetworkStatus>
+
 }

@@ -14,6 +14,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import com.example.krishimitra.data.repo.LanguageManager
@@ -69,8 +70,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavGraph(
                     navController = navController,
-                    activity = this,
-                    intent
+                    activity = this
                 )
             }
         }

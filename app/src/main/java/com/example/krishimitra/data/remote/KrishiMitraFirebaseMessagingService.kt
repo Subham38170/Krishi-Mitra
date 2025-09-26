@@ -30,6 +30,7 @@ class KrishiMitraFirebaseMessagingService : FirebaseMessagingService() {
     lateinit var repo: Repo
 
 
+
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
         Log.v("CloudMessage", "From ${message.from}")
@@ -61,6 +62,7 @@ class KrishiMitraFirebaseMessagingService : FirebaseMessagingService() {
 
 
         if (message.data.isNotEmpty()) {
+
             showGlobalNotification(notificationData)
         }
 
@@ -78,6 +80,9 @@ class KrishiMitraFirebaseMessagingService : FirebaseMessagingService() {
             webLink = notificationData["webLink"]
         )
         GlobalScope.launch(Dispatchers.IO) {
+            repo.setNewNotificationStatus(true)
+        }
+        GlobalScope.launch(Dispatchers.IO){
             repo.saveNotification(entity)
         }
 

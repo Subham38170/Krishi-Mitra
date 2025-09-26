@@ -88,4 +88,11 @@
     <string name="the_predicted_disease_is">The predicted disease is </string>
     <string name="click_photo">Click photo</string>
 
+
+    <string name="just_now">just now</string>
+    <string name="m_ago">m ago</string>
+    <string name="d_ago">days ago</string>
+    <string name="h_ago">h ago</string>
+    <string name="you">You</string>
+    <string name="krishi_dost">Krishi Dost</string>
 </resources>

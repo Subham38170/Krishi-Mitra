@@ -25,6 +25,7 @@ class NotificationScreenViewModel @Inject constructor(
 
     init {
         loadAllNotifications()
+        setNotificationStatus()
     }
 
     private fun loadAllNotifications() {
@@ -44,6 +45,17 @@ class NotificationScreenViewModel @Inject constructor(
             is NotificationScreenEvent.ClearAllNotfication -> {
                 clearAllNotification()
             }
+
+            is NotificationScreenEvent.NotificationStatusUpdate -> {
+                setNotificationStatus()
+            }
+        }
+    }
+
+    private fun setNotificationStatus(
+    ){
+        viewModelScope.launch {
+            repo.setNewNotificationStatus(false)
         }
     }
 

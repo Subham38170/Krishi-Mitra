@@ -87,8 +87,8 @@ fun HomeScreen(
     moveToDiseasePredictionScreen: (Uri?) -> Unit,
     moveToKrishiBazar: () -> Unit,
     moveToNotificationScreen: () -> Unit,
+
     scrollBehavior: BottomAppBarScrollBehavior,
-    intent: Intent
 ) {
 
 

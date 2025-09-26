@@ -4,6 +4,6 @@ import com.example.krishimitra.domain.disease_prediction_model.DiseasePrediction
 
 data class DiseasePredictionScreenState(
     val isLoading: Boolean = false,
-    val response: DiseasePredictionResponse? = null
-
+    val response: DiseasePredictionResponse? = null,
+    val currentLang: String = "hi"
 )

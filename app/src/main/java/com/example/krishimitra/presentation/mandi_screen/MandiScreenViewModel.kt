@@ -1,10 +1,10 @@
 package com.example.krishimitra.presentation.mandi_screen
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.example.krishimitra.data.local.entity.MandiPriceEntity
 import com.example.krishimitra.data.local.json.loadStatesAndDistricts
 import com.example.krishimitra.domain.repo.Repo
@@ -21,23 +21,34 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MandiScreenViewModel @Inject constructor(
-    private val repo: Repo,
-    @ApplicationContext private val context: Context
+    private val repo: Repo, @ApplicationContext private val context: Context
 ) : ViewModel() {
     private val _state = MutableStateFlow(MandiScreenState())
     val state = _state.asStateFlow()
     var pagingData: MutableStateFlow<PagingData<MandiPriceEntity>> =
-        MutableStateFlow<PagingData<MandiPriceEntity>>(PagingData.empty())
+        MutableStateFlow(PagingData.empty())
 
     init {
         getMandiPrices()
         loadStates()
+        checkMandi()
     }
+
+    fun checkMandi(){
+        Log.d("MANDI","Loading")
+
+        viewModelScope.launch {
+            repo.getMandiPrices().collect {
+                Log.d("MANDI",it.toString())
+            }
+        }
+    }
+
 
 
     fun onEvent(event: MandiPriceScreenEvent) {
         when (event) {
-            MandiPriceScreenEvent.onDistrictDeselect -> {
+            is MandiPriceScreenEvent.onDistrictDeselect -> {
                 _state.update { it.copy(district = "") }
                 getMandiPrices(state = state.value.state)
             }
@@ -69,8 +80,8 @@ class MandiScreenViewModel @Inject constructor(
 
             is MandiPriceScreenEvent.loadAllCrops -> {
                 getMandiPrices(
-                    state = if(state.value.state.isNotEmpty()) state.value.state else null,
-                    district = if(state.value.district.isNotEmpty()) state.value.district else null
+                    state = if (state.value.state.isNotEmpty()) state.value.state else null,
+                    district = if (state.value.district.isNotEmpty()) state.value.district else null
                 )
             }
         }
@@ -80,8 +91,7 @@ class MandiScreenViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             _state.update {
                 it.copy(
-                    listOfStates = loadStatesAndDistricts(context).map { it.state }
-                )
+                    listOfStates = loadStatesAndDistricts(context).map { it.state })
             }
         }
     }
@@ -114,10 +124,10 @@ class MandiScreenViewModel @Inject constructor(
                 commodity = commodity,
                 variety = variety,
                 grade = grade
-            ).cachedIn(viewModelScope)
-                .collectLatest { data ->
-                    pagingData.value = data
-                }
+            ).collectLatest { data ->
+                pagingData.update { data }
+
+            }
         }
 
     }

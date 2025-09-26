@@ -1,5 +1,6 @@
 package com.example.krishimitra.presentation.mandi_screen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -53,6 +55,10 @@ fun MandiScreen(
 
     val windowInfo = LocalWindowInfo.current
     val containerWidth = windowInfo.containerSize.width
+
+    LaunchedEffect(true) {
+        Log.d("MANDI_PRICE",mandiPrice.itemCount.toString())
+    }
 
     Scaffold {
 

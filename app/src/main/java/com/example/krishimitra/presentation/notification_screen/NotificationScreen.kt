@@ -34,14 +34,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -68,7 +66,9 @@ fun NotificationScreen(
     ) { granted ->
     }
 
+
     LaunchedEffect(Unit) {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val hasPermission = ContextCompat.checkSelfPermission(
                 context,
@@ -157,13 +157,7 @@ fun NotificationItem(
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Text(
-                text = formatTime(notificationData.timeStamp),
-                fontWeight = FontWeight.Light,
-                modifier = Modifier
-                    .fillMaxWidth(),
-                textAlign = TextAlign.End
-            )
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -190,10 +184,18 @@ fun NotificationItem(
                         .height(200.dp)
                 )
             }
+            Text(
+                text = formatTime(notificationData.timeStamp),
+                fontWeight = FontWeight.Light,
+                modifier = Modifier
+                    .fillMaxWidth(),
+                textAlign = TextAlign.End
+            )
         }
     }
 }
 
+@Composable
 fun formatTime(timestamp: Long): String {
     val currentTime = System.currentTimeMillis()
     val difference = currentTime - timestamp
@@ -204,10 +206,10 @@ fun formatTime(timestamp: Long): String {
     val days = hours / 24
 
     return when {
-        seconds < 60 -> "just now"
-        minutes < 60 -> "$minutes m ago"
-        hours < 24 -> "$hours h ago"
-        days < 7 -> "$days d ago"
+        seconds < 60 -> stringResource(id = R.string.just_now)
+        minutes < 60 -> "$minutes " + stringResource(id = R.string.m_ago)
+        hours < 24 -> "$hours " + stringResource(id = R.string.h_ago)
+        days < 7 -> "$days " + stringResource(id = R.string.d_ago)
         else -> {
             val sdf = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
             sdf.format(Date(timestamp))

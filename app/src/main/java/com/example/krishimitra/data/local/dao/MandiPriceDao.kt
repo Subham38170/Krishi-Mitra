@@ -17,4 +17,7 @@ interface MandiPriceDao {
 
     @Query("DELETE FROM mandi_data")
     suspend fun clearAll()
+
+    @Query("SELECT COUNT(*) FROM mandi_data")
+    suspend fun getRowCount(): Int
 }

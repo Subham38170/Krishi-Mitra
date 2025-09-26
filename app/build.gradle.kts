@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.google.generativeai)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.firebase.messaging)
+    implementation(libs.androidx.compose.ui.text)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -121,7 +122,7 @@ dependencies {
     //Gemini sdk
 
 
-    implementation(libs.firebase.ai)
+    implementation(libs.google.firebase.ai)
     implementation(platform(libs.firebase.bom))
 
 }

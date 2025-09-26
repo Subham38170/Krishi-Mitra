@@ -28,6 +28,8 @@ import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
+import com.example.krishimitra.domain.repo.NetworkConnectivityObserver
+import com.example.krishimitra.domain.repo.NetworkStatus
 import com.example.krishimitra.domain.repo.Repo
 import com.example.krishimitra.domain.weather_models.DailyWeather
 import com.google.firebase.auth.FirebaseAuth
@@ -43,6 +45,7 @@ import java.util.UUID
 import javax.inject.Inject
 
 class RepoImpl @Inject constructor(
+    private val networkConnectivityObserver: NetworkConnectivityObserver,
     private val firestoreDb: FirebaseFirestore,
     private val firebaseStorage: FirebaseStorage,
     private val firebaseAuth: FirebaseAuth,
@@ -104,6 +107,7 @@ class RepoImpl @Inject constructor(
     ): Flow<ResultState<List<MandiPriceDto>>> {
         return callbackFlow {
             trySend(ResultState.Loading)
+
             try {
                 val response = mandiApiService.getMandiPrices(
                     offset = offset,
@@ -118,6 +122,7 @@ class RepoImpl @Inject constructor(
                 Log.d("API_DATA", response.body()?.records.toString())
                 if (response.isSuccessful) {
                     trySend(ResultState.Success(response.body()?.records ?: emptyList()))
+
                 } else {
                     trySend(ResultState.Error("Something went wrong? ${response.message()}"))
                 }
@@ -138,7 +143,6 @@ class RepoImpl @Inject constructor(
         variety: String?,
         grade: String?
     ): Flow<PagingData<MandiPriceEntity>> {
-        val pagingSourceFactory = { localDb.mandiPriceDao().getAllMandiPrices() }
         return Pager(
             config = PagingConfig(pageSize = 20, enablePlaceholders = false),
             remoteMediator = MandiPriceRemoteMediator(
@@ -150,7 +154,9 @@ class RepoImpl @Inject constructor(
                 varietyFilter = variety,
                 commodityFilter = commodity
             ),
-            pagingSourceFactory = pagingSourceFactory
+            pagingSourceFactory = {
+                localDb.mandiPriceDao().getAllMandiPrices()
+            }
 
         ).flow
     }
@@ -406,6 +412,10 @@ class RepoImpl @Inject constructor(
         } catch (e: Exception) {
 
         }
+    }
+
+    override fun networkStatus(): Flow<NetworkStatus> {
+        return networkConnectivityObserver.networkStatus
     }
 
     private fun deleteImagefromCropBazar(imageUrl: String) {
