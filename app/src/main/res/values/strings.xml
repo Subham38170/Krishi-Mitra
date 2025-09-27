@@ -54,7 +54,6 @@
     <string name="search_for_crops">Search for crops</string>\
 
 
-
     <string name="disease_prediction">Disease Prediction</string>
     <string name="crop_recommendataion">Crop Recommendation</string>
     <string name="mandi_price">Mandi Price</string>
@@ -95,4 +94,16 @@
     <string name="h_ago">h ago</string>
     <string name="you">You</string>
     <string name="krishi_dost">Krishi Dost</string>
+    <string name="feedback">Your experience (Feedback)</string>
+
+
+    <string name="feedback_description">What did you like and what should be improved</string>
+    <string name="feedback_improvement">What can be improved ?</string>
+    <string name="feedback_issues">Is the any issues with this app ?</string>
+    <string name="feedback_rating">Rate your experience.</string>
+    <string name="feedback_good">Good</string>
+    <string name="feedback_bad">Bad</string>
+    <string name="feedback_avg">Okay</string>
+    <string name="feedback_empty">Feedback is empty</string>
+    <string name="feedback_select_rating">Select your rating</string>
 </resources>

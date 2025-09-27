@@ -79,4 +79,21 @@
     <string name="here_is_description">यहाँ विवरण छ</string>
     <string name="the_predicted_disease_is">भविष्यवाणी गरिएको रोग हो</string>
     <string name="click_photo">फोटो खिच्नुहोस्</string>
+
+    <string name="just_now">भर्खरै</string>
+    <string name="m_ago">मिनेट अघि</string>
+    <string name="d_ago">दिन अघि</string>
+    <string name="h_ago">घण्टा अघि</string>
+    <string name="you">तपाईं</string>
+    <string name="krishi_dost">कृषि दोस्त</string>
+    <string name="feedback">तपाईंको अनुभव (प्रतिक्रिया)</string>
+    <string name="feedback_description">तपाईंलाई के मन पर्यो र के सुधार गर्नुपर्छ</string>
+    <string name="feedback_improvement">के सुधार गर्न सकिन्छ?</string>
+    <string name="feedback_issues">के यो एपमा कुनै समस्या छ?</string>
+    <string name="feedback_rating">तपाईंको अनुभवलाई रेट गर्नुहोस्।</string>
+    <string name="feedback_good">राम्रो</string>
+    <string name="feedback_bad">नराम्रो</string>
+    <string name="feedback_avg">ठिकै छ</string>
+    <string name="feedback_empty">प्रतिक्रिया खाली छ</string>
+    <string name="feedback_select_rating">आफ्नो रेटिङ चयन गर्नुहोस्</string>
 </resources>

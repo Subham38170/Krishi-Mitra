@@ -1,5 +1,6 @@
 package com.example.krishimitra.domain.farmer_data
 
+
 data class UserDataModel(
     val name: String = "",
     val email: String = "",

@@ -81,4 +81,21 @@
     <string name="the_predicted_disease_is">ପୂର୍ବାନୁମାନ କରାଯାଇଥିବା ରୋଗ ହେଉଛି</string>
     <string name="click_photo">ଫଟୋ ଉଠାନ୍ତୁ</string>
 
+
+    <string name="just_now">ବର୍ତ୍ତମାନ</string>
+    <string name="m_ago">ମି: ପୂର୍ବେ</string>
+    <string name="d_ago">ଦିନ ପୂର୍ବେ</string>
+    <string name="h_ago">ଘ: ପୂର୍ବେ</string>
+    <string name="you">ଆପଣ</string>
+    <string name="krishi_dost">କୃଷି ଦୋସ୍ତ</string>
+    <string name="feedback">ଆପଣଙ୍କ ଅନୁଭୂତି (ମତାମତ)</string>
+    <string name="feedback_description">ଆପଣ କଣ ପସନ୍ଦ କଲେ ଏବଂ କଣ ସୁଧାରିବା ଉଚିତ୍</string>
+    <string name="feedback_improvement">କଣ ସୁଧାରିବା ଯାଇପାରେ?</string>
+    <string name="feedback_issues">ଏହି ଆପରେ କୌଣସି ସମସ୍ୟା ଅଛି କି?</string>
+    <string name="feedback_rating">ଆପଣଙ୍କ ଅନୁଭୂତିକୁ ରେଟ୍ କରନ୍ତୁ।</string>
+    <string name="feedback_good">ଭଲ</string>
+    <string name="feedback_bad">ଖରାପ</string>
+    <string name="feedback_avg">ଠିକ୍ ଅଛି</string>
+    <string name="feedback_empty">ମତାମତ ଖାଲି</string>
+    <string name="feedback_select_rating">ଆପଣଙ୍କ ରେଟିଂ ବାଛନ୍ତୁ</string>
 </resources>

@@ -1,6 +1,13 @@
 package com.example.krishimitra.presentation.mandi_screen
 
+import android.content.Intent
+import android.os.Bundle
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,7 +23,12 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -25,6 +37,7 @@ import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import coil3.ImageLoader
@@ -32,8 +45,8 @@ import coil3.disk.DiskCache
 import coil3.disk.directory
 import com.example.krishimitra.R
 import com.example.krishimitra.data.local.entity.MandiPriceEntity
-import com.example.krishimitra.data.local.json.getMandiCropImageUrl
 import com.example.krishimitra.data.mappers.toDto
+import com.example.krishimitra.domain.repo.NetworkStatus
 import com.example.krishimitra.presentation.buy_sell_screen.CustomizedSearchBar
 import com.example.krishimitra.presentation.components.CustomizedInputChip
 import com.example.krishimitra.presentation.components.MandiPriceItem
@@ -48,6 +61,64 @@ fun MandiScreen(
 ) {
 
     val context = LocalContext.current
+
+
+    var recognizedText by remember { mutableStateOf("") }
+    var isListening by remember { mutableStateOf(false) }
+
+
+    val speechRecognizer = remember {
+        SpeechRecognizer.createSpeechRecognizer(context)
+    }
+    val listener = object : RecognitionListener {
+        override fun onResults(results: Bundle?) {
+            val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+            if (!matches.isNullOrEmpty()) {
+                recognizedText = matches[0]
+                onEvent(MandiPriceScreenEvent.onSearch(recognizedText))
+            }
+            isListening = false
+        }
+
+        override fun onReadyForSpeech(params: Bundle?) {
+            isListening = true
+        }
+
+        override fun onBeginningOfSpeech() {}
+
+        override fun onRmsChanged(rmsdB: Float) {
+        }
+
+        override fun onBufferReceived(buffer: ByteArray?) {}
+        override fun onEndOfSpeech() {
+            isListening = false
+        }
+
+        override fun onError(errorCode: Int) {
+            Toast.makeText(context, "Something went wrong..", Toast.LENGTH_LONG).show()
+            isListening = false
+        }
+
+        override fun onPartialResults(partialResults: Bundle?) {}
+        override fun onEvent(eventType: Int, params: Bundle?) {}
+    }
+
+
+    DisposableEffect(Unit) {
+        speechRecognizer.setRecognitionListener(listener)
+        onDispose { speechRecognizer.destroy() }
+    }
+
+    val micPermissionLauncher = rememberLauncherForActivityResult(
+        contract = androidx.activity.result.contract.ActivityResultContracts.RequestPermission(),
+        onResult = { isGranted ->
+        }
+    )
+    val micPermissionGranted = ContextCompat.checkSelfPermission(
+        context,
+        android.Manifest.permission.RECORD_AUDIO
+    ) == android.content.pm.PackageManager.PERMISSION_GRANTED
+
     val imageLoader = ImageLoader.Builder(context).diskCache {
         DiskCache.Builder().directory(context.cacheDir.resolve("offline_images"))
             .maxSizeBytes(100L * 1024L * 1024).build()
@@ -57,7 +128,7 @@ fun MandiScreen(
     val containerWidth = windowInfo.containerSize.width
 
     LaunchedEffect(true) {
-        Log.d("MANDI_PRICE",mandiPrice.itemCount.toString())
+        Log.d("MANDI_PRICE", mandiPrice.itemCount.toString())
     }
 
     Scaffold {
@@ -71,13 +142,38 @@ fun MandiScreen(
         ) {
 
             CustomizedSearchBar(
-                onSearch = {
-                onEvent(MandiPriceScreenEvent.onSearch(it))
-            }, onEmptySearch = {
-                onEvent(MandiPriceScreenEvent.loadAllCrops)
-            }, onMicClick = {
 
-            }, placeHolder = stringResource(id = R.string.search_crops)
+                searchValue = recognizedText,
+                onSearch = {
+                    onEvent(MandiPriceScreenEvent.onSearch(it))
+                }, onEmptySearch = {
+                    onEvent(MandiPriceScreenEvent.loadAllCrops)
+                }, onMicClick = {
+                    if (state.networkStatus is NetworkStatus.Disconnected) {
+                        Toast.makeText(context, "Connect to internet", Toast.LENGTH_SHORT).show()
+                    } else {
+                        if (!micPermissionGranted) {
+                            micPermissionLauncher.launch(android.Manifest.permission.RECORD_AUDIO)
+
+                        } else {
+                            val intent =
+                                Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                                    putExtra(
+                                        RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                                    )
+                                    putExtra(
+                                        RecognizerIntent.EXTRA_LANGUAGE,
+                                        "en-IN"
+                                    )
+                                    putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now...")
+                                }
+                            speechRecognizer.startListening(intent)
+
+                        }
+                    }
+
+                }, placeHolder = stringResource(id = R.string.search_crops)
 
             )
 

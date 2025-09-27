@@ -81,5 +81,22 @@
     <string name="the_predicted_disease_is">പ്രവചിക്കപ്പെട്ട രോഗം</string>
     <string name="click_photo">ചിത്രം എടുക്കുക</string>
 
+
+    <string name="just_now">ഇപ്പോൾ</string>
+    <string name="m_ago">മിനിറ്റ് മുമ്പ്</string>
+    <string name="d_ago">ദിവസങ്ങൾക്ക് മുമ്പ്</string>
+    <string name="h_ago">മണിക്കൂർ മുമ്പ്</string>
+    <string name="you">നിങ്ങൾ</string>
+    <string name="krishi_dost">കൃഷി ദോസ്ത്</string>
+    <string name="feedback">നിങ്ങളുടെ അനുഭവം (ഫീഡ്‌ബാക്ക്)</string>
+    <string name="feedback_description">നിങ്ങൾക്കിഷ്ടപ്പെട്ടതും മെച്ചപ്പെടുത്തേണ്ടതും</string>
+    <string name="feedback_improvement">എന്താണ് മെച്ചപ്പെടുത്താൻ കഴിയുക?</string>
+    <string name="feedback_issues">ഈ ആപ്പിൽ എന്തെങ്കിലും പ്രശ്നങ്ങളുണ്ടോ?</string>
+    <string name="feedback_rating">നിങ്ങളുടെ അനുഭവത്തെ റേറ്റുചെയ്യുക.</string>
+    <string name="feedback_good">നല്ലത്</string>
+    <string name="feedback_bad">മോശം</string>
+    <string name="feedback_avg">ശരി</string>
+    <string name="feedback_empty">ഫീഡ്ബാക്ക് ശൂന്യമാണ്</string>
+    <string name="feedback_select_rating">നിങ്ങളുടെ റേറ്റിംഗ് തിരഞ്ഞെടുക്കുക</string>
 </resources>
 

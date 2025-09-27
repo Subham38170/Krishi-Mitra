@@ -80,4 +80,21 @@
     <string name="here_is_description">अत्र विवरणम् अस्ति</string>
     <string name="the_predicted_disease_is">प्राक्कथितः रोगः अस्ति</string>
     <string name="click_photo">चित्रं निष्पीडयतु</string>
+
+    <string name="just_now">अधुना एव</string>
+    <string name="m_ago">निमेषाः प्राक्</string>
+    <string name="d_ago">दिवसाः प्राक्</string>
+    <string name="h_ago">होराः प्राक्</string>
+    <string name="you">भवान्</string>
+    <string name="krishi_dost">कृषि मित्रम्</string>
+    <string name="feedback">भवतः अनुभवः (प्रतिपुष्टिः)</string>
+    <string name="feedback_description">भवान् किम् इष्टवान्, किञ्च संस्करणीयम्</string>
+    <string name="feedback_improvement">किम् संस्करणीयम्?</string>
+    <string name="feedback_issues">किम् अत्र कोऽपि दोषः अस्ति?</string>
+    <string name="feedback_rating">भवतः अनुभवं मूल्याङ्कनं करोतु।</string>
+    <string name="feedback_good">उत्तमम्</string>
+    <string name="feedback_bad">खराबम्</string>
+    <string name="feedback_avg">सामान्यम्</string>
+    <string name="feedback_empty">प्रतिपुष्टिः रिक्ता अस्ति</string>
+    <string name="feedback_select_rating">भवतः मूल्याङ्कनं चयनं करोतु</string>
 </resources>

@@ -81,4 +81,20 @@
     <string name="click_photo">تصویر کھینچیں</string>
 
 
+    <string name="just_now">بس ابھی</string>
+    <string name="m_ago">منٹ پہلے</string>
+    <string name="d_ago">دن پہلے</string>
+    <string name="h_ago">گھنٹے پہلے</string>
+    <string name="you">آپ</string>
+    <string name="krishi_dost">کرشی دوست</string>
+    <string name="feedback">آپ کا تجربہ (رائے)</string>
+    <string name="feedback_description">آپ کو کیا پسند آیا اور کس چیز کو بہتر بنایا جانا چاہیے</string>
+    <string name="feedback_improvement">کس چیز کو بہتر بنایا جا سکتا ہے؟</string>
+    <string name="feedback_issues">کیا اس ایپ میں کوئی مسئلہ ہے؟</string>
+    <string name="feedback_rating">اپنے تجربے کو ریٹ کریں۔</string>
+    <string name="feedback_good">اچھا</string>
+    <string name="feedback_bad">برا</string>
+    <string name="feedback_avg">ٹھیک</string>
+    <string name="feedback_empty">رائے خالی ہے</string>
+    <string name="feedback_select_rating">اپنی ریٹنگ منتخب کریں</string>
 </resources>

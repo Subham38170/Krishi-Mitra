@@ -80,4 +80,21 @@
     <string name="the_predicted_disease_is">అంచనా వేయబడిన వ్యాధి</string>
     <string name="click_photo">ఫోటో తీయండి</string>
 
+
+    <string name="just_now">ఇప్పుడే</string>
+    <string name="m_ago">ని. క్రితం</string>
+    <string name="d_ago">రోజుల క్రితం</string>
+    <string name="h_ago">గం. క్రితం</string>
+    <string name="you">మీరు</string>
+    <string name="krishi_dost">కృషి దోస్త్</string>
+    <string name="feedback">మీ అనుభవం (అభిప్రాయం)</string>
+    <string name="feedback_description">మీకు ఏమి నచ్చింది మరియు ఏమి మెరుగుపరచాలి</string>
+    <string name="feedback_improvement">ఏమి మెరుగుపరచవచ్చు?</string>
+    <string name="feedback_issues">ఈ యాప్‌లో ఏమైనా సమస్యలు ఉన్నాయా?</string>
+    <string name="feedback_rating">మీ అనుభవాన్ని రేట్ చేయండి.</string>
+    <string name="feedback_good">మంచి</string>
+    <string name="feedback_bad">చెడు</string>
+    <string name="feedback_avg">ఫర్వాలేదు</string>
+    <string name="feedback_empty">అభిప్రాయం ఖాళీగా ఉంది</string>
+    <string name="feedback_select_rating">మీ రేటింగ్‌ను ఎంచుకోండి</string>
 </resources>

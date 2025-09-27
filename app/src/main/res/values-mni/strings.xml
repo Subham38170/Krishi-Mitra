@@ -80,4 +80,21 @@
     <string name="the_predicted_disease_is">দ প্রিডিক্টেড ডিজিজ ইজ</string>
     <string name="click_photo">ক্লিক ফটো</string>
 
+
+    <string name="just_now">ঙসিদগী</string>
+    <string name="m_ago">মিনিট মমাঙ</string>
+    <string name="d_ago">নুমিৎ মমাঙ</string>
+    <string name="h_ago">পুং মমাঙ</string>
+    <string name="you">নখোঙ</string>
+    <string name="krishi_dost">কৃষি দোস্ত</string>
+    <string name="feedback">নখোঙগী অহনবা (ফীদবেক)</string>
+    <string name="feedback_description">নখোঙ কৈন লৌবদা ফৈ আর কৈন ফজাগদৌরিব</string>
+    <string name="feedback_improvement">কৈন ফজাগদৌরিব?</string>
+    <string name="feedback_issues">অসিদ লিতৈবদা সমস্যা অমা লৈব্রা?</string>
+    <string name="feedback_rating">নখোঙগী অহনবা রেট তৌবীয়ু।</string>
+    <string name="feedback_good">ফৈ</string>
+    <string name="feedback_bad">ফত্ত</string>
+    <string name="feedback_avg">য়াম নত্তে</string>
+    <string name="feedback_empty">ফীদবেক খালী ওই</string>
+    <string name="feedback_select_rating">নখোঙগী রেটিং খনবীয়ু</string>
 </resources>

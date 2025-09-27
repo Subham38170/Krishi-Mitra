@@ -140,9 +140,10 @@ fun CustomizedSearchBar(
     onSearch: (String) -> Unit,
     onMicClick: () -> Unit,
     placeHolder: String,
-    onEmptySearch: () -> Unit
+    onEmptySearch: () -> Unit,
+    searchValue: String = ""
 ) {
-    var search by rememberSaveable { mutableStateOf("") }
+    var search by rememberSaveable { mutableStateOf(searchValue) }
 
     Row(
         modifier = Modifier

@@ -32,18 +32,30 @@ class MandiScreenViewModel @Inject constructor(
         getMandiPrices()
         loadStates()
         checkMandi()
+        observeNetworkStatus()
     }
 
-    fun checkMandi(){
-        Log.d("MANDI","Loading")
-
-        viewModelScope.launch {
-            repo.getMandiPrices().collect {
-                Log.d("MANDI",it.toString())
+    fun observeNetworkStatus() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.networkStatus().collectLatest { status ->
+                _state.update {
+                    it.copy(
+                        networkStatus = status
+                    )
+                }
             }
         }
     }
 
+    fun checkMandi() {
+        Log.d("MANDI", "Loading")
+
+        viewModelScope.launch {
+            repo.getMandiPrices().collect {
+                Log.d("MANDI", it.toString())
+            }
+        }
+    }
 
 
     fun onEvent(event: MandiPriceScreenEvent) {

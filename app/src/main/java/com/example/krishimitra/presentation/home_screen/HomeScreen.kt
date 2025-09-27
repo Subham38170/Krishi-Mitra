@@ -191,7 +191,7 @@ fun HomeScreen(
                         }
                     }) {
                     Text(
-                        text = "Click Photo"
+                        text = stringResource(id = R.string.click_photo)
                     )
                 }
             }

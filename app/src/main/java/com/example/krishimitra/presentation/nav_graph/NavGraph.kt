@@ -21,7 +21,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -52,6 +55,8 @@ import com.example.krishimitra.presentation.community_screen.ComunityMainScreen
 import com.example.krishimitra.presentation.community_screen.StateCommunityScreen
 import com.example.krishimitra.presentation.disease_prediction_screen.DiseasePredictionScreen
 import com.example.krishimitra.presentation.disease_prediction_screen.DiseasePredictionViewModel
+import com.example.krishimitra.presentation.feedback_screen.FeedbackScreen
+import com.example.krishimitra.presentation.feedback_screen.FeedbackScreenViewModel
 import com.example.krishimitra.presentation.home_screen.HomeScreen
 import com.example.krishimitra.presentation.home_screen.HomeScreenViewModel
 import com.example.krishimitra.presentation.mandi_screen.MandiScreen
@@ -59,6 +64,7 @@ import com.example.krishimitra.presentation.mandi_screen.MandiScreenViewModel
 import com.example.krishimitra.presentation.notification_screen.NotificationScreen
 import com.example.krishimitra.presentation.notification_screen.NotificationScreenViewModel
 import com.example.krishimitra.presentation.profile_screen.ProfileScreen
+import com.example.krishimitra.presentation.profile_screen.ProfileScreenViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -81,7 +87,10 @@ fun NavGraph(
                 || currentDestination?.hierarchy?.any { it.hasRoute(Routes.ProfileScreen::class) } == true
 
 
+    val snackbarHostState = remember { SnackbarHostState() }
+
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         bottomBar = {
 
 
@@ -177,6 +186,7 @@ fun NavGraph(
 
             }
             composable<Routes.ProfileScreen> {
+                val profileScreenViewModel = hiltViewModel<ProfileScreenViewModel>()
                 ProfileScreen(
                     logOut = {
                         firebaseAuth.signOut()
@@ -184,6 +194,10 @@ fun NavGraph(
                             popUpTo(0) { saveState = true }
                             launchSingleTop = true
                         }
+                    },
+                    state = profileScreenViewModel.state.collectAsStateWithLifecycle().value,
+                    moveToFeedbackScreen = {
+                        navController.navigate(Routes.FeedbackScreen)
                     }
                 )
             }
@@ -272,6 +286,18 @@ fun NavGraph(
                     },
                     state = notificationViewModel.state.collectAsStateWithLifecycle().value,
                     onEvent = notificationViewModel::onEvent
+                )
+            }
+            composable<Routes.FeedbackScreen> {
+                val feedbackScreenViewModel = hiltViewModel<FeedbackScreenViewModel>()
+                FeedbackScreen(
+                    state = feedbackScreenViewModel.state.collectAsStateWithLifecycle().value,
+                    onEvent = feedbackScreenViewModel::onEvent,
+                    event = feedbackScreenViewModel.event,
+                    snackbarHostState = snackbarHostState,
+                    moveBackToProfileScreen = {
+                        navController.popBackStack()
+                    }
                 )
             }
         }

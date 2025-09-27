@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -22,7 +21,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,7 +33,6 @@ import com.example.krishimitra.Constants
 import com.example.krishimitra.R
 import com.example.krishimitra.domain.farmer_data.UserDataModel
 import com.example.krishimitra.presentation.components.LangDropDownMenu
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,7 +44,7 @@ fun AuthScreen(
     signUp: (UserDataModel) -> Unit,
     moveToHomeScreen: () -> Unit,
     getLocation: () -> Unit,
-    onEnableLocationPermission: ()-> Unit,
+    onEnableLocationPermission: () -> Unit,
     errorFlow: SharedFlow<String>
 ) {
 

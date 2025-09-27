@@ -81,4 +81,21 @@
     <string name="the_predicted_disease_is">अंदाज केलेला रोग आहे</string>
     <string name="click_photo">फोटो काढा</string>
 
+
+    <string name="just_now">आत्ताच</string>
+    <string name="m_ago">मि. पूर्वी</string>
+    <string name="d_ago">दिवसांपूर्वी</string>
+    <string name="h_ago">तासांपूर्वी</string>
+    <string name="you">तुम्ही</string>
+    <string name="krishi_dost">कृषी दोस्त</string>
+    <string name="feedback">तुमचा अनुभव (अभिप्राय)</string>
+    <string name="feedback_description">तुम्हाला काय आवडले आणि काय सुधारले पाहिजे</string>
+    <string name="feedback_improvement">काय सुधारले जाऊ शकते?</string>
+    <string name="feedback_issues">या ॲपमध्ये काही समस्या आहे का?</string>
+    <string name="feedback_rating">तुमच्या अनुभवाला रेट करा.</string>
+    <string name="feedback_good">चांगला</string>
+    <string name="feedback_bad">वाईट</string>
+    <string name="feedback_avg">ठीक</string>
+    <string name="feedback_empty">अभिप्राय रिकामा आहे</string>
+    <string name="feedback_select_rating">तुमचे रेटिंग निवडा</string>
 </resources>

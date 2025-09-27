@@ -25,6 +25,7 @@ import com.example.krishimitra.domain.ResultState
 import com.example.krishimitra.domain.crops_model.CropModel
 import com.example.krishimitra.domain.disease_prediction_model.DiseasePredictionResponse
 import com.example.krishimitra.domain.farmer_data.UserDataModel
+import com.example.krishimitra.domain.feedback_model.FeedbackData
 import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
@@ -416,6 +417,27 @@ class RepoImpl @Inject constructor(
 
     override fun networkStatus(): Flow<NetworkStatus> {
         return networkConnectivityObserver.networkStatus
+    }
+
+    override suspend fun sendFeedback(feedbackData: FeedbackData): Flow<ResultState<Boolean>> {
+        return callbackFlow {
+            trySend(ResultState.Loading)
+            try {
+
+                firestoreDb.collection(FirebaseConstants.USER_FEEDBACK)
+                    .document()
+                    .set(feedbackData.copy(uid = firebaseAuth.uid?: "Unknown"))
+                    .addOnSuccessListener{
+                        trySend(ResultState.Success(true))
+                    }
+                    .addOnFailureListener {
+                        trySend(ResultState.Error(it.message.toString()))
+                    }
+            } catch (e: Exception) {
+                trySend(ResultState.Error(e.message.toString()))
+            }
+            awaitClose { close() }
+        }
     }
 
     private fun deleteImagefromCropBazar(imageUrl: String) {

@@ -1,5 +1,6 @@
 package com.example.krishimitra.presentation.nav_graph
 
+import com.example.krishimitra.domain.farmer_data.UserDataModel
 import kotlinx.serialization.Serializable
 
 sealed class Routes {
@@ -37,5 +38,9 @@ sealed class Routes {
 
 
     @Serializable
-    object NotificationScreen: Routes()
+    object NotificationScreen : Routes()
+
+
+    @Serializable
+    data object FeedbackScreen : Routes()
 }

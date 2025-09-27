@@ -80,5 +80,21 @@
     <string name="the_predicted_disease_is">ਅਨੁਮਾਨਿਤ ਰੋਗ ਹੈ</string>
     <string name="click_photo">ਫੋਟੋ ਖਿੱਚੋ</string>
 
+    <string name="just_now">ਬੱਸ ਹੁਣੇ</string>
+    <string name="m_ago">ਮਿੰਟ ਪਹਿਲਾਂ</string>
+    <string name="d_ago">ਦਿਨ ਪਹਿਲਾਂ</string>
+    <string name="h_ago">ਘੰਟੇ ਪਹਿਲਾਂ</string>
+    <string name="you">ਤੁਸੀਂ</string>
+    <string name="krishi_dost">ਕ੍ਰਿਸ਼ੀ ਦੋਸਤ</string>
+    <string name="feedback">ਤੁਹਾਡਾ ਅਨੁਭਵ (ਫੀਡਬੈਕ)</string>
+    <string name="feedback_description">ਤੁਹਾਨੂੰ ਕੀ ਪਸੰਦ ਆਇਆ ਅਤੇ ਕੀ ਸੁਧਾਰਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ</string>
+    <string name="feedback_improvement">ਕੀ ਸੁਧਾਰਿਆ ਜਾ ਸਕਦਾ ਹੈ?</string>
+    <string name="feedback_issues">ਕੀ ਇਸ ਐਪ ਨਾਲ ਕੋਈ ਸਮੱਸਿਆ ਹੈ?</string>
+    <string name="feedback_rating">ਆਪਣੇ ਅਨੁਭਵ ਨੂੰ ਰੇਟ ਕਰੋ।</string>
+    <string name="feedback_good">ਚੰਗਾ</string>
+    <string name="feedback_bad">ਮਾੜਾ</string>
+    <string name="feedback_avg">ਠੀਕ ਹੈ</string>
+    <string name="feedback_empty">ਫੀਡਬੈਕ ਖਾਲੀ ਹੈ</string>
+    <string name="feedback_select_rating">ਆਪਣੀ ਰੇਟਿੰਗ ਚੁਣੋ</string>
 
 </resources>

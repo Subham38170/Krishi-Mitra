@@ -33,8 +33,16 @@ class DataStoreManager @Inject constructor(
     suspend fun storeUserData(
         userData: UserDataModel
     ) {
-        context.dataStore.edit {
-
+        context.dataStore.edit {prefs->
+            prefs[USER_NAME] = userData.name
+            prefs[USER_STATE] = userData.state
+            prefs[USER_MOBILE] = userData.mobileNo
+            prefs[USER_EMAIL] = userData.email
+            prefs[USER_PINCODE] = userData.pinCode
+            prefs[USER_VILLAGE] = userData.village
+            prefs[USER_LATITUDE] = userData.latitude
+            prefs[USER_LONGITUDE] = userData.longitude
+            prefs[USER_DISTRICT] = userData.district
         }
     }
 

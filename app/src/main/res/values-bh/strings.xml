@@ -82,4 +82,21 @@
     <string name="the_predicted_disease_is">पूर्वानुमान कइल गइल रोग बा</string>
     <string name="click_photo">फोटो खींचीं</string>
 
+
+    <string name="just_now">एहिजे</string>
+    <string name="m_ago">मि. पहिले</string>
+    <string name="d_ago">दिन पहिले</string>
+    <string name="h_ago">घं. पहिले</string>
+    <string name="you">रउँ</string>
+    <string name="krishi_dost">क्रिसि दोस्त</string>
+    <string name="feedback">आपन अनुभव (फीडबैक)</string>
+    <string name="feedback_description">काह रउँ पसन्द कइल आ काह सुधारे के चाहीं</string>
+    <string name="feedback_improvement">काह सुधारे जा सकत बा?</string>
+    <string name="feedback_issues">काह एह एप में कवनो समस्या बा?</string>
+    <string name="feedback_rating">आपन अनुभव के रेट करीं।</string>
+    <string name="feedback_good">नीक</string>
+    <string name="feedback_bad">खराब</string>
+    <string name="feedback_avg">ठीक बा</string>
+    <string name="feedback_empty">फीडबैक खाली बा</string>
+    <string name="feedback_select_rating">आपन रेटिंग चुनीं</string>
 </resources>

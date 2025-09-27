@@ -9,10 +9,10 @@ import com.example.krishimitra.domain.ResultState
 import com.example.krishimitra.domain.crops_model.CropModel
 import com.example.krishimitra.domain.disease_prediction_model.DiseasePredictionResponse
 import com.example.krishimitra.domain.farmer_data.UserDataModel
+import com.example.krishimitra.domain.feedback_model.FeedbackData
 import com.example.krishimitra.domain.govt_scheme_slider.BannerModel
 import com.example.krishimitra.domain.location_model.Location
 import com.example.krishimitra.domain.mandi_data_models.MandiPriceDto
-import com.example.krishimitra.domain.notification_model.GlobalNotificationData
 import com.example.krishimitra.domain.weather_models.DailyWeather
 import kotlinx.coroutines.flow.Flow
 
@@ -99,5 +99,7 @@ interface Repo {
     suspend fun setNewNotificationStatus(status: Boolean)
 
     fun networkStatus(): Flow<NetworkStatus>
+
+    suspend fun sendFeedback(feedbackData: FeedbackData): Flow<ResultState<Boolean>>
 
 }

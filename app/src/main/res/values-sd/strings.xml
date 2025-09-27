@@ -81,4 +81,21 @@
     <string name="the_predicted_disease_is">اڳڪٿي ڪيل بيماري آهي</string>
     <string name="click_photo">تصوير ڪلڪ ڪريو</string>
 
+
+    <string name="just_now">هاڻي</string>
+    <string name="m_ago">منٽ اڳ</string>
+    <string name="d_ago">ڏينهن اڳ</string>
+    <string name="h_ago">ڪلاڪ اڳ</string>
+    <string name="you">اوهان</string>
+    <string name="krishi_dost">ڪرشي دوست</string>
+    <string name="feedback">اوهان جو تجربو (راءِ)</string>
+    <string name="feedback_description">اوهان کي ڇا پسند آيو ۽ ڇا بهتر ڪرڻ گهرجي</string>
+    <string name="feedback_improvement">ڇا بهتر ڪري سگهجي ٿو؟</string>
+    <string name="feedback_issues">ڇا هن ايپ ۾ ڪيئي مسئلا آهن؟</string>
+    <string name="feedback_rating">اوهان جي تجربي کي ريٽ ڪيو.</string>
+    <string name="feedback_good">سٺو</string>
+    <string name="feedback_bad">خراب</string>
+    <string name="feedback_avg">ٺيڪ آهي</string>
+    <string name="feedback_empty">راءِ خالي آهي</string>
+    <string name="feedback_select_rating">پنهنجي ريٽنگ چونڊيو</string>
 </resources>

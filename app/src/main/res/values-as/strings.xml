@@ -79,4 +79,21 @@
     <string name="here_is_description">ইয়াত বিৱৰণ আছে</string>
     <string name="the_predicted_disease_is">ভৱিষ্যতবাণী কৰা ৰোগটো হৈছে</string>
     <string name="click_photo">ছবি উঠাওক</string>
+
+    <string name="just_now">এইমাত্ৰ</string>
+    <string name="m_ago">মি: আগতে</string>
+    <string name="d_ago">দিন আগতে</string>
+    <string name="h_ago">ঘ: আগতে</string>
+    <string name="you">আপুনি</string>
+    <string name="krishi_dost">কৃষি দোস্ত</string>
+    <string name="feedback">আপোনাৰ অভিজ্ঞতা (মতামত)</string>
+    <string name="feedback_description">আপুনি কি ভাল পালে আৰু কি উন্নত কৰিব লাগে</string>
+    <string name="feedback_improvement">কি উন্নত কৰিব পাৰি?</string>
+    <string name="feedback_issues">এই এপটোত কিবা সমস্যা আছেনে?</string>
+    <string name="feedback_rating">আপোনাৰ অভিজ্ঞতা ৰেটিং কৰক।</string>
+    <string name="feedback_good">ভাল</string>
+    <string name="feedback_bad">বেয়া</string>
+    <string name="feedback_avg">ঠিক আছে</string>
+    <string name="feedback_empty">মতামত খালী</string>
+    <string name="feedback_select_rating">আপোনাৰ ৰেটিং বাছনি কৰক</string>
 </resources>

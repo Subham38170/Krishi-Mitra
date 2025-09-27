@@ -82,4 +82,21 @@
     <string name="the_predicted_disease_is">پَرناوَن بؠماری چھِ</string>
     <string name="click_photo">تصویر کلک کریو</string>
 
+
+    <string name="just_now">کَنَنٕے</string>
+    <string name="m_ago">مِنٹ کَن</string>
+    <string name="d_ago">دۄہَن کَن</string>
+    <string name="h_ago">گَنٹَن کَن</string>
+    <string name="you">تُہؠ</string>
+    <string name="krishi_dost">کِرشِی دوٗست</string>
+    <string name="feedback">تۄہُنٛد تَجربہ (فِیڈبیک)</string>
+    <string name="feedback_description">کیاہ تۄہؠنٛدو پسند چھُ تہٕ کیاہ سُدھارنہٕ یِوان</string>
+    <string name="feedback_improvement">کیاہ سُدھارنہٕ یِوان؟</string>
+    <string name="feedback_issues">چھُ اَتھ ایپَس مَنٛز کانہہ مُشکل؟</string>
+    <string name="feedback_rating">تۄہُنٛد تَجربَس ریٹ کٔرِو۔</string>
+    <string name="feedback_good">سۄکھ</string>
+    <string name="feedback_bad">خراب</string>
+    <string name="feedback_avg">ٹھیک</string>
+    <string name="feedback_empty">فِیڈبیک چھُ خالی</string>
+    <string name="feedback_select_rating">تۄہُنٛد ریٹنگ چُنو</string>
 </resources>

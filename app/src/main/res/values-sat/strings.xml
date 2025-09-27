@@ -80,4 +80,20 @@
     <string name="the_predicted_disease_is">ᱯᱨᱤᱰᱤᱠᱴᱮᱰ ᱰᱤᱡᱤᱡ ᱫᱚ</string>
     <string name="click_photo">ᱯᱷᱚᱴᱚ ᱠᱞᱤᱠ ᱢᱮ</string>
 
+    <string name="just_now">ᱱᱤᱛᱚᱜ ᱜᱮ</string>
+    <string name="m_ago">ᱢᱤᱱᱤᱴ ᱢᱟᱲᱟᱝ</string>
+    <string name="d_ago">ᱫᱤᱱ ᱢᱟᱲᱟᱝ</string>
+    <string name="h_ago">ᱜᱷᱚᱱᱴᱟ ᱢᱟᱲᱟᱝ</string>
+    <string name="you">ᱟᱢ</string>
+    <string name="krishi_dost">ᱠᱨᱤᱥᱤ ᱫᱳᱥᱛ</string>
+    <string name="feedback">ᱟᱢᱟᱜ ᱟᱱᱩᱵᱷᱚᱵ (ᱯᱷᱤᱰᱵᱮᱠ)</string>
+    <string name="feedback_description">ᱪᱮᱫ ᱟᱢᱮᱢ ᱠᱩᱥᱤᱭᱟᱫᱟ ᱟᱨ ᱪᱮᱫ ᱫᱚ ᱵᱮᱥ ᱦᱩᱭᱩᱜ ᱞᱟᱹᱠᱛᱤᱭᱟ</string>
+    <string name="feedback_improvement">ᱪᱮᱫ ᱵᱮᱥ ᱦᱩᱭᱩᱜ ᱫᱟᱲᱮᱭᱟᱜᱼᱟ?</string>
+    <string name="feedback_issues">ᱱᱚᱣᱟ ᱮᱯ ᱨᱮ ᱪᱮᱫ ᱮᱴᱠᱮᱴᱚᱬᱮ ᱢᱮᱱᱟᱜᱼᱟ?</string>
+    <string name="feedback_rating">ᱟᱢᱟᱜ ᱟᱱᱩᱵᱷᱚᱵ ᱨᱮᱴ ᱢᱮ᱾</string>
+    <string name="feedback_good">ᱵᱷᱟᱹᱜᱤ</string>
+    <string name="feedback_bad">ᱵᱮᱥ ᱵᱟᱝ</string>
+    <string name="feedback_avg">ᱵᱮᱥ ᱜᱮ</string>
+    <string name="feedback_empty">ᱯᱷᱤᱰᱵᱮᱠ ᱫᱚ ᱵᱟᱝ ᱢᱮᱱᱟᱜᱼᱟ</string>
+    <string name="feedback_select_rating">ᱟᱢᱟᱜ ᱨᱮᱴᱤᱝ ᱵᱟᱪᱷᱟᱣ ᱢᱮ</string>
 </resources>

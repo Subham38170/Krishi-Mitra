@@ -80,4 +80,21 @@
     <string name="here_is_description">இங்கே விளக்கம் உள்ளது</string>
     <string name="the_predicted_disease_is">கணிக்கப்பட்ட நோய்</string>
     <string name="click_photo">படத்தை கிளிக் செய்யவும்</string>
+
+    <string name="just_now">இப்போதுதான்</string>
+    <string name="m_ago">நிமி. முன்</string>
+    <string name="d_ago">நாட்களுக்கு முன்</string>
+    <string name="h_ago">மணி. முன்</string>
+    <string name="you">நீங்கள்</string>
+    <string name="krishi_dost">கிரிஷி தோஸ்த்</string>
+    <string name="feedback">உங்கள் அனுபவம் (பின்னூட்டம்)</string>
+    <string name="feedback_description">நீங்கள் விரும்பியது மற்றும் எதை மேம்படுத்த வேண்டும்</string>
+    <string name="feedback_improvement">எதை மேம்படுத்த முடியும்?</string>
+    <string name="feedback_issues">இந்தச் செயலியில் ஏதேனும் சிக்கல்கள் உள்ளதா?</string>
+    <string name="feedback_rating">உங்கள் அனுபவத்தை மதிப்பிடுங்கள்.</string>
+    <string name="feedback_good">நல்லது</string>
+    <string name="feedback_bad">மோசம்</string>
+    <string name="feedback_avg">பரவாயில்லை</string>
+    <string name="feedback_empty">பின்னூட்டம் காலியாக உள்ளது</string>
+    <string name="feedback_select_rating">உங்கள் மதிப்பீட்டைத் தேர்ந்தெடுக்கவும்</string>
 </resources>

@@ -80,4 +80,20 @@
     <string name="the_predicted_disease_is">भविष्यवाणी कियोड़ो रोग है</string>
     <string name="click_photo">फोटो खींच</string>
 
+    <string name="just_now">इण बखत</string>
+    <string name="m_ago">मि. पैलां</string>
+    <string name="d_ago">दिनां पैलां</string>
+    <string name="h_ago">घं. पैलां</string>
+    <string name="you">थां</string>
+    <string name="krishi_dost">कृषी दोस्त</string>
+    <string name="feedback">थांरो अनुभव (फीडबैक)</string>
+    <string name="feedback_description">थांने कांह गयो अर कांह सुधारां चाहीजे</string>
+    <string name="feedback_improvement">कांह सुधारां जा सकै?</string>
+    <string name="feedback_issues">कांह आं एप में कोई समस्या है?</string>
+    <string name="feedback_rating">थांरो अनुभव रेट करो।</string>
+    <string name="feedback_good">चोखो</string>
+    <string name="feedback_bad">माड़ो</string>
+    <string name="feedback_avg">ठीक है</string>
+    <string name="feedback_empty">फीडबैक खाली है</string>
+    <string name="feedback_select_rating">थांरी रेटिंग चुणो</string>
 </resources>

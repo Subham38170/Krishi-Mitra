@@ -48,7 +48,6 @@ object Constants {
     const val MANDI_API_KEY = BuildConfig.MANDI_API_KEY
 
     const val WEATHER_API_KEY = BuildConfig.WEATHER_API_KEY
-    const val GEMINI_API_KEY = "AIzaSyC06RscFEUVXSsHkg71iBWgQprFfVJlxG0"
 
 }
 
@@ -60,6 +59,7 @@ object FirebaseConstants {
     const val CROP_BAZAR_IMAGES = "Buy_Sell_Crops"
     const val CROP_BAZAR = "krishi_bazar"
     const val MANDI_CROP_IMAGES = "mandi_price_crop_images"
+    const val USER_FEEDBACK = "user_feedback"
 }
 
 
